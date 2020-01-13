@@ -5,7 +5,37 @@ This repository contains the codes for all known ciphers and a few hashing algor
         Caesar Cipher
         Beale Cipher
         Vignere Cipher
+        Gronsfeld Cipher
         Beaufort Cipher
-        Trimesthius Cipher
+        Trithemius cipher
         Checkerboard Cipher
-        
+        Affine Cipher
+        ROT13
+        Rail Fence Cipher
+        Alphabetical Substitution
+        Bacon Cipher
+
+    Complex Ciphers
+        Enigma-V
+        Lorentz SB-40
+        Polybius Square Ciphers
+            Polybius Cipher
+            ADFGX Cipher
+            Bifid Cipher
+            Nihilist Cipher
+            Tap Code
+            Trifid Cipher
+
+    Encoding
+        Base32
+        Base64
+        ASCII65
+        Baudot Code
+        URL Encoding
+        Bootstring       
+
+
+    Hashing Algorithms
+        MD5
+        SHA-1
+        SHA-2
