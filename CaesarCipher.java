@@ -16,10 +16,10 @@ class CesearCipher {
 			for (int i = 0;i<plainText.length();i++) {
 				 if(plainText.charAt(i)>=65 && plainText.charAt<=90)
 					encryptedText =
-					encryptedText.concat((char)(plainText.charAt(i)-65)%25+65);
+					encryptedText.concat((char)(plainText.charAt(i)-65+shift)%25+65);
 				 else if(plainText.charAt(i)>=97 && plainText.charAt<=122))
 					encryptedText =
-					encryptedText.concat((char)(plainText.charAt(i)-97)%25+97);
+					encryptedText.concat((char)(plainText.charAt(i)-97+shift)%25+97);
 			}//for loop - i
 			break;
 
