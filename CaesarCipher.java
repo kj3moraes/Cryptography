@@ -27,4 +27,8 @@ class CaesarCipher {
 
      }//switch statement(int)
   }//end of void main(String[])
+
+  private static String encrypt(String plain text, int key){
+	  
+  }
 }//end of class
