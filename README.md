@@ -15,17 +15,20 @@ This repository contains the codes for all known ciphers and a few hashing algor
         Rail Fence Cipher  
         Alphabetical Substitution  
         Bacon Cipher  
+		  One Time Pad
 
     Complex Ciphers
         Enigma-V
         Lorentz SB-40
-        Polybius Square Ciphers
-            Polybius Cipher
-            ADFGX Cipher
-            Bifid Cipher
-            Nihilist Cipher
-            Tap Code
-            Trifid Cipher
+        Polybius Cipher
+        ADFGX Cipher
+        Bifid Cipher
+        Nihilist Cipher
+        Tap Code
+        Trifid Cipher
+		  DES
+		  3DES
+		  AES - 256
 
     Encoding
         Base32
@@ -34,7 +37,6 @@ This repository contains the codes for all known ciphers and a few hashing algor
         Baudot Code
         URL Encoding
         Bootstring       
-
 
     Hashing Algorithms
         MD5
