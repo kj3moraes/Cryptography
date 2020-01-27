@@ -13,22 +13,22 @@ This repository contains the codes for all known ciphers and a few hashing algor
         Affine Cipher  
         ROT13  
         Rail Fence Cipher  
+		  Polybius Cipher
+        ADFGX Cipher
+        Bifid Cipher
+        Nihilist Cipher
+        Tap Code  
+        Trifid Cipher  
         Alphabetical Substitution  
         Bacon Cipher  
 		  One Time Pad
 
-    Complex Ciphers
+    Modern Ciphers
         Enigma-V
         Lorentz SB-40
-        Polybius Cipher
-        ADFGX Cipher
-        Bifid Cipher
-        Nihilist Cipher
-        Tap Code
-        Trifid Cipher
 		  DES
 		  3DES
-		  AES - 256
+		  AES - 256bit
 
     Encoding
         Base32
