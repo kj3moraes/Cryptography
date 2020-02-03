@@ -20,15 +20,15 @@ This repository contains the codes for all known ciphers and a few hashing algor
    * Tap Code  
    * Trifid Cipher  
    * Alphabetical Substitution  
-   * Bacon Cipher    
+   * Bacon Cipher     
 	* One Time Pad
 
 ### Modern Ciphers
-   * Enigma-V
-   * Lorentz SB-40  
-	* DES
-	* 3DES
-	* AES - 256bit
+   * Enigma-V  
+   * Lorentz SB-40    
+	* DES    
+	* 3DES    
+	* AES - 256bit    
 
 ### Encoding
    * Base32
@@ -55,3 +55,4 @@ Cryptanalysis' section of the Vigenère documentation.
  to  assist the reader in understanding the working of the code.**  
 
 The following image below shows the flowchart of documentation for each and every encryption scheme listed.
+INSERT IMAGE HERE
