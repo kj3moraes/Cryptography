@@ -38,13 +38,13 @@ class OneTimePad {
 	}//end of void main(String[])
 
 	private static String computeBitwiseXOR(String plainText, String key){
-        String result = "";
-        for(int i = 0, j = 0; i<plainText.length(); i++){
-            int plainTextBit = plainText.charAt(i) - 48;
-            int keyBit = key.charAt(j) - 48;
-            result += (plainTextBit+keyBit)%2;
-            j = ++j%key.length();
-        }//for loop - i
-        return result;
+		String result = "";
+		for(int i = 0, j = 0; i<plainText.length(); i++){
+		    int plainTextBit = plainText.charAt(i) - 48;
+		    int keyBit = key.charAt(j) - 48;
+		    result += (plainTextBit+keyBit)%2;
+		    j = ++j%key.length();
+		}//for loop - i
+		return result;
     }//end of String computeBitwiseXOR(String, String)
 }//end of class
