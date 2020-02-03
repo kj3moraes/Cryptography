@@ -2,7 +2,7 @@
 
 This repository contains the codes for all known ciphers and a few hashing algorithms. This is updated every week to ensure that the codes are the most efficient and up-to-date. The entire list of ciphers is as below.  
 
-###Simple Ciphers  
+### Simple Ciphers  
    * Caesar Cipher   
    * Beale Cipher  
    * Vignere Cipher  
@@ -23,14 +23,14 @@ This repository contains the codes for all known ciphers and a few hashing algor
    * Bacon Cipher  
 	* One Time Pad
 
-###Modern Ciphers
+### Modern Ciphers
    * Enigma-V
    * Lorentz SB-40
 	* DES
 	* 3DES
 	* AES - 256bit
 
-###Encoding
+### Encoding
    * Base32
    * Base64
    * ASCII65
@@ -38,7 +38,7 @@ This repository contains the codes for all known ciphers and a few hashing algor
    * URL Encoding
    * Bootstring       
 
-###Hashing Algorithms
+### Hashing Algorithms
    * MD5
    * SHA-1
    * SHA-2
@@ -53,3 +53,5 @@ Cryptanalysis' section of the Vigenère documentation.
  Furthermore, the documentation for each cipher provides a background knowledge and mathematical
  representation of the cipher's encryption and decryption algorithms. **This documentation is simply
  to  assist the reader in understanding the working of the code.**  
+
+The following image below shows the flowchart of documentation for each and every encryption scheme listed.
