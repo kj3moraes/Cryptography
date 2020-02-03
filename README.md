@@ -12,8 +12,8 @@ This repository contains the codes for all known ciphers and a few hashing algor
    * Checkerboard Cipher  
    * Affine Cipher  
    * ROT13  
-   * Rail Fence Cipher    
- 	* Polybius Cipher
+   * Rail Fence Cipher  
+   * Polybius Cipher
    * ADFGX Cipher
    * Bifid Cipher
    * Nihilist Cipher
@@ -21,14 +21,14 @@ This repository contains the codes for all known ciphers and a few hashing algor
    * Trifid Cipher  
    * Alphabetical Substitution  
    * Bacon Cipher  
-	* One Time Pad
+   * One Time Pad
 
 ### Modern Ciphers
-   * Enigma-V
-	* Lorentz SB-40  
-	* DES
-	* 3DES  
-	* AES - 256bit    
+   * Enigma-V  
+   * Lorentz SB-40  
+   * DES
+   * 3DES  
+   * AES - 256bit    
 
 ### Encoding
    * Base32
