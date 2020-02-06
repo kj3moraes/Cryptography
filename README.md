@@ -25,7 +25,11 @@ This repository contains the codes for all known ciphers and a few hashing algor
 
 ### Modern Ciphers
    * Enigma-V  
-   * Lorentz SB-40  
+   * Lorentz SB-40
+   * Feistel Network
+   * Lai Maussey Network
+   * RC5
+   * IDEA
    * DES
    * 3DES  
    * AES - 256bit    
