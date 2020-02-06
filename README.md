@@ -1,6 +1,6 @@
 # Cryptography
 
-This repository contains the codes for all known ciphers and a few hashing algorithms. This is updated every week to ensure that the codes are the most efficient and up-to-date. The entire list of ciphers is as below.  
+This repository contains the codes for several known ciphers and a few hashing algorithms. The codes for the ciphers are in Java. Another repostiory of those codes in Python will be uploaded soon. Every code has its own documentation to explain its workings to the reader. It also provides some historical context as well as the modern relevance of the cipher it describes.  The entire list of ciphers is as below.  
 
 ### Simple Ciphers  
    * Caesar Cipher   
