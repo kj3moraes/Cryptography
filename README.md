@@ -19,7 +19,7 @@ This repository contains the codes for several known ciphers and a few hashing a
    * Nihilist Cipher
    * Tap Code  
    * Trifid Cipher  
-   * Alphabetical Substitution  
+   * Wheatstone-Playfair cipher
    * Bacon Cipher  
    * One Time Pad
 
