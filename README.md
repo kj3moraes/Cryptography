@@ -57,5 +57,4 @@ The following image below shows the flowchart of documentation for all the liste
      alt="Modern Ciphers Flowchart"
      style="float: left; margin-right: 5px;" />
 
-This project has been a personal endeavor in order to provide ease of access to budding cryptography
-enthusiasts out there to be able to get an understanding of the ciphers and hashing algorithms in the world of cryptography having to spend hours scouring the internet trying to make sense of the algorithms. Although this repository does not cover **everything** in cryptography, it is a good starting point from which one can learn about the rudiments of cryptography. 
+This project has been a personal endeavor in order to provide ease of access for budding cryptography enthusiasts to get an understanding of the ciphers and hashing methods in the world of cryptography without having to spend hours scouring the internet trying to make sense of the algorithms. Although this repository does not cover **everything** cryptography, it is a good starting point from which one can learn about the fundamentals of this field. 
