@@ -36,8 +36,6 @@ public class Polybius {
         main(new String[]{});
     }//end of void main(String[])
 
-	 /**
-	 */
     private static String encrypt(String plainText) {
         String result = "";
         for (int i = 0; i < plainText.length(); i++) {
@@ -55,9 +53,9 @@ public class Polybius {
                     letterNumber = plainText.charAt(i) - 65;
             }//if statement - uppercase
             else {
-					result+=plain.charAt(i);
-					continue;
-				}//else statement
+				result+=plainText.charAt(i);
+				continue;
+			}//else statement
             int rowNumber = letterNumber/5 + 1;
             int columnNumber = letterNumber%5 + 1;
             result += (rowNumber + "") + (columnNumber+"") + " ";
