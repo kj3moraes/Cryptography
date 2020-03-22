@@ -1,3 +1,4 @@
+import java.util.Scanner;
 class OneTimePad {
 	public static void main(String[] args) {
 		Scanner txt = new Scanner(System.in), num = new Scanner(System.in);
@@ -24,7 +25,7 @@ class OneTimePad {
 				plainText = computeBitwiseXOR(encryptedText, key);
 				System.out.println("\t INPUTED ENCRYPTED TEXT : ");
 				System.out.println("\t KEY : ");
-				System.out.println("\t\t PLAIN TEXT : " + plainTexts);
+				System.out.println("\t\t PLAIN TEXT : " + plainText);
 
 			case 88:
 
