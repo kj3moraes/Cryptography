@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class CaesarCipher {
+public class Caesar {
     public static void main(final String[] args) {
         final Scanner txt = new Scanner(System.in), num = new Scanner(System.in);
         System.out.println("\nEnter your choice \n\t [1] Encrypt \n\t [2] Decrypt \n\t [X] Exit");
