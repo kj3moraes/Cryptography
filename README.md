@@ -46,6 +46,7 @@ This repository contains the codes for several known ciphers and a few hashing a
    * Bootstring       
 
 ### Hashing Algorithms
+   * Merkel-Damgard Construction
    * MD5
    * SHA-1
    * SHA-2
