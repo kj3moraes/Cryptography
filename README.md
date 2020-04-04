@@ -80,7 +80,7 @@ This is a rigorous and lively course by Dan Boneh of Stanford that is a very str
 [r/codes](https://www.reddit.com/r/codes/) and [r/cryptography](https://www.reddit.com/r/cryptography/) are two subreddits where one can learn a whole lot from other enthusiasts and professionals in the field of cryptography. r/codes is mainly for cracking ciphers and puzzles. r/cryptogrpahy is for learning about the encryption and decryption schemes.
 
 **High School Mathematics Extensions**  
-This webpage ['High School Mathematics Extension'](https://en.wikibooks.org/wiki/High_School_Mathematics_Extensions) is a fantastic WikiBooks page that helps you take the high school math curriculum beyound the prescribed syllabus. It delved into discrete mathematics, number theory set theory and probability.
+This webpage ['High School Mathematics Extension'](https://en.wikibooks.org/wiki/High_School_Mathematics_Extensions) is a fantastic WikiBooks page that helps you take the high school math curriculum beyond the prescribed syllabus. It delved into discrete mathematics, number theory set theory and probability.
 
 ## **Books**  
 **Introduction to Mathematical Cryptography (Hofmann and Silvermann)**  
