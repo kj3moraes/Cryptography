@@ -102,6 +102,6 @@ This is a great book to get a rigorous understanding of number theory. However, 
 This would be an alternate to studying from the previous two books. Although not as thorough as the previous two combined, it is a fitting alternative to them. The prerequisite is high school mathematics. It is sufficient for any high school student learning about cryptography but may not be the right book to study from if you are a undergraduate ot graduate in computer science and related fields.
 
 ---
-This project has been a personal endeavor in order to provide ease of access for budding cryptography enthusiasts to get an understanding of the ciphers and hashing methods in the world of cryptography without having to spend hours scouring the internet trying to make sense of the algorithms.Although **this repository does not cover everything** in cryptography, it is a good starting point from which one can learn about several primitives of this field.
+Although **this repository does not cover everything** in cryptography, it is a good starting point from which one can learn about several primitives of this field.
 
 I sincerely hope that this has been helpful to you and that you enjoyed learning as much as I enjoyed making it.
