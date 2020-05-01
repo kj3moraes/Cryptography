@@ -51,8 +51,8 @@ This repository contains the codes for several known ciphers and a few hashing a
    * SHA-1
    * SHA-256
 
-The classification of 'Simple Ciphers' and 'Modern Ciphers' is rather arbitrary (since ROT13 is a modern variant of the Caesa cipher yet is listed under Simple Ciphers) but is in place to segregate ciphers based on difficulty to 
-The ciphers which do not have separate documentations are specified in others which are similar to it and have existed before. Furthermore, the documentation for each cipher provides background knowledge and mathematical representation of the cipher's encryption and decryption algorithms. The documentation is simply to assist the reader in understanding the working of the code.** However, one must **read the documentations before going through the code.**
+The classification of 'Simple Ciphers' and 'Modern Ciphers' is rather arbitrary (since ROT13 is a modern variant of the Caesar cipher yet is listed under Simple Ciphers) but is in place to segregate ciphers based on difficulty to 
+The ciphers which do not have separate documentations are specified in others which are similar to it and have existed before. Furthermore, the documentation for each cipher provides background knowledge and mathematical representation of the cipher's encryption and decryption algorithms. The documentation is simply to assist the reader in understanding the working of the code. However, one must **read the documentations before going through the code.**
  
 The following image below shows the flowchart of documentation for all the listed ciphers.:
 
@@ -78,7 +78,7 @@ This is a rigorous course by Dan Boneh of Stanford University that is a very str
 **High School Mathematics Extensions**  
 This webpage ['High School Mathematics Extension'](https://en.wikibooks.org/wiki/High_School_Mathematics_Extensions) is a fantastic WikiBooks page that helps you take the high school math curriculum beyond the prescribed syllabus. It delves into number theory, set theory and discrete probability.
 
-**CryptoHack**
+**CryptoHack**  
 This website is a fun and engaging way of learning modern cryptography. However, one must be well versed with JavaScript to be able to complete some 'missions'.
 
 ## **Books**  
