@@ -19,7 +19,7 @@ public class Vigenere {
                 System.out.println("\t\t GENERATED ENCRYPTION : " + encryptedText);
                 break;
 
-            //DECRYPTION
+            //DECRYPTION 
             case '2':
                 System.out.print("\t ENCRYPTED TEXT : ");
                 encryptedText = txt.nextLine();

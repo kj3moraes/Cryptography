@@ -1,6 +1,6 @@
 import java.util.Scanner;
-public class Caesar {
-    public static void main(final String[] args) {
+class Caesar {
+    public static void main(String[] args) {
         final Scanner txt = new Scanner(System.in), num = new Scanner(System.in);
         System.out.println("\nEnter your choice \n\t [1] Encrypt \n\t [2] Decrypt \n\t [X] Exit");
         final char choice = num.next().toUpperCase().charAt(0);

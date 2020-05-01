@@ -1,3 +1,4 @@
+package Polybius;
 import java.util.Scanner;
 public class Bifid {
     public static void main(String[] args) {

@@ -1,35 +1,50 @@
+package Polybius;
 import java.util.*;
 class Trifid {
     public static void main(String[] args) {
         Scanner txt = new Scanner(System.in), num = new Scanner(System.in);
         System.out.println("Enter your choice \n\t [1] Encrypt \n\t [2] Decrypt \n\t [X] Exit");
         int choice = num.nextInt();
-        String plainText = "", encryptedText = "";
+        String plainText, encryptedText, key;
+        int groupingSize;
         switch (choice) {
             case 1:
                 System.out.print("\t PLAIN TEXT : ");
-                plainText = txt.nextLine();
-                encryptedText = encrypt(plainText);
+                plainText = txt.nextLine().trim().toUpperCase();
+                System.out.print("\t GROUPING SIZE : ");
+                groupingSize = num.nextInt();
+                if (groupingSize == 0 || groupingSize > 10)
+                    groupingSize = 7;
+                System.out.print("\t KEY : ");
+                key = txt.nextLine().toUpperCase().replaceAll(" ", "");
+                encryptedText = encrypt(plainText, groupingSize, key);
                 System.out.println("\n\t\t INPUTED PLAIN TEXT : " + plainText);
-                System.out.println("\t\t GENERATED ENCRYPTION : " +  encryptedText);
+                System.out.println("\t\t GROUPED IN : " + groupingSize);
+                System.out.println("\t\t KEY : " + key);
+                System.out.println("\t\t GENERATED ENCRYPTION : " + encryptedText);
                 break;
 
             case 2:
                 System.out.print("\t ENCRYPTED TEXT : ");
                 encryptedText = txt.nextLine();
-                plainText = decrypt(encryptedText);
-                System.out.println("\n\t\t INPUTED ENCRYPTED TEXT : " + plainText);
-                System.out.println("\t\t GENERATED DECRYPTION : " +  encryptedText);
+                System.out.print("\t GROUPING SIZE : ");
+                groupingSize = num.nextInt();
+                System.out.print("\t KEY : ");
+                key = num.next().toUpperCase().trim();
+                plainText = decrypt(encryptedText, groupingSize, key);
+                System.out.println("\n\t\t INPUTED ENCRYPTED TEXT : " + encryptedText);
+                System.out.println("\t\t GROUPED IN : " + groupingSize);
+                System.out.println("\t\t KEY : " + key);
+                System.out.println("\t\t GENERATED DECRYPTION : " + plainText);
                 break;
 
-            case 88:
-
-            case 120:
+            // EXIT
+            case 'X':
                 System.exit(0);
                 break;
 
             default:
-                System.out.println("KINDLY ENTER A NUMBER (1-2) or (X) to EXIT ");
+                System.out.println("KINDLY ENTER A NUMBER (1-2) or (X)");
         }//switch statement(int)
         main(new String[]{});
     }//end of void main(String[])
@@ -50,7 +65,7 @@ class Trifid {
      * @param plainText - the user input that is to be encrypted
      * @param groupingSize - the size of the group that will act as blocks for S3
      * @param key - the key that will encrypt the numbers
-     * @return - the encrypted text
+     * @return the encrypted text
      */
     private static String encrypt(String plainText, int groupingSize, String key){
         String result = "", alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -91,8 +106,8 @@ class Trifid {
         return result;
     }//end of String encrypt(String, int, String)
     
-    private static String decrypt(String encryptedText){
+    private static String decrypt(String encryptedText, int groupingSize, String key) {
         String result = "";
         return result;
-    }//end of String decrypt(String)
+    }// end of String decrypt(String, String)
 }//end of class

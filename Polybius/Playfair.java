@@ -1,3 +1,4 @@
+package Polybius;
 import java.util.Scanner;
 class Playfair{
     public static void main(String[] args) {
