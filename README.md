@@ -1,4 +1,4 @@
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://raw.githubusercontent.com/LordVader31/Cryptography/master/LICENSE?token=AGECP4QSOLAG3PEZL4F6EG26VRUBM)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://raw.githubusercontent.com/LordVader31/Cryptography/master/LICENSE?token=AGECP4VARMQ6CDEPAL7DKIC6VWG5Y)
 
 # Cryptography
 
