@@ -51,8 +51,7 @@ This repository contains the codes for several known ciphers and a few hashing a
    * SHA-1
    * SHA-256
 
-The classification of 'Simple Ciphers' and 'Modern Ciphers' is rather arbitrary (since ROT13 is a modern variant of the Caesar cipher yet is listed under Simple Ciphers) but is in place to segregate ciphers based on difficulty to 
-The ciphers which do not have separate documentations are specified in others which are similar to it and have existed before. Furthermore, the documentation for each cipher provides background knowledge and mathematical representation of the cipher's encryption and decryption algorithms. The documentation is simply to assist the reader in understanding the working of the code. However, one must **read the documentations before going through the code.**
+The classification of 'Simple Ciphers' and 'Modern Ciphers' is rather arbitrary (since ROT13 is a modern variant of the Caesar cipher yet is listed under Simple Ciphers) but is in place to segregate ciphers based on difficulty to comprehend. The ciphers which do not have separate documentations are specified in others which are similar to it and have existed before. Furthermore, the documentation for each cipher provides background knowledge and mathematical representation of the cipher's encryption and decryption algorithms. The documentation is simply to assist the reader in understanding the working of the code. However, one must **read the documentations before going through the code.**
  
 The following image below shows the flowchart of documentation for all the listed ciphers.:
 
@@ -83,7 +82,7 @@ This website is a fun and engaging way of learning modern cryptography. However,
 
 ## **Books**  
 **Introduction to Mathematical Cryptography (Hoffmann and Silvermann)**  
-This is a great book for beginners and professinals alike. Its main focus is introducing the reader to crpytanalytic methods and the mathematics behind the encryption and decryption algorithms. Although it is a great read, it delves into lots of technical material very swiftly so only read if this is what you want to learn.
+This is a great book for beginners and professinals alike. Its main focus is introducing the reader to cryptanalytic methods and the mathematics behind the encryption and decryption algorithms. Although it is a great read, it delves into lots of technical material very swiftly so only read if this is what you want to learn.
 
 **The Codebreakers (Kahn, David)**  
 A rich and detailed history of the history of ciphers and crpytography all the way from the Babylonians to modern fay security. A great read to learn about the history of cryptography.
