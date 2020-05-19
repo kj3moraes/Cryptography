@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 public class Feistel {
     private static final Scanner txt = new Scanner(System.in), num = new Scanner(System.in);
-
     public static void main(String[] args) throws NoSuchAlgorithmException {
         System.out.println("\nEnter your choice " + "\n\t [1] Encode \n\t [2] Decode \n\t [X] Exit");
         char choice = num.next().toUpperCase().charAt(0);
@@ -95,7 +94,7 @@ public class Feistel {
 
     private static String decrypt(String encryptedText, int noOfRounds) {
         String result = "";
-
+        
         return result;
     }// end of String decrypt(String)
 }// end of class
