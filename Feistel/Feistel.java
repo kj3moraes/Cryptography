@@ -1,4 +1,6 @@
 package Feistel;
+
+import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
@@ -15,7 +17,7 @@ public class Feistel {
             case '1':
                 System.out.print("\t PLAIN TEXT : ");
                 plainText = txt.nextLine();
-                System.out.println("\t NO. OF ROUNDS : ");
+                System.out.print("\t NO. OF ROUNDS : ");
                 noOfRounds = num.nextInt();
                 encodedText = encrypt(plainText, noOfRounds);
                 System.out.println("\n\t\t INPUTED PLAIN TEXT : " + plainText);
@@ -46,23 +48,48 @@ public class Feistel {
 
     private static String encrypt(String plainText, int noOfRounds) throws NoSuchAlgorithmException {
         String result = "";
-        System.out.println("\t\t HMAC will be used as the round function. "
-                + "\n\t\t PREFERRED HASH FUNCTION (type ~ for default : SHA256)");
-        String hashFunction = txt.next().trim().toUpperCase();
-        if (hashFunction.equals("~")) {
-            RoundFunction F = new RoundFunction();
-        } // if statement
-        else {
-            try {
-                RoundFunction F = new RoundFunction(hashFunction);
-            } catch (NoSuchAlgorithmException ex) {
-                System.out.println("NO SUCH HASH ALGORITHM EXISTS, EXITING...");
-                System.exit(0);
-            } // try-catch block
-        } // else statement
-        for (int i = 1; i <= noOfRounds; i++) {
 
-        }
+        // STEP 1 : CHOOSING THE HASH FUNCTION
+        System.out.println("\t\t HMAC will be used as the round function. "
+                + "\n\t\t Choose your preferred HASH FUNCTION (default set to SHA256):");
+        System.out.println("\t\t\t [1] SHA-1 \n\t\t\t [2] SHA256\n\t\t\t [3] SHA384");
+        System.out.println("\t\t\t [4] SHA512\n\t\t\t [5] MD5");
+        char hashFunction = txt.next().trim().charAt(0);
+        RoundFunction F;
+        switch (hashFunction) {
+            case '1':
+                F = new RoundFunction("HmacSHA1");
+                break;
+
+            case '3':
+                F = new RoundFunction("HmacSHA384");
+                break;
+
+            case '4':
+                F = new RoundFunction("HmacSHA512");
+                break;
+
+            case '5':
+                F = new RoundFunction("HmacMD5");
+                break;
+
+            case '6':
+                F = new RoundFunction("HmacWHIRLPOOL");
+                break;
+
+            default:
+                F = new RoundFunction();
+                break;
+        }// switch statement
+
+        // STEP 2 : TRUNCATING/PAD THE INPUT TO DESIRED INPUT BLOCK SIZE(S)
+        String plainTextStream = new BigInteger(plainText.getBytes()).toString(2);
+        System.out.println("As plainTextStream: " + plainTextStream);
+
+        // STEP 3 : RUNNING THE FEISTEL NETWORK UPTO 'N' ROUNDS
+        for (int i = 1; i < noOfRounds; i++) {
+            
+        } // for loop - i
         return result;
     }// end of String encrypt(String)
 
