@@ -1,11 +1,9 @@
 package Feistel;
 
 import javax.crypto.Mac;
-import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
-import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 
 public class RoundFunction {
@@ -44,8 +42,11 @@ public class RoundFunction {
         return result;
     }// end of static String generateMAC()
 
-    public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeyException {
-        RoundFunction F = new RoundFunction("HmacSHA256");
-        F.generateMACTag("hwfbf".getBytes(), "wrt getge ge");
-    }
+    protected String ByteToHex(byte[] input){
+        String result = "";
+        for (byte b : input) {
+            result = String.format("%02X", b);
+        }//for each loop - b
+        return result;
+    }//end of String ByteToHex(byte[])
 }// end of class

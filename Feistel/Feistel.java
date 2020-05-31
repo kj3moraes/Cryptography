@@ -1,5 +1,4 @@
 package Feistel;
-import com.sun.org.apache.xerces.internal.impl.dv.util.HexBin;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
@@ -142,7 +141,7 @@ public class Feistel {
             }//try-catch block
 //            System.out.println("\n\n\n\n --- END OF ROUND --- \n\n\n\n");
         }//for loop - i
-        result = HexBin.encode(RHS).concat(HexBin.encode(LHS));
+        result = F.ByteToHex(RHS).concat(F.ByteToHex(LHS));
         return result;
     }// end of String encrypt(String)
 
