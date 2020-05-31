@@ -68,8 +68,8 @@ public class Feistel {
 
         //STEP 1 : CHOOSING THE HASH FUNCTION
         System.out.println("\t\t HMAC will be used as the round function. "
-                + "\n\t\t Choose your preferred HASH FUNCTION (default set to SHA256):");
-        System.out.println("\t\t\t [1] SHA-1 \n\t\t\t [2] SHA256\n\t\t\t [3] SHA384");
+                + "\n\t\t Choose your preferred HASH FUNCTION :");
+        System.out.println("\t\t\t [1] SHA-1 \n\t\t\t [2] SHA256 (default)\n\t\t\t [3] SHA384");
         System.out.println("\t\t\t [4] SHA512\n\t\t\t [5] MD5");
         char hashFunction = txt.next().trim().charAt(0);
         RoundFunction F;
