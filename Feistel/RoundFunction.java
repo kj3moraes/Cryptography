@@ -1,10 +1,11 @@
 package Feistel;
 
-import javax.crypto.KeyGenerator;
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
-import java.math.BigInteger;
+import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
+import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 
 public class RoundFunction {
@@ -19,19 +20,32 @@ public class RoundFunction {
         HMAC = Mac.getInstance(hashAlgorithm);
     }// end of public RoundFunction(String)
 
-    protected String generateMAC(String plainText) throws NoSuchAlgorithmException, InvalidKeyException {
-        KeyGenerator keyGen = KeyGenerator.getInstance("AES");
-        keyGen.init(256);
-        SecretKey secretKey = keyGen.generateKey();
+    /**
+     * ROUND FUNCTION - GENERATE MAC TAG
+     *
+     *
+     * @param plainText - accepts the plaintext message as a array of bytes
+     * @param key       - acts as the seed for the PKDF function to generate a
+     *                  pseudorandom key.
+     * @return - the tag of the plaintext using the secret key from the
+     *         SecretKeySpec class
+     * @throws InvalidKeyException - SECRET KEY IS INVALID
+     */
+    protected byte[] generateMACTag(byte[] plainText, String key) throws InvalidKeyException {
+        byte[] result;
+
+        // STEP 1 - INITIALIZING THE HMAC ALGORITHM WITH A SECRET KEY
+        SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), HMAC.getAlgorithm());
         HMAC.init(secretKey);
-        byte[] plainTextStream = plainText.getBytes();
-        byte[] encryptedTextStream = HMAC.doFinal(plainTextStream);
-        BigInteger bigInteger = new BigInteger(1, encryptedTextStream);
-        System.out.println(bigInteger.toString(16) + "\t length" + bigInteger.toString(16).length());
-        return bigInteger.toString(16);
+
+        // STEP 2 - USE THE KEY TO GENERATE A MAC TAG
+        result = HMAC.doFinal(plainText);
+
+        return result;
     }// end of static String generateMAC()
+
     public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeyException {
-        RoundFunction rf = new RoundFunction();
-        rf.generateMAC("othtadwrg");
-    }//end of void main(String[])
+        RoundFunction F = new RoundFunction("HmacSHA256");
+        F.generateMACTag("hwfbf".getBytes(), "wrt getge ge");
+    }
 }// end of class
