@@ -19,7 +19,7 @@ public class Feistel {
                 seed = txt.nextLine().toUpperCase().trim();
                 System.out.print("\t NO. OF ROUNDS : ");
                 noOfRounds = num.nextInt();
-                encodedText = encrypt(plainText, seed, noOfRounds);
+                encodedText = encode(plainText, seed, noOfRounds);
                 System.out.println("\n\t\t INPUTED PLAIN TEXT : " + plainText);
                 System.out.println("\t\t KEY (seed for Secret Key): " + seed);
                 System.out.println("\t\t NO OF ROUNDS : " + noOfRounds);
@@ -30,7 +30,7 @@ public class Feistel {
             case '2':
                 System.out.print("\t ENCRYPTED TEXT : ");
                 encodedText = txt.nextLine();
-                plainText = decrypt(encodedText, noOfRounds);
+                plainText = decode(encodedText, noOfRounds);
                 System.out.println("\n\t\t INPUTED ENCRYPTED TEXT : " + encodedText);
                 System.out.println("\t\t GENERATED DECRYPTION : " + plainText);
                 break;
@@ -63,7 +63,7 @@ public class Feistel {
      * @return - the resultant
      * @throws NoSuchAlgorithmException - HASH ALGORITHM IS INVALID
      */
-    private static String encrypt(String plainText, String seed, int noOfRounds) throws NoSuchAlgorithmException {
+    private static String encode(String plainText, String seed, int noOfRounds) throws NoSuchAlgorithmException {
         String result = "";
 
         //STEP 1 : CHOOSING THE HASH FUNCTION
@@ -145,7 +145,7 @@ public class Feistel {
         return result;
     }// end of String encrypt(String)
 
-    private static String decrypt(String encryptedText, int noOfRounds) {   
+    private static String decode(String encryptedText, int noOfRounds) {   
         String result = "";
 
         return result;
