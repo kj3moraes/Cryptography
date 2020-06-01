@@ -2,9 +2,9 @@ package Polybius;
 import java.util.Scanner;
 public class Bifid {
     public static void main(String[] args) {
-        Scanner txt = new Scanner(System.in), num = new Scanner(System.in);
+        final Scanner txt = new Scanner(System.in), num = new Scanner(System.in);
         System.out.println("\nEnter your choice \n\t [1] Encrypt \n\t [2] Decrypt \n\t [X] Exit");
-        char choice = num.next().toUpperCase().charAt(0);
+        final char choice = num.next().toUpperCase().charAt(0);
         String plainText, encryptedText;
         switch (choice){
             //ENCRYPTION

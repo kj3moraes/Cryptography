@@ -2,12 +2,12 @@ package Polybius;
 import java.util.Scanner;
 class Playfair{
     public static void main(String[] args) {
-        Scanner txt = new Scanner(System.in), num = new Scanner(System.in);
+        final Scanner txt = new Scanner(System.in), num = new Scanner(System.in);
         System.out.println("Enter your choice \n\t [1] Encrypt \n\t [2] Decrypt \n\t [X] Exit");
-        int choice = num.nextInt();
+        final char choice = num.next().toUpperCase().charAt(0);
         String plainText = "", encryptedText = "";
         switch (choice) {
-            case 1:
+            case '1':
                 System.out.print("\t PLAIN TEXT : ");
                 plainText = txt.nextLine();
                 encryptedText = encrypt(plainText);
@@ -15,7 +15,7 @@ class Playfair{
                 System.out.println("\t\t GENERATED ENCRYPTION : " +  encryptedText);
                 break;
 
-            case 2:
+            case '2':
                 System.out.print("\t ENCRYPTED TEXT : ");
                 encryptedText = txt.nextLine();
                 plainText = decrypt(encryptedText);
@@ -23,9 +23,7 @@ class Playfair{
                 System.out.println("\t\t GENERATED DECRYPTION : " +  encryptedText);
                 break;
 
-            case 88:
-
-            case 120:
+            case 'X':
                 System.exit(0);
                 break;
 
