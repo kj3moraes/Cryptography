@@ -41,12 +41,9 @@ class OneTimePad {
 		String result = "";
 		byte[] plainTextStream = plainText.getBytes();
 		byte[] keyStream = key.getBytes();
-		int smallerLength = Math.min(plainTextStream.length, keyStream.length);
-		for (int i = 0; i < smallerLength; i++) {
-			byte = keyStream[i]^plainTextStream[i];
-			result = result.concat(String.format("%02X", b));
-		} // for loop - i
-		
+		// int smallerLength = Math.min(plainTextStream.length, keyStream.length);
+		byte b = keyStream[8];
+		System.out.println("b = " + b);
 		return result;
 	}// end of String computeBitwiseXOR(String, String)
 }// end of class
