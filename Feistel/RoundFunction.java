@@ -45,7 +45,7 @@ public class RoundFunction {
     protected String ByteToHex(byte[] input){
         String result = "";
         for (byte b : input) {
-            result = String.format("%02X", b);
+            result = result.concat(String.format("%02X", b));
         }//for each loop - b
         return result;
     }//end of String ByteToHex(byte[])

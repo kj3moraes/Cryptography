@@ -4,7 +4,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
 public class Feistel {
-    private static final Scanner txt = new Scanner(System.in), num = new Scanner(System.in);
+    private static final Scanner txt = new Scanner(System.in), num = new Scanner(System.in); 
     public static void main(String[] args) throws NoSuchAlgorithmException {
         System.out.println("\nEnter your choice " + "\n\t [1] Encode \n\t [2] Decode \n\t [X] Exit");
         char choice = num.next().toUpperCase().charAt(0);
@@ -122,32 +122,64 @@ public class Feistel {
         for (int i = 1; i <= noOfRounds; i++) {
             try {
                 RHStemp = RHS;
-//                for (int j = 0; j < RHS.length; j++) {
-//                    System.out.println("RHS ELEMENT : " + RHS[j] + " RHS TEMP ELEMENT" + RHStemp[j]);
-//                }
                 RHS = F.generateMACTag(plainText.getBytes(),"ROUND NO."+i+""+seed);
                 for (int j = 0; j < LHS.length; j++) {
                     RHS[j] = (byte) (RHS[j]^LHS[j]);
                     LHS[j] = RHStemp[j];
                 }//for loop - i
-//                System.out.println("\n\n\n AFTER MACING \n\n\n ");
-//                for (int j = 0; j < RHS.length; j++) {
-//                    System.out.println("RHS ELEMENT : " + RHS[j] + " RHS TEMP ELEMENT : " + RHStemp[j] + "  LHS ELEMENT : " + LHS[j]);
-//                }
-                //System.out.println(HexBin.encode(RHS) +  " LENGTH : " + HexBin.encode(RHS).length());
             } catch (InvalidKeyException e) {
                 System.out.println("INVALID KEY - TRY AGAIN");
                 main(new String[] {});
             }//try-catch block
-//            System.out.println("\n\n\n\n --- END OF ROUND --- \n\n\n\n");
         }//for loop - i
         result = F.ByteToHex(RHS).concat(F.ByteToHex(LHS));
         return result;
     }// end of String encrypt(String)
 
-    private static String decode(String encryptedText, int noOfRounds) {   
+    private static String decode(String encodedText, int noOfRounds) throws NoSuchAlgorithmException {
         String result = "";
+        
+        // STEP 1 : DECIDING THE HASH FUNCTION
+        System.out.println("\t\t Choose the HASH FUNCTION you used to encode :");
+        System.out.println("\t\t\t [1] SHA-1 \n\t\t\t [2] SHA256 (default)\n\t\t\t [3] SHA384");
+        System.out.println("\t\t\t [4] SHA512\n\t\t\t [5] MD5");
+        char hashFunction = txt.next().trim().charAt(0);
+        RoundFunction F;
+        int ptSizeCap;
+        switch (hashFunction) {
+            case '1':
+                F = new RoundFunction("HmacSHA1");
+                ptSizeCap = 40;
+                break;
 
+            case '3':
+                F = new RoundFunction("HmacSHA384");
+                ptSizeCap = 48;
+                break;
+
+            case '4':
+                F = new RoundFunction("HmacSHA512");
+                ptSizeCap = 128;
+                break;
+
+            case '5':
+                F = new RoundFunction("HmacMD5");
+                ptSizeCap = 32;
+                break;
+
+            default:
+                F = new RoundFunction();
+                ptSizeCap = 64;
+                break;
+        }// switch statement
+
+        // STEP 2 : RUNNING THE INVERTING FEISTEL NETWORK UPTO 'N' ROUNDS
+        byte[] RHStemp;
+        byte[] RHS = encodedText.substring(0, ptSizeCap / 2).getBytes();
+        byte[] LHS = encodedText.substring(ptSizeCap / 2).getBytes();
+        // The RHStemp variable simply stores the value of the RHS before the MAC so it
+        // can later be assigned to LHS
+        
         return result;
     }// end of String decrypt(String)
 }// end of class
