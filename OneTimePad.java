@@ -39,11 +39,11 @@ class OneTimePad {
 
 	private static String computeBitwiseXOR(String plainText, String key) {
 		String result = "";
-		byte[] plainTextStream = plainText.getBytes();
-		byte[] keyStream = key.getBytes();
-		// int smallerLength = Math.min(plainTextStream.length, keyStream.length);
-		byte b = keyStream[8];
-		System.out.println("b = " + b);
+		for (int i = 0; i < plainText.length(); i++) {
+			System.out.println("result = "+ plainText.charAt(i)^key.charAt(i % key.length()));
+			result = result.concat((char)(plainText.charAt(i) ^ key.charAt(i % key.length()))+"");
+		}//for loop - i
+		System.out.println("result" + result);
 		return result;
 	}// end of String computeBitwiseXOR(String, String)
 }// end of class
