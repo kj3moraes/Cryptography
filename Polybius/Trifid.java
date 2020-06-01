@@ -11,7 +11,7 @@ class Trifid {
             //ENCRYPTION
             case '1':
                 System.out.print("\t PLAIN TEXT : ");
-                plainText = txt.nextLine().trim().toUpperCase();
+                plainText = txt.nextLine().trim ().toUpperCase();
                 System.out.print("\t GROUPING SIZE : ");
                 groupingSize = num.nextInt();
                 if (groupingSize == 0 || groupingSize > 10)
