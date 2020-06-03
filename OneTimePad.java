@@ -61,11 +61,11 @@ public class OneTimePad {
                 //STEP 1 : CONVERT THE PLAINTEXT AND THE KEY TO 8-BIT ASCII STRINGS
                 for (int i = 0; i < plainText.length(); i++) {
                     int character = plainText.charAt(i);
-                    plainTextToBits = plainTextToBits.concat(ASCIIto8BitBinary(character));
+                    plainTextToBits = plainTextToBits.concat(Decimalto8BitBinary(character));
                 }//for loop - i | PLAIN TEXT TO BITS
                 for (int j = 0; j < key.length(); j++) {
                     int character = key.charAt(j);
-                    keyToBits = key.concat(ASCIIto8BitBinary(character));
+                    keyToBits = key.concat(Decimalto8BitBinary(character));
                 }//for loop - j | KEY TO BITS
                 break;
 
@@ -73,7 +73,7 @@ public class OneTimePad {
 				plainTextToBits = plainText;
 				for (int j = 0; j < key.length(); j++) {
 					int character = key.charAt(j);
-					keyToBits = key.concat(ASCIIto8BitBinary(character));
+					keyToBits = key.concat(Decimalto8BitBinary(character));
 				} // for loop - j | KEY TO BITS
         }//switch case - mode
 
@@ -94,7 +94,7 @@ public class OneTimePad {
 			case 'd':
 
 		}//switch case - mode
-		
+
         //STEP 3 : CONVERTING 8-BIT BINARY TO HEXADECIMAL
         for (int m = 0; m < resultInBits.length(); m+=8)
             result=  result.concat(Integer.toHexString(Integer.parseInt(resultInBits.substring(m,m+8),2))+"");
@@ -109,7 +109,7 @@ public class OneTimePad {
      * @param charValue - the character to be converted
      * @return the 8 bit string of the character
      */
-    private static String ASCIIto8BitBinary(int charValue){
+    private static String Decimalto8BitBinary(int charValue){
         String result = Integer.toBinaryString(charValue);
         for (int i = result.length() ; i < 8; i++) result = "0".concat(result);
         return result;
@@ -126,7 +126,7 @@ public class OneTimePad {
         String result = "";
         for (int i = 0; i < hexString.length(); i++) {
 				int num = Integer.parseInt(hexString.charAt(i)+"");
-				result = result.concat(ASCIIto8BitBinary(num));
+				result = result.concat(Decimalto8BitBinary(num));
         }//for loop - i
         return result;
     }//end of static String HexTo8BitBinary(String)
