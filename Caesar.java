@@ -44,9 +44,9 @@ class Caesar {
 
     /**
      * CAESAR - ENCRYPT
-     * This function takes 2 parameters - plain text and the shift
-     * value and outputs the encrypted text. In a Caesar cipher, the shift is
-     * constant and we add it to the plaintext
+     *      This function takes 2 parameters - plain text and the shift
+     *      value and outputs the encrypted text. In a Caesar cipher, the shift is
+     *      constant and we add it to the plaintext
      * 
      * @param plainText - the user input that is to be encrypted
      * @param shift     - the shift value necessary to encrypt the data
@@ -65,9 +65,9 @@ class Caesar {
 
     /**
      * CAESAR - DECRYPT
-     * This function takes 2 parameters - encrypted text and the
-     * shift value and outputs the plain text. In Caesar cipher, we just subtract
-     * the encrypted text with the shift to decrypt it.
+     *      This function takes 2 parameters - encrypted text and the
+     *      shift value and outputs the plain text. In Caesar cipher, we just subtract
+     *      the encrypted text with the shift to decrypt it.
      * 
      * @param encryptedText - the user input that is to be decrypted
      * @param shift - the shift value necessary to decrypt the data

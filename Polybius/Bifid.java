@@ -38,9 +38,9 @@ public class Bifid {
 
     /**
      * BIFID - ENCRYPT
-     * This function takes a single parameter - plain text. However the user may choose
-     * to implement a scheme with a key for additional security. The encryption scheme
-     * is implemented in 3 steps
+     *      This function takes a single parameter - plain text. However the user may choose
+     *      to implement a scheme with a key for additional security. The encryption scheme
+     *      is implemented in 3 steps
      *      Step 1 : Convert the letters into standard Polybius Square coordinates.
      *               This is done by simple calculating the letter number and
      *               performing a ceil division by 5 and a modulo  of 5 to attain
@@ -104,8 +104,8 @@ public class Bifid {
 
     /**
      * BIFID - DECRYPT
-     * This function takes a single parameter - the encrypted text. Decryption takes place
-     * in 2 steps. 
+     *      This function takes a single parameter - the encrypted text. Decryption takes place
+     *      in 2 steps. 
      *      Step 1 : Convert the letters into standard Polybius Square coordinates.
      *               This is done the same way as in the encrypt() function.
      *               

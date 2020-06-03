@@ -53,9 +53,9 @@ class Trifid {
 
     /**
      * TRIFID - ENCRYPT
-     * This function takes 3 - parameters - plain text, size of the groups and key for
-     * encryption. The encryption scheme occurs in 3 steps. However, Step 1 can be
-     * omitted if the user enters a key with unique letters.
+     *      This function takes 3 - parameters - plain text, size of the groups and key for
+     *      encryption. The encryption scheme occurs in 3 steps. However, Step 1 can be
+     *      omitted if the user enters a key with unique letters.
      *      Step 1 : Generating a unique key 27 characters long. 'Unique' means no 
      *              repeated characters. The 27th character is a '+' symbol.
      *      Step 2 : Converting the plain text into the trifid number equivalent.
