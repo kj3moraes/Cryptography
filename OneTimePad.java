@@ -24,7 +24,7 @@ public class OneTimePad {
                 encryptedText = txt.nextLine();
                 System.out.print("\t KEY : ");
                 key = num.next().toUpperCase().trim();
-                plainText = computeBitwiseXOR(encryptedText, key, 'd');
+                plainText = computeBitwiseXOR(HexTo8BitBinary(encryptedText), key, 'd');
                 System.out.println("\n\t\t INPUTED ENCRYPTED TEXT : " + encryptedText);
                 System.out.println("\t\t KEY : " + key);
                 System.out.println("\t\t GENERATED DECRYPTION : " + plainText);
@@ -84,6 +84,17 @@ public class OneTimePad {
             resultInBits = result.concat((plainTextBit+keyBit)%2+"");
         }//for loop - k
 
+		switch (mode){
+			case 'e':
+				for (int m = 0; m < resultInBits.length(); m += 8)
+					result = result
+					.concat(Integer.toHexString(Integer.parseInt(resultInBits.substring(m, m + 8), 2)) + "");
+					break;
+
+			case 'd':
+
+		}//switch case - mode
+		
         //STEP 3 : CONVERTING 8-BIT BINARY TO HEXADECIMAL
         for (int m = 0; m < resultInBits.length(); m+=8)
             result=  result.concat(Integer.toHexString(Integer.parseInt(resultInBits.substring(m,m+8),2))+"");
@@ -114,7 +125,8 @@ public class OneTimePad {
     private static String HexTo8BitBinary(String hexString){
         String result = "";
         for (int i = 0; i < hexString.length(); i++) {
-				
+				int num = Integer.parseInt(hexString.charAt(i)+"");
+				result = result.concat(ASCIIto8BitBinary(num));
         }//for loop - i
         return result;
     }//end of static String HexTo8BitBinary(String)
