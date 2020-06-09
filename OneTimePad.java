@@ -2,9 +2,9 @@ import java.util.Scanner;
 public class OneTimePad {
     public static void main(String[] args) {
         final Scanner txt = new Scanner(System.in), num = new Scanner(System.in);
-        System.out.println("Enter your choice \n\t [1] Encrypt \n\t [2] Decrypt \n\t [X] Exit");
+        System.out.println("\nEnter your choice \n\t [1] Encrypt \n\t [2] Decrypt \n\t [X] Exit");
         final char choice = num.next().toUpperCase().charAt(0);
-        String plainText = "", encryptedText= "", key = "";
+        String plainText, encryptedText, key;
         switch(choice) {
             //ENCRYPTION
             case '1':
@@ -38,6 +38,7 @@ public class OneTimePad {
             default:
                 System.out.println("KINDLY ENTER A NUMBER (1-2) or (X) to EXIT ");
         }//switch statement
+        main(new String[] {});
     }// end of void main(String[])
 
     /**
@@ -49,56 +50,54 @@ public class OneTimePad {
      *      the XOR will be a ASCII printable character (i.e "H"(72) XORed with "W"
      *      (87) gives me an ASCII of (31) which is not an ASCII Printable Character.
      *      So we must print our output in Hexadecimal.
-     * @param plainText - the user input that is to be encrypted
+     * @param text - the user input that is to be encrypted
      * @param key - the text XOR with the plain text.
+     * @param mode - represents either (e)ncryption or (d)ecryption
      * @return - the encrypted text in Hex
      */
-    private static String computeBitwiseXOR(String plainText, String key, char mode) {
+    private static String computeBitwiseXOR(String text, String key, char mode) {
         String result = "", resultInBits = "";
-        String plainTextToBits = "", keyToBits = "";
+        String textToBits = "", keyToBits = "";
+
+        //STEP 1 : CONVERT THE PLAINTEXT AND THE KEY TO 8-BIT ASCII STRINGS
         switch(mode){
             case 'e':
-                //STEP 1 : CONVERT THE PLAINTEXT AND THE KEY TO 8-BIT ASCII STRINGS
-                for (int i = 0; i < plainText.length(); i++) {
-                    int character = plainText.charAt(i);
-                    plainTextToBits = plainTextToBits.concat(Decimalto8BitBinary(character));
+                for (int i = 0; i < text.length(); i++) {
+                    int character = text.charAt(i);
+                    textToBits = textToBits.concat(Decimalto8BitBinary(character));
                 }//for loop - i | PLAIN TEXT TO BITS
                 for (int j = 0; j < key.length(); j++) {
                     int character = key.charAt(j);
-                    keyToBits = key.concat(Decimalto8BitBinary(character));
+                    keyToBits = keyToBits.concat(Decimalto8BitBinary(character));
                 }//for loop - j | KEY TO BITS
                 break;
 
             case 'd':
-				plainTextToBits = plainText;
-				for (int j = 0; j < key.length(); j++) {
-					int character = key.charAt(j);
-					keyToBits = key.concat(Decimalto8BitBinary(character));
-				} // for loop - j | KEY TO BITS
+                textToBits = text;
+                for (int j = 0; j < key.length(); j++) {
+                    int character = key.charAt(j);
+                    keyToBits = keyToBits.concat(Decimalto8BitBinary(character));
+                }// for loop - j | KEY TO BITS
         }//switch case - mode
 
         //STEP 2 : XOR THEM TOGETHER (WRAPPING THE KEY IF NEED BE)
-        for(int k = 0; k<plainTextToBits.length(); k++){
-            int plainTextBit = plainTextToBits.charAt(k) - 48;
+        for(int k = 0; k<textToBits.length(); k++) {
+            int plainTextBit = textToBits.charAt(k) - 48;
             int keyBit = keyToBits.charAt(k%keyToBits.length()) - 48;
-            resultInBits = result.concat((plainTextBit+keyBit)%2+"");
-        }//for loop - k
+            resultInBits = resultInBits.concat((plainTextBit+keyBit)%2+"");
+        }//for loop - k`
 
-		switch (mode){
-			case 'e':
-				for (int m = 0; m < resultInBits.length(); m += 8)
-					result = result
-					.concat(Integer.toHexString(Integer.parseInt(resultInBits.substring(m, m + 8), 2)) + "");
-					break;
+        switch (mode){
+            case 'e':
+                for (int m = 0; m < resultInBits.length(); m += 8)
+                    result += Integer.toHexString(Integer.parseInt(resultInBits.substring(m, m + 8), 2)) + " ";
+                break;
 
-			case 'd':
-
-		}//switch case - mode
-
-        //STEP 3 : CONVERTING 8-BIT BINARY TO HEXADECIMAL
-        for (int m = 0; m < resultInBits.length(); m+=8)
-            result=  result.concat(Integer.toHexString(Integer.parseInt(resultInBits.substring(m,m+8),2))+"");
-
+            case 'd':
+                for (int n = 0; n < resultInBits.length(); n++)
+                    result += (char)(Integer.parseInt(resultInBits.substring(n, n + 8), 2))+"";
+                break;
+        }//switch case - mode
         return result;
     }// end of String computeBitwiseXOR(String, String)
 
@@ -111,9 +110,9 @@ public class OneTimePad {
      */
     private static String Decimalto8BitBinary(int charValue){
         String result = Integer.toBinaryString(charValue);
-        for (int i = result.length() ; i < 8; i++) result = "0".concat(result);
+        for (int i = result.length() ; i < 8; i++) result = "0" + result;
         return result;
-    }//end of String ASCIIto8BitBinary(int)
+    }//end of String ASCIIIto8BitBinary(int)
 
     /**
      * OTP - HEXADECIMAL TO 8 BIT BINARY
@@ -124,10 +123,11 @@ public class OneTimePad {
      */
     private static String HexTo8BitBinary(String hexString){
         String result = "";
-        for (int i = 0; i < hexString.length(); i++) {
-				int num = Integer.parseInt(hexString.charAt(i)+"");
-				result = result.concat(Decimalto8BitBinary(num));
-        }//for loop - i
+        for (int i = 0, j; i < hexString.length();) {
+            j = hexString.indexOf(' ',i);
+            result += Decimalto8BitBinary(Integer.parseInt(hexString.substring(i,j),16)) + " ";
+            i = j+1;
+        }//for loop - i,j
         return result;
     }//end of static String HexTo8BitBinary(String)
 }//end of class
