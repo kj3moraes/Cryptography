@@ -101,7 +101,7 @@ public class OneTimePad {
             int plainTextBit = textIn8BitBin.charAt(k) - 48;
             int keyBit = keyIn8BitBin.charAt(k%keyIn8BitBin.length()) - 48;
             resultInBits = resultInBits.concat((plainTextBit+keyBit)%2+"");
-        }//for loop - k`
+        }//for loop - k
 
         //STEP 3 : CONVERTING INTO THE DESIRED OUTPUT FORMAT
         switch (mode){
