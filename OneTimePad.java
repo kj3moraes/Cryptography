@@ -5,7 +5,7 @@ public class OneTimePad {
         System.out.println("\nEnter your choice \n\t [1] Encrypt \n\t [2] Decrypt \n\t [X] Exit");
         final char choice = num.next().toUpperCase().charAt(0);
         String plainText, encryptedText, key;
-        switch(choice) {
+        switch (choice) {
             //ENCRYPTION
             case '1':
                 System.out.print("\t PLAIN TEXT : ");
@@ -21,10 +21,10 @@ public class OneTimePad {
             //DECRYPTION
             case '2':
                 System.out.print("\t ENCRYPTED TEXT : ");
-                encryptedText = txt.nextLine();
+                encryptedText = txt.nextLine().trim();
                 System.out.print("\t KEY : ");
-                key = num.next().toUpperCase().trim();
-                plainText = computeBitwiseXOR(HexTo8BitBinary(encryptedText), key, 'd');
+                key = txt.nextLine().toUpperCase().trim();
+                plainText = computeBitwiseXOR(encryptedText, key, 'd');
                 System.out.println("\n\t\t INPUTED ENCRYPTED TEXT : " + encryptedText);
                 System.out.println("\t\t KEY : " + key);
                 System.out.println("\t\t GENERATED DECRYPTION : " + plainText);
@@ -38,18 +38,21 @@ public class OneTimePad {
             default:
                 System.out.println("KINDLY ENTER A NUMBER (1-2) or (X) to EXIT ");
         }//switch statement
-        main(new String[] {});
+        main(new String[]{});
     }// end of void main(String[])
+
 
     /**
      * OTP - COMPUTE BITWISE XOR
-     *      This function takes 2 parameters - plain text and the key.
+     *      This function takes 2 parameters - given text, a key and a mode.
      *      The function will compute the XOR of 2 Strings as follows
-     *          String --> ASCII --> 8-bit binary --> XOR --> Decimal -- Hex
-     *      The reason we can't output Strings isbecause we cannot guarantee that
-     *      the XOR will be a ASCII printable character (i.e "H"(72) XORed with "W"
-     *      (87) gives me an ASCII of (31) which is not an ASCII Printable Character.
-     *      So we must print our output in Hexadecimal.
+     *          ENCRYTPION
+     *          String --> ASCII --> 8-bit binary --> XOR --> Decimal --> Hex
+     *
+     *          DECRYTPION
+     *          Hex --> 8-bit binary --> XOR --> Decimal (ASCII) --> String
+     *
+     *      The (e)ncryption and (d)ecryption algorithms both take 3 steps.
      * @param text - the user input that is to be encrypted
      * @param key - the text XOR with the plain text.
      * @param mode - represents either (e)ncryption or (d)ecryption
@@ -57,59 +60,79 @@ public class OneTimePad {
      */
     private static String computeBitwiseXOR(String text, String key, char mode) {
         String result = "", resultInBits = "";
-        String textToBits = "", keyToBits = "";
+        String textIn8BitBin = "", keyIn8BitBin = "";
 
-        //STEP 1 : CONVERT THE PLAINTEXT AND THE KEY TO 8-BIT ASCII STRINGS
-        switch(mode){
+        //STEP 1 : CONVERT THE GIVEN TEXT INTO 8 BIT BINARY [SPACED]
+        switch (mode) {
             case 'e':
+                //PLAIN TEXT TO 8 BIT BINARY
                 for (int i = 0; i < text.length(); i++) {
-                    int character = text.charAt(i);
-                    textToBits = textToBits.concat(Decimalto8BitBinary(character));
-                }//for loop - i | PLAIN TEXT TO BITS
+                    char character = text.charAt(i);
+                    if (character==' ') continue;
+                    textIn8BitBin += Decimalto8BitBinary(character) + " ";
+                }//for loop - i
+                //KEY TO 8 BIT BINARY
                 for (int j = 0; j < key.length(); j++) {
-                    int character = key.charAt(j);
-                    keyToBits = keyToBits.concat(Decimalto8BitBinary(character));
-                }//for loop - j | KEY TO BITS
+                    char character = key.charAt(j);
+                    if (character==' ') continue;
+                    keyIn8BitBin += Decimalto8BitBinary(character) + " ";
+                }//for loop - j
                 break;
 
             case 'd':
-                textToBits = text;
+                //ENCRYPTED TEXT TO 8 BIT BINARY
+                if(text.charAt(text.length()-1)!=' ') text+=" ";
+                textIn8BitBin = HexTo8BitBinary(text);
+                //KEY TO 8 BIT BINARY
                 for (int j = 0; j < key.length(); j++) {
-                    int character = key.charAt(j);
-                    keyToBits = keyToBits.concat(Decimalto8BitBinary(character));
-                }// for loop - j | KEY TO BITS
-        }//switch case - mode
+                    char character = key.charAt(j);
+                    if (character==' ') continue;
+                    keyIn8BitBin += Decimalto8BitBinary(character) + " ";
+                }//for loop - j
+                break;
+        }//switch statement - mode
 
-        //STEP 2 : XOR THEM TOGETHER (WRAPPING THE KEY IF NEED BE)
-        for(int k = 0; k<textToBits.length(); k++) {
-            int plainTextBit = textToBits.charAt(k) - 48;
-            int keyBit = keyToBits.charAt(k%keyToBits.length()) - 48;
+        //STEP 2 : XOR THE TEXT AND THE KEY (WRAPPING THE KEY IF NEED BE)
+        for(int k = 0; k<textIn8BitBin.length(); k++) {
+            if (textIn8BitBin.charAt(k)==' ') {
+                resultInBits += " ";
+                continue;
+            }//if statement - spaces
+            int plainTextBit = textIn8BitBin.charAt(k) - 48;
+            int keyBit = keyIn8BitBin.charAt(k%keyIn8BitBin.length()) - 48;
             resultInBits = resultInBits.concat((plainTextBit+keyBit)%2+"");
         }//for loop - k`
 
+        //STEP 3 : CONVERTING INTO THE DESIRED OUTPUT FORMAT
         switch (mode){
             case 'e':
-                for (int m = 0; m < resultInBits.length(); m += 8)
-                    result += Integer.toHexString(Integer.parseInt(resultInBits.substring(m, m + 8), 2)) + " ";
+                for (int m = 0, n; m < resultInBits.length();) {
+                    n = resultInBits.indexOf(' ',m);
+                    result += Integer.toHexString(Integer.parseInt(resultInBits.substring(m,n),2)) + " ";
+                    m = n+1;
+                }//for loop - m,n
                 break;
 
             case 'd':
-                for (int n = 0; n < resultInBits.length(); n++)
-                    result += (char)(Integer.parseInt(resultInBits.substring(n, n + 8), 2))+"";
+                for (int m = 0, n; m < resultInBits.length();) {
+                    n = resultInBits.indexOf(' ',m);
+                    result += (char)(Integer.parseInt(resultInBits.substring(m,n),2));
+                    m = n+1;
+                }//for loop - m,n
                 break;
-        }//switch case - mode
+        }//switch statement
         return result;
-    }// end of String computeBitwiseXOR(String, String)
+    }//end of String computeBitwiseXOR(String, String, int)
 
     /**
-     * OTP - ASCII TO 8 BIT BINARY
-     *      This function takes 1 parameter - a character's ASCII value
+     * OTP - DECIMAL TO 8 BIT BINARY
+     *      This function takes 1 parameter - a decimal (int)
      *      It outputs its equivalent 8 bit binary string.
-     * @param charValue - the character to be converted
+     * @param intValue - the character to be converted
      * @return the 8 bit string of the character
      */
-    private static String Decimalto8BitBinary(int charValue){
-        String result = Integer.toBinaryString(charValue);
+    private static String Decimalto8BitBinary(int intValue) {
+        String result = Integer.toBinaryString(intValue);
         for (int i = result.length() ; i < 8; i++) result = "0" + result;
         return result;
     }//end of String ASCIIIto8BitBinary(int)
