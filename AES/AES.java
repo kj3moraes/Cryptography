@@ -1,31 +1,32 @@
-package AES;
 import java.util.Scanner;
-class SPNetwork {
+class AES {
     public static void main(String[] args){
         Scanner num = new Scanner(System.in), txt = new Scanner(System.in);
-        System.out.println("\nEnter your choice \n\t [1] Encrypt \n\t [2] Decrypt \n\t [X] Exit");
+        System.out.println("\nEnter your choice " + "\n\t [1] Encode \n\t [2] Decode \n\t [X] Exit");
         final char choice = num.next().toUpperCase().charAt(0);
         String plainText, encryptedText, seed;
         switch (choice) {
-            // ENCODING
+            // ENCRYPTION
             case '1':
                 System.out.print("\t PLAIN TEXT : ");
                 plainText = txt.nextLine().trim();
                 System.out.print("\t KEY : ");
                 seed = txt.nextLine().toUpperCase().trim();
+                System.out.print("\t NO. OF ROUNDS : ");
+                noOfRounds = num.nextInt();
+                encryptedText = encrypt(plainText, seed);
                 System.out.println("\n\t\t INPUTED PLAIN TEXT : " + plainText);
                 System.out.println("\t\t KEY (seed for Secret Key): " + seed);
-                System.out.println("\t\t GENERATED ENCRYPTION : " + encryptedText);
+                System.out.println("\t\t NO OF ROUNDS : " + noOfRounds);
+                System.out.println("\t\t GENERATED ENCODING : " + encryptedText);
                 break;
 
-            // DECODING
+            // DECRYPTION
             case '2':
                 System.out.print("\t ENCRYPTED TEXT : ");
                 encryptedText = txt.nextLine();
-                System.out.print("\t KEY : ");
-                seed = txt.nextLine().toUpperCase().trim();
+                plainText = decrypt(encryptedText, seed);
                 System.out.println("\n\t\t INPUTED ENCRYPTED TEXT : " + encryptedText);
-                System.out.println("\t\t KEY (seed for Secret Key): " + seed);
                 System.out.println("\t\t GENERATED DECRYPTION : " + plainText);
                 break;
 
@@ -35,8 +36,19 @@ class SPNetwork {
                 break;
 
             default:
-                System.out.println("KINDLY ENTER A NUMBER (1-2) or (X) to EXIT ");
-        }//switch statement
-        main(new String[]{});
+                System.out.println("KINDLY ENTER A NUMBER (1-2) or (X)");
+        }// switch statement
+        main(new String[] {});
     }//end of void main(String[])
+
+    public static String encrypt(String plaintext, String seed){
+        String result = "";
+        System.out.println("SUBMIT YOUR AES VERSION");
+        return result;
+    }//end of String encrpyt(String, String)
+
+    public static String decrypt(String encryptedText, String seed) {
+        String result = "";
+        return result;
+    }//end of String decrypt(String, String)
 }//end of class
