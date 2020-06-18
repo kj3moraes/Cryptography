@@ -12,19 +12,17 @@ class AES {
                 plainText = txt.nextLine().trim();
                 System.out.print("\t KEY : ");
                 seed = txt.nextLine().toUpperCase().trim();
-                System.out.print("\t NO. OF ROUNDS : ");
-                noOfRounds = num.nextInt();
                 encryptedText = encrypt(plainText, seed);
                 System.out.println("\n\t\t INPUTED PLAIN TEXT : " + plainText);
-                System.out.println("\t\t KEY (seed for Secret Key): " + seed);
-                System.out.println("\t\t NO OF ROUNDS : " + noOfRounds);
-                System.out.println("\t\t GENERATED ENCODING : " + encryptedText);
+                System.out.println("\t\t KEY (seed for Secret Key): " + seed);                System.out.println("\t\t GENERATED ENCODING : " + encryptedText);
                 break;
 
             // DECRYPTION
             case '2':
                 System.out.print("\t ENCRYPTED TEXT : ");
                 encryptedText = txt.nextLine();
+                System.out.print("\t KEY : ");
+                seed = txt.nextLine().toUpperCase().trim();
                 plainText = decrypt(encryptedText, seed);
                 System.out.println("\n\t\t INPUTED ENCRYPTED TEXT : " + encryptedText);
                 System.out.println("\t\t GENERATED DECRYPTION : " + plainText);
