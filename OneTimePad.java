@@ -64,6 +64,7 @@ public class OneTimePad {
 
         //STEP 1 : CONVERT THE GIVEN TEXT INTO 8 BIT BINARY [SPACED]
         switch (mode) {
+            //ENCRYPTION
             case 'e':
                 //PLAIN TEXT TO 8 BIT BINARY
                 for (int i = 0; i < text.length(); i++) {
@@ -79,6 +80,7 @@ public class OneTimePad {
                 }//for loop - j
                 break;
 
+            //DECRYPTION
             case 'd':
                 //ENCRYPTED TEXT TO 8 BIT BINARY
                 if(text.charAt(text.length()-1)!=' ') text+=" ";
@@ -144,11 +146,11 @@ public class OneTimePad {
      * @param hexString- inputed hex string
      * @return - the equivalent binary string.
      */
-    private static String HexTo8BitBinary(String hexString){
+    private static String HexTo8BitBinary(String hex){
         String result = "";
-        for (int i = 0, j; i < hexString.length();) {
-            j = hexString.indexOf(' ',i);
-            result += Decimalto8BitBinary(Integer.parseInt(hexString.substring(i,j),16)) + " ";
+        for (int i = 0, j; i < hex.length();) {
+            j = hex.indexOf(' ',i);
+            result += Decimalto8BitBinary(Integer.parseInt(hex.substring(i,j),16)) + " ";
             i = j+1;
         }//for loop - i,j
         return result;
