@@ -1,7 +1,7 @@
 import java.util.Scanner;
 class AES {
+    private static final Scanner num = new Scanner(System.in), txt = new Scanner(System.in);
     public static void main(String[] args){
-        Scanner num = new Scanner(System.in), txt = new Scanner(System.in);
         System.out.println("\nEnter your choice " + "\n\t [1] Encode \n\t [2] Decode \n\t [X] Exit");
         final char choice = num.next().toUpperCase().charAt(0);
         String plainText, encryptedText, seed;
@@ -45,13 +45,13 @@ class AES {
         System.out.println("SUBMIT YOUR AES VERSION: [1] AES-128, [2] AES-192, [3] AES-256");
         final char choice = txt.next().trim().charAt(0);
         switch(choice){
-            case 1:
+            case '1':
             break;
             
-            case 2:
+            case '2':
             break;
 
-            case 3:
+            case '3':
             break;
 
             default:

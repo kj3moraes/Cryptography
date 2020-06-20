@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class SBox {es
+public class SBox {
     public SBox(){
         
     }//end of public Sbox(int)
