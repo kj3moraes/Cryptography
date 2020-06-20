@@ -14,7 +14,8 @@ class AES {
                 seed = txt.nextLine().toUpperCase().trim();
                 encryptedText = encrypt(plainText, seed);
                 System.out.println("\n\t\t INPUTED PLAIN TEXT : " + plainText);
-                System.out.println("\t\t KEY (seed for Secret Key): " + seed);                System.out.println("\t\t GENERATED ENCODING : " + encryptedText);
+                System.out.println("\t\t KEY (seed for Secret Key): " + seed); 
+                System.out.println("\t\t GENERATED ENCODING : " + encryptedText);
                 break;
 
             // DECRYPTION
@@ -41,7 +42,21 @@ class AES {
 
     public static String encrypt(String plaintext, String seed){
         String result = "";
-        System.out.println("SUBMIT YOUR AES VERSION");
+        System.out.println("SUBMIT YOUR AES VERSION: [1] AES-128, [2] AES-192, [3] AES-256");
+        final char choice = txt.next().trim().charAt(0);
+        switch(choice){
+            case 1:
+            break;
+            
+            case 2:
+            break;
+
+            case 3:
+            break;
+
+            default:
+            break;
+        }// switch statement
         return result;
     }//end of String encrpyt(String, String)
 
