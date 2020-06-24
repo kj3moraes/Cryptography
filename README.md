@@ -13,7 +13,7 @@ This repository contains the codes for several known ciphers and a few hashing a
    * Beaufort Cipher  
    * Trithemius Cipher
    * Running Key Cipher  
-   * Checkerboard Cipher    
+   * Checkerboard Cipher
    * Rail Fence Cipher  
    * Polybius Cipher
    * ADFGX Cipher
@@ -35,7 +35,7 @@ This repository contains the codes for several known ciphers and a few hashing a
    * IDEA
    * DES
    * 3DES  
-   * AES-256
+   * AES
 
 ### Encoding
    * Base32
@@ -46,6 +46,7 @@ This repository contains the codes for several known ciphers and a few hashing a
    * Bootstring
 
 ### Hashing Algorithms
+
    * Merkel-Damgård Construction
    * MD5
    * SHA-1
