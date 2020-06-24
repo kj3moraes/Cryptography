@@ -1,12 +1,15 @@
 import java.util.Scanner;
-
-class RoundFunction {
+public class AESRoundFunction {
     private static final Scanner num = new Scanner(System.in), txt = new Scanner(System.in);
-    private static final int keySize;
+    private int keySize;
 
-    public RoundFunction(int keySize){
-        this.keySize = keySize;
+    public AESRoundFunction(){
+        keySize = 256;
     }//end of public RoundFunction()
+
+    public AESRoundFunction(int keySize){
+        this.keySize = keySize;
+    }//end of public RoundFunction(int)
 
     protected void subBytes(int[][] matrix){
 

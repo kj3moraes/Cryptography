@@ -1,6 +1,6 @@
 package DES;
 import java.util.Scanner;
-class RoundFunction {
+class DESRoundFunction {
     public static void main(String[] args){
         Scanner num = new Scanner(System.in), txt = new Scanner(System.in);
         

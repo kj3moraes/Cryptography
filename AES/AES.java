@@ -1,5 +1,7 @@
 import java.util.Scanner;
-class AES {
+
+import Feistel.RoundFunction;
+public class AES {
     private static final Scanner num = new Scanner(System.in), txt = new Scanner(System.in);
     private static final int noOfRounds;
     public static void main(String[] args){
@@ -45,17 +47,21 @@ class AES {
         String result = "";
         System.out.println("SUBMIT YOUR AES VERSION: [1] AES-128, [2] AES-192, [3] AES-256");
         final char choice = txt.next().trim().charAt(0);
+        AESRoundFunction F;
         switch(choice){
             case '1':
                 noOfRounds = 10;
+                F = new AESRoundFunction(128);
             break;
             
             case '2':
                 noOfRounds = 12;
+                F = new AESRoundFunction(192);
             break;
 
             default:
                 noOfRounds = 14;
+                F = new AESRoundFunction(256);
         }// switch statement
         return result;
     }//end of String encrpyt(String, String)
