@@ -1,6 +1,7 @@
 import java.util.Scanner;
 class AES {
     private static final Scanner num = new Scanner(System.in), txt = new Scanner(System.in);
+    private static final int noOfRounds;
     public static void main(String[] args){
         System.out.println("\nEnter your choice " + "\n\t [1] Encode \n\t [2] Decode \n\t [X] Exit");
         final char choice = num.next().toUpperCase().charAt(0);
@@ -46,16 +47,15 @@ class AES {
         final char choice = txt.next().trim().charAt(0);
         switch(choice){
             case '1':
+                noOfRounds = 10;
             break;
             
             case '2':
-            break;
-
-            case '3':
+                noOfRounds = 12;
             break;
 
             default:
-            break;
+                noOfRounds = 14;
         }// switch statement
         return result;
     }//end of String encrpyt(String, String)
