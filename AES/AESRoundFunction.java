@@ -39,6 +39,6 @@ public class AESRoundFunction {
     }// end of void mixColumns(int[][])
 
     protected void addRoundKey(int[][] matrix) {
-        
+
     }// end of void addRoundKey(int[][])
 }//end of class

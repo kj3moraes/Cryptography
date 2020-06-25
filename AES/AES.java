@@ -1,6 +1,4 @@
 import java.util.Scanner;
-
-import Feistel.RoundFunction;
 public class AES {
     private static final Scanner num = new Scanner(System.in), txt = new Scanner(System.in);
     private static int noOfRounds;
