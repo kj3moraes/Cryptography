@@ -3,7 +3,7 @@ import java.util.Scanner;
 import Feistel.RoundFunction;
 public class AES {
     private static final Scanner num = new Scanner(System.in), txt = new Scanner(System.in);
-    private static final int noOfRounds;
+    private static int noOfRounds;
     public static void main(String[] args){
         System.out.println("\nEnter your choice " + "\n\t [1] Encode \n\t [2] Decode \n\t [X] Exit");
         final char choice = num.next().toUpperCase().charAt(0);
