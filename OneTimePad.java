@@ -41,7 +41,6 @@ public class OneTimePad {
         main(new String[]{});
     }// end of void main(String[])
 
-
     /**
      * OTP - COMPUTE BITWISE XOR
      *      This function takes 2 parameters - given text, a key and a mode.
@@ -70,13 +69,13 @@ public class OneTimePad {
                 for (int i = 0; i < text.length(); i++) {
                     char character = text.charAt(i);
                     if (character==' ') continue;
-                    textIn8BitBin += Decimalto8BitBinary(character) + " ";
+                    textIn8BitBin += DecimalTo8BitBinary(character) + " ";
                 }//for loop - i
                 //KEY TO 8 BIT BINARY
                 for (int j = 0; j < key.length(); j++) {
                     char character = key.charAt(j);
                     if (character==' ') continue;
-                    keyIn8BitBin += Decimalto8BitBinary(character) + " ";
+                    keyIn8BitBin += DecimalTo8BitBinary(character) + " ";
                 }//for loop - j
                 break;
 
@@ -89,7 +88,7 @@ public class OneTimePad {
                 for (int j = 0; j < key.length(); j++) {
                     char character = key.charAt(j);
                     if (character==' ') continue;
-                    keyIn8BitBin += Decimalto8BitBinary(character) + " ";
+                    keyIn8BitBin += DecimalTo8BitBinary(character) + " ";
                 }//for loop - j
                 break;
         }//switch statement - mode
@@ -133,11 +132,11 @@ public class OneTimePad {
      * @param intValue - the character to be converted
      * @return the 8 bit string of the character
      */
-    private static String Decimalto8BitBinary(int intValue) {
+    private static String DecimalTo8BitBinary(int intValue) {
         String result = Integer.toBinaryString(intValue);
         for (int i = result.length() ; i < 8; i++) result = "0" + result;
         return result;
-    }//end of String ASCIIIto8BitBinary(int)
+    }//end of String DecimalTo8BitBinary(int)
 
     /**
      * OTP - HEXADECIMAL TO 8 BIT BINARY
@@ -150,7 +149,7 @@ public class OneTimePad {
         String result = "";
         for (int i = 0, j; i < hex.length();) {
             j = hex.indexOf(' ',i);
-            result += Decimalto8BitBinary(Integer.parseInt(hex.substring(i,j),16)) + " ";
+            result += DecimalTo8BitBinary(Integer.parseInt(hex.substring(i,j),16)) + " ";
             i = j+1;
         }//for loop - i,j
         return result;
