@@ -1,3 +1,5 @@
+package AES_Encryption;
+
 public class SBox {
     protected char mode;
     int[][] forwardSBox = { {99, 124, 119, 123, 242, 107, 111, 197, 48, 1, 103, 43, 254, 215, 171, 118},
@@ -38,17 +40,19 @@ public class SBox {
         this.mode = mode;
     }//end of public Sbox(int)
 
-    protected int performSubstution(int number) {
+    protected int performSubstitution(int number) {
         String LeastSignificantNibble = Decimalto8BitBinary(number).substring(4,8);
         String MostSignificantNibble =  Decimalto8BitBinary(number).substring(0,4);
         switch (mode) {
             case 'e':
-                return forwardSBox[Integer.parseInt(MostSignificantNibble,2)][Integer.parseInt(LeastSignificantNibble,2)];
-                break;
+                return forwardSBox[Integer.parseInt(MostSignificantNibble,2)][Integer.parseInt(LeastSignificantNibble,2)];                
 
             case 'd':
-                return reverseSBox[Integer.parseInt(MostSignificantNibble,2)][Integer.parseInt(LeastSignificantNibble,2)];
-                break;
+                return reverseSBox[Integer.parseInt(MostSignificantNibble,2)][Integer.parseInt(LeastSignificantNibble,2)]; 
+              
+            default:
+                return 0;
+                
         }//switch statment
     }//end of int performSubstitution
 
