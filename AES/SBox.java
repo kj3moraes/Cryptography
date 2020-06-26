@@ -1,5 +1,6 @@
 import java.util.Scanner;
 public class SBox {
+    protected char mode;
     int[][] forwardSBox = { {99, 124, 119, 123, 242, 107, 111, 197, 48, 1, 103, 43, 254, 215, 171, 118},
                             {202, 130, 201, 125, 250, 89, 71, 240, 173, 212, 162, 175, 156, 164, 114, 192},
                             {183, 253, 147, 38, 54, 63, 247, 204, 52, 165, 229, 241, 113, 216, 49, 21},
@@ -34,7 +35,27 @@ public class SBox {
                             {96, 81, 127, 169, 25, 181, 74, 13, 45, 229, 122, 159, 147, 201, 156, 239},
                             {160, 224, 59, 77, 174, 42, 245, 176, 200, 235, 187, 60, 131, 83, 153, 97},
                             {23, 43, 4, 126, 186, 119, 214, 38, 225, 105, 20, 99, 85, 33, 12, 125} };
-    public SBox(){
-        
+    public SBox(char mode){
+        this.mode = mode;
     }//end of public Sbox(int)
+
+    protected int performSubstution(int number) {
+        String LeastSignificantNibble = Decimalto8BitBinary(number).substring(4,8);
+        String MostSignificantNibble =  Decimalto8BitBinary(number).substring(0,4);
+        switch (mode) {
+            case 'e':
+                return forwardSBox[Integer.parseInt(MostSignificantNibble,2)][Integer.parseInt(LeastSignificantNibble,2)];
+                break;
+
+            case 'd':
+                return reverseSBox[Integer.parseInt(MostSignificantNibble,2)][Integer.parseInt(LeastSignificantNibble,2)];
+                break;
+        }//switch statment
+    }//end of int performSubstitution
+
+    private static String Decimalto8BitBinary(int intValue) {
+        String result = Integer.toBinaryString(intValue);
+        for (int i = result.length() ; i < 8; i++) result = "0" + result;
+        return result;
+    }//end of String Decimalto8BitBinary(int)
 }//end of class
