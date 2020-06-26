@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import javax.crypto.spec.SecretKeySpec;
 public class AESRoundFunction {
     private static final Scanner num = new Scanner(System.in), txt = new Scanner(System.in);
     private int keySize;
@@ -12,7 +13,7 @@ public class AESRoundFunction {
     }//end of public RoundFunction(int)
 
     protected void subBytes(int[][] matrix){
-
+        SBox S = new SBox('e');
     }//end of void subBytes(int[][])
 
     protected void shiftRows(int[][] matrix){
@@ -41,4 +42,8 @@ public class AESRoundFunction {
     protected void addRoundKey(int[][] matrix) {
 
     }// end of void addRoundKey(int[][])
+
+    private void keyGenerate(String seed){
+        
+    }//end of void keyGenerate(String)
 }//end of class
