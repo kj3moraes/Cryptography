@@ -1,5 +1,6 @@
+package AES;
 import java.util.Arrays;
-import java.util.Scanner;
+// import java.util.Scanner;
 import javax.crypto.spec.SecretKeySpec;
 public class AESRoundFunction {
     //private static final Scanner num = new Scanner(System.in), txt = new Scanner(System.in);

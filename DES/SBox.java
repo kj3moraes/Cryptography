@@ -1,5 +1,4 @@
 package DES;
-package ;
 import java.util.Scanner;
 class SBox {
     public static void main(String[] args){
