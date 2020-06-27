@@ -1,27 +1,39 @@
+import java.util.Arrays;
 import java.util.Scanner;
 import javax.crypto.spec.SecretKeySpec;
 public class AESRoundFunction {
-    private static final Scanner num = new Scanner(System.in), txt = new Scanner(System.in);
+    //private static final Scanner num = new Scanner(System.in), txt = new Scanner(System.in);
     private int keySize;
+    private String key;
     private int[][] matrix = new int[4][4];
-    public AESRoundFunction(){
+
+    public AESRoundFunction(int matrix[][]){
+        this.matrix = matrix;
         keySize = 256;
     }//end of public RoundFunction()
 
-    public AESRoundFunction(int keySize){
+    public AESRoundFunction(int matrix[][], int keySize) {
+        this.matrix = matrix;
         this.keySize = keySize;
-    }//end of public RoundFunction(int)
+    }// end of public RoundFunction(int)
+
+    private void generateSecretKey(String seed) {
+        SecretKeySpec keyGenerator = new SecretKeySpec(seed.getBytes(),"AES_".concat(keySize+""));
+        key = Arrays.toString(keyGenerator.getEncoded());
+    }//end of void generateSecretKey(String)
 
     protected void subBytes(int[][] matrix){
         SBox S = new SBox('e');
     }//end of void subBytes(int[][])
 
-    protected void shiftRows(int[][] matrix){
-        int[] tempArray = new int[4];
+    protected void shiftRows(int[][] matrix) {
+        int[] tempArray;
         for (int n = 0; n < 4; n++) {
-            for (int i = 0; i < 4; i++) tempArray[i] = matrix[n][(i+n)%n];
-            for (int j = 0; j < 4; j++) matrix[n][j] = tempArray[j];
-        }//for loop - n
+            tempArray = new int[4];
+            for (int i = 0; i < 4; i++)
+                tempArray[i] = matrix[n][(i + n) % 4];
+            matrix[n] = tempArray;
+        } // for loop - n
     }// end of void shiftRows(int[][])
 
     protected void mixColumns(int[][] matrix){
@@ -40,7 +52,7 @@ public class AESRoundFunction {
     }// end of void mixColumns(int[][])
 
     protected void addRoundKey(int[][] matrix) {
-
+        
     }// end of void addRoundKey(int[][])
 
     private void keyGenerate(String seed){
