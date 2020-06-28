@@ -1,7 +1,5 @@
 package AES;
-import java.util.Arrays;
-// import java.util.Scanner;
-import javax.crypto.spec.SecretKeySpec;
+
 public class AESRoundFunction {
     //private static final Scanner num = new Scanner(System.in), txt = new Scanner(System.in);
     private int keySize;
@@ -18,10 +16,6 @@ public class AESRoundFunction {
         this.keySize = keySize;
     }// end of public RoundFunction(int)
 
-    private void generateSecretKey(String seed) {
-        SecretKeySpec keyGenerator = new SecretKeySpec(seed.getBytes(),"AES_".concat(keySize+""));
-        key = Arrays.toString(keyGenerator.getEncoded());
-    }//end of void generateSecretKey(String)
 
     protected void subBytes(int[][] matrix){
         SBox S = new SBox('e');
