@@ -17,14 +17,14 @@ public class Keys {
     private void generateKeys() {
     }//end of void generateKeys(String)
 
-    private void generateKeyState(String seed) {
+    private void generateKeyState(String seed, int keySize) {
         byte[] key0; byte inc = 0;
-        final SecretKeySpec keyGenerator = new SecretKeySpec(seed.getBytes(), "AES_128");
+        final SecretKeySpec keyGenerator = new SecretKeySpec(seed.getBytes(), "AES_".concat(keySize+""));
         key0 = keyGenerator.getEncoded();
 
-        for(byte c = 0 ; c < 4 ; c++){//loop to convert key0 into 4x4 matrix as keyState
-            for(byte r = 0 ; r < 4 ; r++){
-                keyState[r][c] = key0[inc++];
+        for(byte i = 0 ; i < 4 ; i++){//loop to convert key0 into 4x4 matrix as keyState
+            for(byte j = 0 ; j < 4 ; j++){
+                keyState[j][i] = key0[inc++];
             }//inner for loop
         }//outer for loop
 

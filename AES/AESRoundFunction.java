@@ -4,18 +4,14 @@ public class AESRoundFunction {
     //private static final Scanner num = new Scanner(System.in), txt = new Scanner(System.in);
     private int keySize;
     private String key;
-    private int[][] matrix = new int[4][4];
 
-    public AESRoundFunction(int matrix[][]){
-        this.matrix = matrix;
+    public AESRoundFunction(){
         keySize = 256;
     }//end of public RoundFunction()
 
-    public AESRoundFunction(int matrix[][], int keySize) {
-        this.matrix = matrix;
+    public AESRoundFunction(int keySize) {
         this.keySize = keySize;
     }// end of public RoundFunction(int)
-
 
     protected void subBytes(int[][] matrix){
         SBox S = new SBox('e');
