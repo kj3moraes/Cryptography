@@ -40,14 +40,14 @@ public class SBox {
     }//end of public Sbox(int)
 
     protected int performSubstitution(int number) {
-        String LeastSignificantNibble = Decimalto8BitBinary(number).substring(4,8);
-        String MostSignificantNibble =  Decimalto8BitBinary(number).substring(0,4);
+        int row = Integer.parseInt(Decimalto8BitBinary(number).substring(0,4),2);
+        int column = Integer.parseInt(Decimalto8BitBinary(number).substring(4,8);,2);
         switch (mode) {
             case 'e':
-                return forwardSBox[Integer.parseInt(MostSignificantNibble,2)][Integer.parseInt(LeastSignificantNibble,2)];                
+                return forwardSBox[row][column];                
 
             case 'd':
-                return reverseSBox[Integer.parseInt(MostSignificantNibble,2)][Integer.parseInt(LeastSignificantNibble,2)]; 
+                return reverseSBox[row][column]; 
               
             default:
                 return 0;
