@@ -2,18 +2,15 @@ package AES;
 public class AESRoundFunction {
     private int keySize;
     protected String seed;
-    private static Keys keyGen;
 
     public AESRoundFunction(String seed) {
         this.seed = seed;
         keySize = 256;
-        keyGen = new Keys(seed, 256);
     }// end of public RoundFunction()
 
     public AESRoundFunction(int keySize, String seed) {
         this.seed = seed;
         this.keySize = keySize;
-        keyGen = new Keys(seed, keySize);
     }// end of public RoundFunction(int)
 
 
