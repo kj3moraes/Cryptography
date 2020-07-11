@@ -13,7 +13,6 @@ public class AESRoundFunction {
         this.keySize = keySize;
     }// end of public RoundFunction(int)
 
-
     protected void subBytes(int[][] matrix) {
         SBox S = new SBox('e');
         for (int i = 0; i < matrix.length; i++)
@@ -40,8 +39,7 @@ public class AESRoundFunction {
             matrix[2][i] = matrix[0][i] ^ matrix[1][i] ^ dotProduct(2, matrix[2][i]) ^ dotProduct(3, matrix[3][i]);
 
             matrix[3][i] = dotProduct(3, matrix[0][i]) ^ matrix[1][i] ^ matrix[2][i] ^ dotProduct(2, matrix[3][i]);
-
-        }
+        }//for loop - i
     }// end of void mixColumns(int[][])
 
     private int dotProduct(int a, int b) {
