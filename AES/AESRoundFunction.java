@@ -58,7 +58,7 @@ public class AESRoundFunction {
         return result;
     }// end of int dotProduct(int, int)
 
-    protected void addRoundKey(int keyMatrix[][], int[][] matrix) {
+    protected void addRoundKey(int[][] keyMatrix, int[][] matrix) {
         for (int i = 0; i < 4; i++)
             for (int j = 0; j < 4; j++)
                 matrix[i][j] ^= keyMatrix[i][j];
