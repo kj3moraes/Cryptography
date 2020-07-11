@@ -78,8 +78,8 @@ This is a rigorous course by Dan Boneh of Stanford University that is a very str
 **High School Mathematics Extensions**  
 This webpage ['High School Mathematics Extension'](https://en.wikibooks.org/wiki/High_School_Mathematics_Extensions) is a fantastic WikiBooks page that helps you take the high school math curriculum beyond the prescribed syllabus. It delves into number theory, set theory and discrete probability.
 
-**CryptoHack**  
-This website is a fun and engaging way of learning modern cryptography. However, one must be well versed with JavaScript to be able to complete some 'missions'.
+**CryptoHack | Cryptopals**  
+These websites are a fun and engaging way of learning modern cryptography. It is aimed at those who like to learn by solving puzzles and problems.
 
 ## **Books**  
 **Introduction to Mathematical Cryptography (Hoffmann and Silvermann)**  
