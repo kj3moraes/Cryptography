@@ -86,7 +86,7 @@ These websites are a fun and engaging way of learning modern cryptography. It is
 This is a great book for beginners and professinals alike. Its main focus is introducing the reader to cryptanalytic methods and the mathematics behind the encryption and decryption algorithms. Although it is a great read, it delves into lots of technical material very swiftly so only read if this is what you want to learn.
 
 **The Codebreakers (Kahn, David)**  
-A rich and detailed history of the history of ciphers and crpytography all the way from the Babylonians to modern fay security. A great read to learn about the history of cryptography.
+A rich and detailed history of the history of ciphers and crpytography all the way from the Babylonians to modern day security. A great read to learn about the history of cryptography.
 
 **The Code Book (Singh, Simon)**  
 Similar to The Codebreakers in content, however, it is far more concise.
