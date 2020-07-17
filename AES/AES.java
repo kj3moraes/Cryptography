@@ -44,26 +44,49 @@ public class AES {
 
     public static String encrypt(String plaintext, String seed){
         String result = "";
-        System.out.println("SUBMIT YOUR AES VERSION: [1] AES-128, [2] AES-192, [3] AES-256");
+        System.out.println("\t SUBMIT YOUR AES VERSION: \n\t\t [1] AES-128 \n\t\t [2] AES-192 \n\t\t [3] AES-256");
         final char choice = txt.next().trim().charAt(0);
-        AESRoundFunction F;
+        
+        //STEP 1 : INITIALIZE AND SET UP EVERYTHING WE NEED
+        Keys K;
         switch(choice){
             case '1':
                 noOfRounds = 10;
-                F = new AESRoundFunction(128);
-            break;
-            
+                K = new Keys(seed,128);
+                break;
+
             case '2':
                 noOfRounds = 12;
-                F = new AESRoundFunction(192);
-            break;
+                K  = new Keys(seed, 192);
+                break;
 
             default:
                 noOfRounds = 14;
-                F = new AESRoundFunction(256);
+                K = new Keys(seed, 256);
         }// switch statement
+        String initialKey, salt;
+        int[][] matrix = new int[4][4];
+        
+        //STEP 2 : PUT THE NECESSARY DATA INTO OUR VARIABLES
+        for (int i = 0; i < 16; i++)
+            matrix[i/4][i%4] = plaintext.charAt(i);
+        salt = K.getSalt(); initialKey = K.getInitialKeyState();
+
+        //STEP 3 : USE THE DATA AND THE VARIABLES TO PERFORM THE ENCRYPTION
+        AESRoundFunction.addRoundKey(K.generateKeyMatrix(0), matrix);
+        for (int row[]:
+                matrix) {
+            for (int element :
+                    row) {
+                System.out.print(Integer.toHexString(element));
+            }
+        }
+        for (int i = 1; i <= noOfRounds ; i++) {
+
+        }
         return result;
-    }//end of String encrpyt(String, String)
+        
+    }//end of String encrypt(String, String)
 
     public static String decrypt(String encryptedText, String seed) {
         String result = "";
