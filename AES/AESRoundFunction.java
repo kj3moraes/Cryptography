@@ -32,8 +32,7 @@ public class AESRoundFunction {
 
             matrix[3][i] = dotProduct(3,matrix[0][i]) ^
                     matrix[1][i] ^ matrix[2][i] ^ dotProduct(2,matrix[3][i]);
-
-        }
+        }//for loop - i
     }// end of void mixColumns(int[][])
 
     private static int dotProduct(int a, int b){
