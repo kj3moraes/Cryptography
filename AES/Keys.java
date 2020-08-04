@@ -10,57 +10,13 @@ import java.security.spec.KeySpec;
 
 public class Keys {
     private static int[][] currentKeyMatrix;
-    private String initialKeyState, salt;
+    private String initialKeyState;
     protected int algorithm, maxColumnNo;
     private final int[] RCON = { 1, 2, 4, 8, 16, 32, 64, 128, 27, 54 };
 
     public String getInitialKeyState() {
         return initialKeyState;
     }// end of String getInitKeyState()
-
-    public String getSalt() {
-        return salt;
-    }// end of String getSalt()
-
-    public Keys(String seed, int algorithm) {
-        // STEP 1 : GENERATE A PSEUDORANDOM KEY BASED ON THE USER'S INPUT
-        SecretKey key = null;
-        byte[] salt = null;
-        try {
-            SecureRandom sr = SecureRandom.getInstanceStrong();
-            salt = new byte[16];
-            sr.nextBytes(salt);
-            KeySpec keyGen = new PBEKeySpec(seed.toCharArray(), salt, 65536, algorithm);
-            key = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1").generateSecret(keyGen);
-        } // try block
-        catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
-            System.out.println("ERROR");
-            System.exit(0);
-        } // catch block
-        initialKeyState = ByteArrayToHexadecimal(key.getEncoded());
-        this.salt = ByteArrayToHexadecimal(salt);
-
-        // STEP 2 : PROPERLY INITIALIZE THE ALGORITHM AND KEY MATRIX
-        switch (algorithm) {
-            case 128:
-                currentKeyMatrix = new int[4][4];
-                this.algorithm = 128;
-                maxColumnNo = 3;
-                break;
-
-            case 192:
-                currentKeyMatrix = new int[4][6];
-                this.algorithm = 192;
-                maxColumnNo = 5;
-                break;
-
-            case 256:
-                currentKeyMatrix = new int[4][8];
-                this.algorithm = 256;
-                maxColumnNo = 7;
-                break;
-        }// switch statement
-    }// end of public Keys(String, int)
 
     public Keys(String seed, String salt, int algorithm) {
         SecretKey key = null;
@@ -73,7 +29,6 @@ public class Keys {
             System.exit(0);
         } // catch block
         initialKeyState = ByteArrayToHexadecimal(key.getEncoded());
-        this.salt = salt;
         // STEP 2 : PROPERLY INITIALIZE THE ALGORITHM AND KEY MATRIX
         switch (algorithm) {
             case 128:
