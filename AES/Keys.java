@@ -68,6 +68,7 @@ public class Keys {
         // STEP 2: HANDLE THE KEY GENERATION PER ALGORITHM
         int[] column = new int[4];
         switch (algorithm) {
+            //STEP 2.1 - 128 BIT VARIANT
             case 128:
                 // STEP 2.1.1 : ASSIGN THE LAST COLUMN TO A TEMPORARY VARIABLE.
                 for (int i = 0; i < 4; i++)
@@ -138,12 +139,11 @@ public class Keys {
         // STEP 3 : USE THE CURRENT KEY MATRIX TO ISOLATE A 4x4 PART TO RETURN
         for (int i = 0; i < 4; i++)
             System.arraycopy(currentKeyMatrix[i], 0, outputMatrix[i], 0, 4);
-
         return outputMatrix;
     }// end of int[][] getKeyMatrix(int)
 
     private int[] functionG(int[] column) {
-        // STEP 1: : ROTWORD
+        // STEP 1: ROTWORD
         int[] resultantKeyColumn = new int[4];
         resultantKeyColumn[3] = column[0];
         for (int i = 1; i < 4; i++)
@@ -159,9 +159,8 @@ public class Keys {
     private int[] functionF(int[] column, int roundNo) {
         int[] resultantKeyColumn = new int[4];
         resultantKeyColumn = functionG(resultantKeyColumn);
-        // STEP 3 : RCON AND XOR FOR FIRST COLUMN
-        for (int i = 0; i < 4; i++)
-            resultantKeyColumn[i] ^= (resultantKeyColumn[i] ^ RCON[roundNo - 1]);
+        // STEP 3 : RCON
+        resultantKeyColumn[0] ^= RCON[roundNo - 1];
         return resultantKeyColumn;
     }// end of int[] functionF(int[], int)
 
