@@ -3,6 +3,7 @@ package AES;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
@@ -12,6 +13,7 @@ public class Keys {
     private String initialKeyState;
     protected int algorithm, maxColumnNo;
     private final int[] RCON = { 1, 2, 4, 8, 16, 32, 64, 128, 27, 54 };
+    private SBox S = new SBox('e');
 
     public String getInitialKeyState() {
         return initialKeyState;
@@ -70,7 +72,7 @@ public class Keys {
         switch (algorithm) {
             //STEP 2.1 - 128 BIT VARIANT
             case 128:
-                // STEP 2.1.1 : ASSIGN THE LAST COLUMN TO A TEMPORARY VARIABLE.
+                // STEP 2.1.1 : ASSIGN THE LAST COLUMN (COLUMN 3) TO A TEMPORARY VARIABLE.
                 for (int i = 0; i < 4; i++)
                     column[i] = currentKeyMatrix[i][3];
 
@@ -87,24 +89,66 @@ public class Keys {
 
             case 192:
                 switch (roundNo % 3) {
-                    case 0:
+                    case 0://first 4 columns, for rounds 3, 6, 9, 12
+                        // STEP 2.3.1 : ASSIGN THE LAST COLUMN (COLUMN 5) TO A TEMPORARY VARIABLE.
+                        for (int i = 0; i < 4; i++)
+                            column[i] = currentKeyMatrix[i][5];
+
+                        // STEP 2.3.2 : GENERATE THE 0th COLUMN OF THE NEXT 4X6 KEY MATRIX
+                        column = functionF(column, (int)((float)(roundNo/2) + (float)(roundNo/7) + (float)(9/10)));
+                        for (int i = 0; i < 4; i++)
+                            currentKeyMatrix[i][0] ^= column[i];
+
+                        // STEP 2.3.3 : USE THE 0th COLUMN TO GENERATE COLUMNS 1, 2, 3, 4, 5
+                        for (int i = 1; i < 6; i++)
+                            for (int j = 0; j < 4; j++)
+                                currentKeyMatrix[j][i] ^= currentKeyMatrix[j][i - 1];
                         break;
-                    case 1:
-                        break;
-                    case 2:
-                        break;
+
+                    case 1://2 + 2 columns, for rounds 1, 4, 7, 10
+                        // STEP 2.3.1 : ASSIGN COLUMN 5 TO A TEMPORARY VARIABLE.
+                        for (int i = 0; i < 4; i++)
+                            column[i] = currentKeyMatrix[i][5];
+                        
+                        // STEP 2.3.2 : GENERATE THE 0th COLUMN OF THE NEXT 4X6 KEY MATRIX
+                        column = functionF(column, (int)((float)(roundNo/2) + (float)(roundNo/7) + (float)(9/10)));
+                        for (int i = 0; i < 4; i++)
+                            currentKeyMatrix[i][0] ^= column[i];
+
+                        // STEP 2.3.3 : USE THE 0th COLUMN TO GENERATE COLUMNS 1, 2, 3, 4, 5                        
+                        for (int i = 1; i < 6; i++)
+                            for(int j = 0; j < 4; j++)
+                                currentKeyMatrix[j][i] ^= currentKeyMatrix[j][i-1];
+                        
+
+                        //copying columns 4, 5, 0, 1 as columns 0, 1, 2, 3 in output matrix respectively
+                        for(int i = 4 ; i < 6 ; i++){
+                            for(int j = 0 ; j < 4 ; j++){
+                                outputMatrix[j][i-4] = currentKeyMatrix[j][i];//copying columns 0 and 1
+                                outputMatrix[j][i-2] = currentKeyMatrix[j][i-4];//copying columns 2 and 3
+                            }
+                        }                        
+                        return outputMatrix;
+
+                    case 2:// last 4 columns, for rounds 2, 5, 8, 11
+                        for(int i = 2 ; i < 6 ; i++){
+                            for(int j = 0 ; j < 4 ; j++){
+                                outputMatrix[j][i-2] = currentKeyMatrix[j][i];
+                            }
+                        }
+                        return outputMatrix;
                 }// switch statement - ROUND NO.
                 break;
 
             case 256:
                 switch (roundNo % 2) {
                     case 0:
-                        // STEP 2.3.1 : ASSIGN THE LAST COLUMN TO A TEMPORARY VARIABLE.
+                        // STEP 2.3.1 : ASSIGN THE LAST COLUMN (COLUMN 7) TO A TEMPORARY VARIABLE.
                         for (int i = 0; i < 4; i++)
                             column[i] = currentKeyMatrix[i][7];
 
                         // STEP 2.3.2 : GENERATE THE FIRST COLUMN OF THE NEXT KEY MATRIX
-                        column = functionF(column, roundNo);
+                        column = functionF(column, roundNo/2 - 1);
                         for (int i = 0; i < 4; i++)
                             currentKeyMatrix[i][0] ^= column[i];
 
@@ -129,6 +173,8 @@ public class Keys {
                         for (int i = 5; i <= 7; i++)
                             for (int j = 0; j < 4; j++)
                                 currentKeyMatrix[j][i] ^= currentKeyMatrix[j][i - 1];
+
+
                         for (int i = 4; i < 8; i++)
                             System.arraycopy(currentKeyMatrix[i], 0, outputMatrix[i - 4], 0, 4);
                         return outputMatrix;
@@ -149,18 +195,17 @@ public class Keys {
         for (int i = 1; i < 4; i++)
             resultantKeyColumn[i - 1] = column[i];
 
-        // STEP 2 : SUBBYTES
-        SBox S = new SBox('e');
+        // STEP 2 : SUBBYTES        
         for (int i = 0; i < 4; i++)
             resultantKeyColumn[i] = S.performSubstitution(resultantKeyColumn[i]);
         return resultantKeyColumn;
     }// end of int[] functionG(int[])
 
-    private int[] functionF(int[] column, int roundNo) {
+    private int[] functionF(int[] column, int rconNo) {
         int[] resultantKeyColumn = new int[4];
         resultantKeyColumn = functionG(resultantKeyColumn);
         // STEP 3 : RCON
-        resultantKeyColumn[0] ^= RCON[roundNo - 1];
+        resultantKeyColumn[0] ^= RCON[rconNo];
         return resultantKeyColumn;
     }// end of int[] functionF(int[], int)
 
