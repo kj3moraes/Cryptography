@@ -1,4 +1,4 @@
-package ModernCiphers.AES;
+package AES;
 
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
