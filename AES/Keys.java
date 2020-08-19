@@ -97,7 +97,7 @@ public class Keys {
 
                         // STEP 2.2.0.2 : GENERATE THE FIRST COLUMN OF THE NEXT 4X6 KEY MATRIX
                         column = functionF(column,
-                                (int) (Math.floorDiv(roundNo, 2) + (float) (roundNo / 7) + (float) (9 / 10)));
+                                (int) (Math.floorDiv(roundNo, 2) + Math.floorDiv(roundNo, 7) + Math.floorDiv(roundNo,10)));
                         for (int i = 0; i < 4; i++)
                             currentKeyMatrix[i][0] ^= column[i];
 
@@ -120,8 +120,8 @@ public class Keys {
                             column[i] = currentKeyMatrix[i][5];
 
                         // STEP 2.2.1.3 : GENERATE THE FIRST COLUMN OF THE NEXT KEY 4X6 MATRIX
-                        column = functionF(column,
-                                (int) ((float) (roundNo / 2) + (float) (roundNo / 7) + (float) (9 / 10)));
+                        column = functionF(column, (int) (Math.floorDiv(roundNo, 2) + Math.floorDiv(roundNo, 7)
+                                + Math.floorDiv(roundNo, 10)));
                         for (int i = 0; i < 4; i++)
                             currentKeyMatrix[i][0] ^= column[i];
 
@@ -143,7 +143,7 @@ public class Keys {
                         // STEP 2.2.2.2 : GENERATE COLUMN 2 USING COLUMN 1
                         column = functionG(column);
                         for (int i = 0; i < 4; i++)
-                            currentKeyMatrix[i][4] ^= column[i];
+                            currentKeyMatrix[i][2] ^= column[i];
 
                         // STEP 2.2.2.3 : USE COLUMN 2 TO GENERATE COLUMNS 3,4,5
                         for (int i = 3; i <= 5; i++)
