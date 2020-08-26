@@ -125,11 +125,11 @@ public class Keys {
                         for (int i = 0; i < 4; i++)
                             currentKeyMatrix[i][0] ^= column[i];
 
-                        // STEP 2.2.1.3 : USE THE 0th COLUMN TO GENERATE COLUMN 1
+                        // STEP 2.2.1.4 : USE THE 0th COLUMN TO GENERATE COLUMN 1
                         for (int j = 0; j < 4; j++)
                             currentKeyMatrix[j][1] ^= currentKeyMatrix[j][0];
 
-                        // STEP 2.2.1.4 : ISOLATE THE COLUMNS 4,5,0,1 INTO A 4x4 PART TO RETURN
+                        // STEP 2.2.1.5 : ISOLATE THE COLUMNS 4,5,0,1 INTO A 4x4 PART TO RETURN
                         for (int i = 4; i <= 7; i++)
                             for (int j = 0; j < 4; j++)
                                 outputMatrix[j][i] = currentKeyMatrix[j][i % 6];
