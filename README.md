@@ -54,6 +54,7 @@ This repository contains the codes for several known ciphers and a few hashing a
 The classification of 'Simple Ciphers' and 'Modern Ciphers' is rather arbitrary (since ROT13 is a modern variant of the Caesar cipher yet is listed under Simple Ciphers) but is in place to segregate ciphers based on difficulty to comprehend. The ciphers which do not have separate documentations are specified in others which are similar to it and have existed before. Furthermore, the documentation for each cipher provides background knowledge and mathematical representation of the cipher's encryption and decryption algorithms. The documentation is simply to assist the reader in understanding the working of the code. However, one must **read the documentations before going through the code.**
  
 The following image below shows the flowchart of documentation for all the listed ciphers.:
+![Simple Ciphers](https://raw.githubusercontent.com/LordVader31/Cryptography/master/Flowcharts/Simple%20Ciphers%20Flowchart%20-%20Web.png?token=AGECP4WEKAPITSPDZAX7Z6C7KCVQE)
 
 It is highly recommended that the reader follows the order specified above. Although most documentations are relatively self-contained, there are several concepts that carry forth from previous ciphers.
 
