@@ -56,6 +56,10 @@ The classification of 'Simple Ciphers' and 'Modern Ciphers' is rather arbitrary 
 The following image below shows the flowchart of documentation for all the listed ciphers.:
 ![Simple Ciphers](https://raw.githubusercontent.com/LordVader31/Cryptography/master/Flowcharts/Simple%20Ciphers%20Flowchart%20-%20Web.png?token=AGECP4WEKAPITSPDZAX7Z6C7KCVQE)
 
+![Modern Ciphers](https://raw.githubusercontent.com/LordVader31/Cryptography/master/Flowcharts/Modern%20Ciphers%20Flowchart%20-%20Web.png?token=AGECP4XKMZBPDGIGWDT6AF27KCWJM)
+
+![Hshing Algorithms](https://raw.githubusercontent.com/LordVader31/Cryptography/master/Flowcharts/Hashing%20Algorithms%20Flowchart%20-%20Web.png?token=AGECP4VQJ45KLZSJLRPRCXK7KCWIM)
+
 It is highly recommended that the reader follows the order specified above. Although most documentations are relatively self-contained, there are several concepts that carry forth from previous ciphers.
 
 ## **Additional Resources to learning Cryptography** :
