@@ -1,7 +1,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://raw.githubusercontent.com/LordVader31/Cryptography/master/LICENSE?token=AGECP4VPVUIVKYCM2Q2GL2C7BVOWI)
 
 # Cryptography
-
 This repository contains the codes for several known ciphers and a few hashing algorithms. The codes for all the ciphers are in Java. Anyone with intermediate experience working with Java (approx. 1-2 years ) will understand the codes. Another repository of the ciphers in Python will be uploaded soon. Every code has its own documentation to explain its workings to the reader. The documentation also provides some historical context as well as the modern relevance of the cipher it describes. Some ciphers will have documentations within others. The entire list of ciphers is below:
 
 ### Simple Ciphers  
