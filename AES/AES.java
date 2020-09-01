@@ -22,11 +22,11 @@ public class AES {
                 System.out.print(
                         "\t SALT (16 character long string | leave blank if you want a pseudorandom one generated) : ");
                 salt = txt.nextLine().toUpperCase().trim();
-                encryptedText = encrypt(plainText, seed);
+                encryptedText = encrypt(plainText, seed);              
                 System.out.println("\n\t\t INPUTED PLAIN TEXT : " + plainText);
                 System.out.println("\t\t KEY (seed for secret key): " + seed);
                 System.out.println("\t\t SALT (salt for key generation): " + salt);
-                System.out.println("\t\t GENERATED ENCRYPTION : " + encryptedText);
+                System.out.println("\t\t GENERATED ENCRYPTION : " + encryptedText);                
                 break;
 
             // DECRYPTION
@@ -82,12 +82,16 @@ public class AES {
                 noOfRounds = 14;
                 K = new Keys(seed, salt, 256);
         }// switch statement - algorithm choice
+        
         String initialKey;
         int[][] matrix = new int[4][4];
 
         // STEP 2 : PUT THE NECESSARY DATA INTO OUR VARIABLES
-        for (int i = 0; i < 16; i++)
-            matrix[i / 4][i % 4] = plaintext.charAt(i);
+        int index = 0;
+        for(int c = 0 ; c < 4 ; c++)
+            for(int r = 0 ; r < 4 ; r++)
+                matrix[r][c] = plaintext.charAt(index++);
+
         initialKey = K.getInitialKeyState();
 
         // STEP 3 : USE THE DATA AND THE VARIABLES TO PERFORM THE ENCRYPTION
@@ -109,9 +113,10 @@ public class AES {
         AESRoundFunction.addRoundKey(K.generateKeyMatrix(noOfRounds), matrix);
 
         // STEP 4 : PUT THE RESULTANT MATRIX INTO A HEX STRING
-        for (int[] row : matrix)
-            for (int element : row)
-                result += Integer.toHexString(element);
+        for (int c = 0 ; c < 4 ; c++)
+            for (int r = 0 ; r < 4 ; r++){
+                result += Integer.toHexString(matrix[r][c]).length() < 2 ? "0" + Integer.toHexString(matrix[r][c]) : Integer.toHexString(matrix[r][c]);
+            }
         return result;
     }// end of String encrypt(String, String)
 
