@@ -30,6 +30,7 @@ public class Keys {
             System.exit(0);
         } // catch block
         initialKeyState = ByteArrayToHexadecimal(key.getEncoded());
+
         // STEP 2 : PROPERLY INITIALIZE THE ALGORITHM AND KEY MATRIX
         switch (algorithm) {
             case 128:
@@ -58,12 +59,16 @@ public class Keys {
         // STEP 1 : TAKE CARE OF THE KEY0 STATE FOR ALL POSSIBLE KEY LENGTHS
         if (roundNo == 0) {
             initialKeyState += " ";
-            for (int i = 0; i < initialKeyState.length() - 1; i += 2) {
-                String extract = initialKeyState.substring(i, i + 2);
-                currentKeyMatrix[i / 2 % 4][i / 8] = Integer.parseInt(extract, 16);
-            } // for loop - i
-            for (int i = 0; i < 4; i++)
-                System.arraycopy(currentKeyMatrix[i], 0, outputMatrix[i], 0, 4);
+            int i = 0;
+            for (int c = 0; c < 4; c++) {
+                for(int r = 0 ; r < 4 ; r++){
+                    String extract = initialKeyState.substring(i, i + 2);
+                    currentKeyMatrix[r][c] = Integer.parseInt(extract, 16);
+                    i+=2;
+                }// for loop - c
+            } // for loop - r
+            for (i = 0; i < 4; i++)
+                System.arraycopy(currentKeyMatrix[i], 0, outputMatrix[i], 0, 4);            
             return outputMatrix;
         } // if statement - INITIAL ROUND
 
@@ -77,14 +82,14 @@ public class Keys {
                     column[i] = currentKeyMatrix[i][3];
 
                 // STEP 2.1.2 : GENERATE THE FIRST COLUMN OF THE NEXT KEY MATRIX
-                column = functionF(column, roundNo);
-                for (int i = 0; i < 4; i++)
+                column = functionF(column, roundNo-1);
+                for(int i = 0 ; i < 4 ; i++)
                     currentKeyMatrix[i][0] ^= column[i];
 
                 // STEP 2.1.3 : USE THE FIRST COLUMN TO GENERATE THE NEXT COLUMNS
-                for (int i = 1; i <= 3; i++)
-                    for (int j = 0; j < 4; j++)
-                        currentKeyMatrix[j][i] ^= currentKeyMatrix[j][i - 1];
+                for (int c = 1; c < 4; c++)
+                    for(int r = 0 ; r < 4 ; r++)
+                        currentKeyMatrix[r][c] ^= currentKeyMatrix[r][c - 1];                              
                 break;
 
             // STEP 2.2 - 192 BIT VARIANT
@@ -96,23 +101,22 @@ public class Keys {
                             column[i] = currentKeyMatrix[i][5];
 
                         // STEP 2.2.0.2 : GENERATE THE FIRST COLUMN OF THE NEXT 4X6 KEY MATRIX
-                        column = functionF(column,
-                                (int) (Math.floorDiv(roundNo, 2) + Math.floorDiv(roundNo, 7) + Math.floorDiv(roundNo,10)));
-                        for (int i = 0; i < 4; i++)
-                            currentKeyMatrix[i][0] ^= column[i];
+                        column = functionF(column, (roundNo - (int)Math.floor(roundNo/3)));
+                        for(int r = 0 ; r < 4 ; r++)
+                            currentKeyMatrix[r][0] ^= column[r];
 
                         // STEP 2.2.0.3 : USE THE 0th COLUMN TO GENERATE COLUMNS THE NEXT 3 COLUMNS
-                        for (int i = 1; i <= 3; i++)
-                            for (int j = 0; j < 4; j++)
-                                currentKeyMatrix[j][i] ^= currentKeyMatrix[j][i - 1];
+                        for (int c = 1 ; c < 4 ; c++)
+                            for(int r = 0 ; r < 4 ; r++)
+                                currentKeyMatrix[r][c] ^= currentKeyMatrix[r][c - 1];                      
                         break;
 
                     case 1:
                         // STEP 2.2.1.1 : GENERATE THE COLUMNS 4 & 5
                         if (roundNo != 1) {
-                            for (int i = 4; i < 6; i++)
-                                for (int j = 0; j < 4; j++)
-                                    currentKeyMatrix[j][i] ^= currentKeyMatrix[j][i - 1];
+                            for (int c = 4; c < 6; c++)
+                                for(int r = 0 ; r < 4 ; r++)
+                                    currentKeyMatrix[r][c] ^= currentKeyMatrix[r][c - 1];                            
                         }
 
                         // STEP 2.2.1.2 : ASSIGN THE LAST COLUMN TO A TEMPORARY VARIABLE.
@@ -120,14 +124,15 @@ public class Keys {
                             column[i] = currentKeyMatrix[i][5];
 
                         // STEP 2.2.1.3 : GENERATE THE FIRST COLUMN OF THE NEXT KEY 4X6 MATRIX
-                        column = functionF(column, (int) (Math.floorDiv(roundNo, 2) + Math.floorDiv(roundNo, 7)
-                                + Math.floorDiv(roundNo, 10)));
-                        for (int i = 0; i < 4; i++)
-                            currentKeyMatrix[i][0] ^= column[i];
+                        column = functionF(column, (int)(Math.floor(roundNo - (roundNo/3))));
+
+                        for(int r = 0 ; r < 4 ; r++)
+                            currentKeyMatrix[r][0] ^= column[r];
+                        
 
                         // STEP 2.2.1.4 : USE THE 0th COLUMN TO GENERATE COLUMN 1
-                        for (int j = 0; j < 4; j++)
-                            currentKeyMatrix[j][1] ^= currentKeyMatrix[j][0];
+                        for(int r = 0 ; r < 4 ; r++)
+                            currentKeyMatrix[r][1] ^= currentKeyMatrix[r][0];
 
                         // STEP 2.2.1.5 : ISOLATE THE COLUMNS 4,5,0,1 INTO A 4x4 PART TO RETURN
                         for (int i = 4; i <= 7; i++)
@@ -142,13 +147,13 @@ public class Keys {
 
                         // STEP 2.2.2.2 : GENERATE COLUMN 2 USING COLUMN 1
                         column = functionG(column);
-                        for (int i = 0; i < 4; i++)
-                            currentKeyMatrix[i][2] ^= column[i];
+                        for(int r = 0 ; r < 4 ; r++)
+                            currentKeyMatrix[r][2] ^= column[r];
 
                         // STEP 2.2.2.3 : USE COLUMN 2 TO GENERATE COLUMNS 3,4,5
-                        for (int i = 3; i <= 5; i++)
-                            for (int j = 0; j < 4; j++)
-                                currentKeyMatrix[j][i] ^= currentKeyMatrix[j][i - 1];
+                        for (int c = 3; c <= 5; c++)
+                            for(int r = 0 ; r < 4 ; r++)
+                                currentKeyMatrix[r][c] ^= currentKeyMatrix[r][c - 1];                        
 
                         // STEP 2.2.2.4 : ISOLATE COLUMNS 2,3,4,5 INTO A 4x4 PART
                         for (int i = 2; i <= 5; i++)
@@ -167,14 +172,15 @@ public class Keys {
                             column[i] = currentKeyMatrix[i][7];
 
                         // STEP 2.3.0.2 : GENERATE THE FIRST COLUMN OF THE NEXT KEY MATRIX
-                        column = functionF(column, roundNo / 2 - 1);
-                        for (int i = 0; i < 4; i++)
-                            currentKeyMatrix[i][0] ^= column[i];
+                        column = functionF(column, (roundNo/2) - 1);
+
+                        for(int r = 0 ; r < 4 ; r++)
+                            currentKeyMatrix[r][0] ^= column[r];
 
                         // STEP 2.3.0.3 : USE THE FIRST COLUMN TO GENERATE THE NEXT COLUMNS
-                        for (int i = 1; i <= 3; i++)
-                            for (int j = 0; j < 4; j++)
-                                currentKeyMatrix[j][i] ^= currentKeyMatrix[j][i - 1];
+                        for (int c = 1 ; c < 4 ; c++)
+                            for(int r = 0 ; r < 4 ; r++)
+                                currentKeyMatrix[r][c] ^= currentKeyMatrix[r][c - 1];                        
                         break;
 
                     case 1:
@@ -185,13 +191,13 @@ public class Keys {
                         // STEP 2.3.1.2 : GENERATE COLUMN 4 USING COLUMN 3.
                         if (roundNo != 1) {
                             column = functionG(column);
-                            for (int i = 0; i < 4; i++)
-                                currentKeyMatrix[i][4] ^= column[i];
+                            for(int r = 0 ; r < 4 ; r++)
+                                currentKeyMatrix[r][4] ^= column[r];
 
                             // STEP 2.3.1.3 : USE THE COLUMN 4 TO GENERATE COLUMNS 5,6,7
-                            for (int i = 5; i <= 7; i++)
-                                for (int j = 0; j < 4; j++)
-                                    currentKeyMatrix[j][i] ^= currentKeyMatrix[j][i - 1];
+                            for (int c = 5; c <= 7; c++)
+                                for(int r = 0 ; r < 4 ; r++)                               
+                                    currentKeyMatrix[r][c] ^= currentKeyMatrix[r][c - 1];                            
                         }
 
                         // STEP 2.3.1.4 : ISOLATE THE COLUMNS 4,5,6,7 INTO A 4x4 PART TO RETURN
