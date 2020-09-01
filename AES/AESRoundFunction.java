@@ -7,7 +7,6 @@ public class AESRoundFunction {
         for (int c = 0; c < matrix.length; c++)
             for (int j = 0; j < matrix[c].length; j++)
                 matrix[c][j] = S.performSubstitution(matrix[c][j]);
-        displayMatrix(matrix);
     }//end of void subBytes(int[][])
 
     protected static void shiftRows(int[][] matrix){
@@ -18,7 +17,6 @@ public class AESRoundFunction {
                 tempArray[c] = matrix[n][(c+n)%4];
             matrix[n]= tempArray;            
         }//for loop - n
-        displayMatrix(matrix);
     }// end of void shiftRows(int[][])
 
     protected static void mixColumns(int[][] matrix){
@@ -35,8 +33,6 @@ public class AESRoundFunction {
             for(int r = 0 ; r < 4 ; r++)
                 matrix[r][c] = tmp[r];
         }//for loop - c
-        
-        displayMatrix(matrix);
     }// end of void mixColumns(int[][])
 
     private static int dotProduct(int mulValue, int number){
@@ -59,16 +55,6 @@ public class AESRoundFunction {
             matrix[1][c] ^= keyMatrix[1][c];
             matrix[2][c] ^= keyMatrix[2][c];
             matrix[3][c] ^= keyMatrix[3][c];
-        }
-        displayMatrix(matrix);                
+        }          
     }// end of void addRoundKey(int[][])
-
-    private static void displayMatrix(int[][] matrix){
-        for(int r = 0 ; r < 4 ; r++){
-            for(int c = 0 ; c < 4 ; c++){
-                System.out.print(Integer.toHexString(matrix[r][c]) + ", ");
-            }
-            System.out.println();
-        }        
-    }
 }//end of class
