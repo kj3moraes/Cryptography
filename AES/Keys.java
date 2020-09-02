@@ -58,15 +58,8 @@ public class Keys {
 
         // STEP 1 : TAKE CARE OF THE KEY0 STATE FOR ALL POSSIBLE KEY LENGTHS
         if (roundNo == 0) {
-            initialKeyState += " ";
-            int i = 0;
-            for (int c = 0; c < 4; c++) {
-                for(int r = 0 ; r < 4 ; r++){
-                    String extract = initialKeyState.substring(i, i + 2);
-                    currentKeyMatrix[r][c] = Integer.parseInt(extract, 16);
-                    i+=2;
-                }// for loop - c
-            } // for loop - r
+            for (int i = 0; i < initialKeyState.length(); i+=2)
+                currentKeyMatrix[(i/2)%4][Math.floorDiv((i/2),4)] = Integer.parseInt(initialKeyState.substring(i,i+2),16);
             for (i = 0; i < 4; i++)
                 System.arraycopy(currentKeyMatrix[i], 0, outputMatrix[i], 0, 4);            
             return outputMatrix;
