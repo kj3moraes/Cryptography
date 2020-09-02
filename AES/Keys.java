@@ -60,7 +60,7 @@ public class Keys {
         if (roundNo == 0) {
             for (int i = 0; i < initialKeyState.length(); i+=2)
                 currentKeyMatrix[(i/2)%4][Math.floorDiv((i/2),4)] = Integer.parseInt(initialKeyState.substring(i,i+2),16);
-            for (i = 0; i < 4; i++)
+            for (int i = 0; i < 4; i++)
                 System.arraycopy(currentKeyMatrix[i], 0, outputMatrix[i], 0, 4);            
             return outputMatrix;
         } // if statement - INITIAL ROUND
