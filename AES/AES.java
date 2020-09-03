@@ -9,24 +9,23 @@ public class AES {
     private static String salt;
 
     public static void main(String[] args) {
-        System.out.println("\nEnter your choice " + "\n\t [1] Encode \n\t [2] Decode \n\t [X] Exit");
+        System.out.println("\nEnter your choice " + "\n\t [1] Encrypt \n\t [2] Decrypt \n\t [X] Exit");
         final char choice = num.next().toUpperCase().charAt(0);
         String plainText, encryptedText, seed;
         switch (choice) {
             // ENCRYPTION
             case '1':
-                System.out.print("\t PLAIN TEXT : ");
-                plainText = txt.nextLine().trim();
+                System.out.print("\t PLAIN TEXT [\"0X:\" (hex) or \"0T:\" (text)] :");
+                plainText = txt.nextLine().replaceAll(" ","").trim();
                 System.out.print("\t SEED (for secret key) : ");
                 seed = txt.nextLine().toUpperCase().trim();
-                System.out.print(
-                        "\t SALT (16 character long string | leave blank if you want a pseudorandom one generated) : ");
+                System.out.print("\t SALT (16 character long string | leave blank if you want a pseudorandom one generated) : ");
                 salt = txt.nextLine().toUpperCase().trim();
-                encryptedText = encrypt(plainText, seed);              
+                encryptedText = encrypt(plainText, seed);
                 System.out.println("\n\t\t INPUTED PLAIN TEXT : " + plainText);
                 System.out.println("\t\t KEY (seed for secret key): " + seed);
                 System.out.println("\t\t SALT (salt for key generation): " + salt);
-                System.out.println("\t\t GENERATED ENCRYPTION : " + encryptedText);                
+                System.out.println("\t\t GENERATED ENCRYPTION : " + encryptedText);
                 break;
 
             // DECRYPTION
@@ -82,35 +81,46 @@ public class AES {
                 noOfRounds = 14;
                 K = new Keys(seed, salt, 256);
         }// switch statement - algorithm choice
-        
+
         String initialKey;
         int[][] matrix = new int[4][4];
 
         // STEP 2 : PUT THE NECESSARY DATA INTO OUR VARIABLES
-        int index = 0;
-        for(int c = 0 ; c < 4 ; c++)
-            for(int r = 0 ; r < 4 ; r++)
-                matrix[r][c] = plaintext.charAt(index++);
+        int index = 3;
+        switch (plaintext.charAt(1)){
+            case 'X':
+//                plaintext += " ";
+                for (; index < plaintext.length(); index+=2)
+                    matrix[((index-3)/2)%4][Math.floorDiv(((index-3)/2),4)] = Integer.parseInt(plaintext.substring(index,index+2),16);
+                    break;
 
-        initialKey = K.getInitialKeyState();
+            case 'T':
+                for (; index < plaintext.length(); index++)
+                    matrix[index%4][Math.floorDiv(index,4)] = plaintext.charAt(index);
+                break;
+
+            default:
+                System.out.println("INVALID TEXT FORMATTING OPTION");
+                System.out.println("REBOOTING....");
+                main(new String[]{});
+        }//switch case - text formatting
 
         // STEP 3 : USE THE DATA AND THE VARIABLES TO PERFORM THE ENCRYPTION
+            // STEP 3.1 - PERFORM THE KEY0 XOR
+            AESRoundFunction.addRoundKey(K.generateKeyMatrix(0), matrix);
 
-        // STEP 3.1 - PERFORM THE KEY0 XOR
-        AESRoundFunction.addRoundKey(K.generateKeyMatrix(0), matrix);
+            // STEP 3.2 : ITERATE UNTIL THE SECOND LAST ROUND
+            for (int i = 1; i < noOfRounds; i++) {
+                AESRoundFunction.subBytes(matrix);
+                AESRoundFunction.shiftRows(matrix);
+                AESRoundFunction.mixColumns(matrix);
+                AESRoundFunction.addRoundKey(K.generateKeyMatrix(i), matrix);
+            } // for loop - i
 
-        // STEP 3.2 : ITERATE UNTIL THE SECOND LAST ROUND
-        for (int i = 1; i < noOfRounds; i++) {
+            // STEP 3.3 : PERFORM THE UNIQUE LAST ROUND FUNCTION
             AESRoundFunction.subBytes(matrix);
             AESRoundFunction.shiftRows(matrix);
-            AESRoundFunction.mixColumns(matrix);
-            AESRoundFunction.addRoundKey(K.generateKeyMatrix(i), matrix);
-        } // for loop - i
-
-        // STEP 3.3 : PERFORM THE UNIQUE LAST ROUND FUNCTION
-        AESRoundFunction.subBytes(matrix);
-        AESRoundFunction.shiftRows(matrix);
-        AESRoundFunction.addRoundKey(K.generateKeyMatrix(noOfRounds), matrix);
+            AESRoundFunction.addRoundKey(K.generateKeyMatrix(noOfRounds), matrix);
 
         // STEP 4 : PUT THE RESULTANT MATRIX INTO A HEX STRING
         for (int c = 0 ; c < 4 ; c++)
