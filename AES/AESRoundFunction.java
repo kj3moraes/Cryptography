@@ -1,4 +1,4 @@
-package AES;
+package ModernCiphers.AES;
 
 public class AESRoundFunction {
 
@@ -15,23 +15,23 @@ public class AESRoundFunction {
             tempArray = new int[4];
             for (int c = 0; c < 4; c++)
                 tempArray[c] = matrix[n][(c+n)%4];
-            matrix[n]= tempArray;            
+            matrix[n]= tempArray;
         }//for loop - n
     }// end of void shiftRows(int[][])
 
     protected static void mixColumns(int[][] matrix){
-        int[] tmp = new int[4];
+        int[] tempArray = new int[4];
         for (int c = 0; c < 4; c++) {
-            tmp[0] = dotProduct(2, matrix[0][c]) ^ dotProduct(3, matrix[1][c]) ^ matrix[2][c] ^ matrix[3][c];
+            tempArray[0] = dotProduct(2, matrix[0][c]) ^ dotProduct(3, matrix[1][c]) ^ matrix[2][c] ^ matrix[3][c];
 
-            tmp[1]= matrix[0][c] ^ dotProduct(2, matrix[1][c]) ^ dotProduct(3, matrix[2][c]) ^ matrix[3][c];
+            tempArray[1]= matrix[0][c] ^ dotProduct(2, matrix[1][c]) ^ dotProduct(3, matrix[2][c]) ^ matrix[3][c];
 
-            tmp[2] = matrix[0][c] ^ matrix[1][c] ^ dotProduct(2, matrix[2][c]) ^ dotProduct(3, matrix[3][c]);
+            tempArray[2] = matrix[0][c] ^ matrix[1][c] ^ dotProduct(2, matrix[2][c]) ^ dotProduct(3, matrix[3][c]);
 
-            tmp[3] = dotProduct(3, matrix[0][c]) ^ matrix[1][c] ^ matrix[2][c] ^ dotProduct(2, matrix[3][c]);
-        
+            tempArray[3] = dotProduct(3, matrix[0][c]) ^ matrix[1][c] ^ matrix[2][c] ^ dotProduct(2, matrix[3][c]);
+
             for(int r = 0 ; r < 4 ; r++)
-                matrix[r][c] = tmp[r];
+                matrix[r][c] = tempArray[r];
         }//for loop - c
     }// end of void mixColumns(int[][])
 
@@ -45,7 +45,7 @@ public class AESRoundFunction {
 
             case 3:
                 result = dotProduct(2, number) ^ number;
-        }//switch statement                        
+        }//switch statement
         return result;
     }//end of int dotProduct(int, int)
 
@@ -55,6 +55,6 @@ public class AESRoundFunction {
             matrix[1][c] ^= keyMatrix[1][c];
             matrix[2][c] ^= keyMatrix[2][c];
             matrix[3][c] ^= keyMatrix[3][c];
-        }          
+        }//for loop - columns
     }// end of void addRoundKey(int[][])
 }//end of class
