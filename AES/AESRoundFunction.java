@@ -1,4 +1,4 @@
-package ModernCiphers.AES;
+package AES;
 
 public class AESRoundFunction {
 
