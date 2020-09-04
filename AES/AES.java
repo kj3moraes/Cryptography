@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class AES {
     private static final Scanner num = new Scanner(System.in), txt = new Scanner(System.in);
     private static int noOfRounds;
-    private static String salt;
+    //private static String salt;
 
     public static void main(String[] args) {
         System.out.println("\nEnter your choice " + "\n\t [1] Encrypt \n\t [2] Decrypt \n\t [X] Exit");
@@ -15,30 +15,29 @@ public class AES {
         switch (choice) {
             // ENCRYPTION
             case '1':
-                System.out.print("\t PLAIN TEXT [\"0X:\" (hex) or \"0T:\" (text)] :");
+                System.out.print("\t PLAIN TEXT (Prefix the text with \"0X:\" (for hex) or \"0T:\" (for text)) : ");
                 plainText = txt.nextLine().replaceAll(" ","").trim();
                 System.out.print("\t SEED (for secret key) : ");
                 seed = txt.nextLine().toUpperCase().trim();
-                System.out.print("\t SALT (16 character long string | leave blank if you want a pseudorandom one generated) : ");
-                salt = txt.nextLine().toUpperCase().trim();
-                encryptedText = encrypt(plainText, seed);
-                System.out.println("\n\t\t INPUTED PLAIN TEXT : " + plainText);
-                System.out.println("\t\t KEY (seed for secret key): " + seed);
-                System.out.println("\t\t SALT (salt for key generation): " + salt);
-                System.out.println("\t\t GENERATED ENCRYPTION : " + encryptedText);
+                System.out.print("\t SALT (MUST BE ONLY 16 CHARACTERS LONG | leave blank if you want a pseudorandom one generated) : ");
+                String salt = txt.nextLine().toUpperCase().trim();
+                encryptedText = encrypt(plainText, seed, salt);
+                System.out.println("\n\t\t   INPUTED PLAIN TEXT\t: " + plainText.substring(4));
+                System.out.println("\t\t\t\t\t\t SEED \t: " + seed);
+                System.out.println("\t\t\t\t\t\t SALT \t: " + salt);
+                System.out.println("\t\t GENERATED ENCRYPTION \t: " + encryptedText);
                 break;
 
             // DECRYPTION
             case '2':
                 System.out.print("\t ENCRYPTED TEXT : ");
                 encryptedText = txt.nextLine();
-                System.out.print("\t KEY : ");
+                System.out.print("\t SEED : ");
                 seed = txt.nextLine().toUpperCase().trim();
                 System.out.print("\t SALT (the same 16 character string that was used for encryption) : ");
                 salt = txt.nextLine().toUpperCase().trim();
-                plainText = decrypt(encryptedText, seed);
+                plainText = decrypt(encryptedText, seed, salt);
                 System.out.println("\n\t\t INPUTED ENCRYPTED TEXT : " + encryptedText);
-                System.out.println("\t\t KEY (seed for secret key): " + seed);
                 System.out.println("\t\t GENERATED DECRYPTION : " + plainText);
                 break;
 
@@ -53,43 +52,43 @@ public class AES {
         main(new String[] {});
     }// end of void main(String[])
 
-    public static String encrypt(String plaintext, String seed) {
+    public static String encrypt(String plaintext, String seed, String salt) {
         String result = "";
         System.out.println("\t SUBMIT YOUR AES VERSION: \n\t\t [1] AES-128 \n\t\t [2] AES-192 \n\t\t [3] AES-256");
         final char choice = txt.next().trim().charAt(0);
 
         // STEP 1 : INITIALIZE AND SET UP EVERYTHING WE NEED
-        Keys K;
-        if (salt.length() < 16) {
-            Random rand = new Random(); // salt = "";
-            while (16 - salt.length() > 0)
-                salt += Integer.toHexString(rand.nextInt(0XF));
-        } // if statement - generate a RANDOM salt.
+            Keys K;
 
-        switch (choice) {
-            case '1':
-                noOfRounds = 10;
-                K = new Keys(seed, salt, 128);
-                break;
+            //STEP 1.1 - NORMALIZE SALT LENGTH TO 16 BYTES
+            if (salt.length() < 16) {
+                Random rand = new Random(); // salt = "";
+                while (16 - salt.length() > 0)
+                    salt += Integer.toHexString(rand.nextInt(0XF));
+            }// if statement - generate a RANDOM salt.
 
-            case '2':
-                noOfRounds = 12;
-                K = new Keys(seed, salt, 192);
-                break;
+            //STEP 1.2 - CONFIGURE THE KEYS CLASS TO GENERATE THE PSEUDORANDOM KEY
+            switch (choice) {
+                case '1':
+                    noOfRounds = 10;
+                    K = new Keys(seed, salt, 128);
+                    break;
 
-            default:
-                noOfRounds = 14;
-                K = new Keys(seed, salt, 256);
-        }// switch statement - algorithm choice
+                case '2':
+                    noOfRounds = 12;
+                    K = new Keys(seed, salt, 192);
+                    break;
 
-        String initialKey;
-        int[][] matrix = new int[4][4];
+                default:
+                    noOfRounds = 14;
+                    K = new Keys(seed, salt, 256);
+            }// switch statement - algorithm choice
+            int[][] matrix = new int[4][4];
 
         // STEP 2 : PUT THE NECESSARY DATA INTO OUR VARIABLES
         int index = 3;
         switch (plaintext.charAt(1)){
             case 'X':
-//                plaintext += " ";
                 for (; index < plaintext.length(); index+=2)
                     matrix[((index-3)/2)%4][Math.floorDiv(((index-3)/2),4)] = Integer.parseInt(plaintext.substring(index,index+2),16);
                     break;
@@ -115,7 +114,7 @@ public class AES {
                 AESRoundFunction.shiftRows(matrix);
                 AESRoundFunction.mixColumns(matrix);
                 AESRoundFunction.addRoundKey(K.generateKeyMatrix(i), matrix);
-            } // for loop - i
+            }// for loop - i
 
             // STEP 3.3 : PERFORM THE UNIQUE LAST ROUND FUNCTION
             AESRoundFunction.subBytes(matrix);
@@ -125,12 +124,13 @@ public class AES {
         // STEP 4 : PUT THE RESULTANT MATRIX INTO A HEX STRING
         for (int c = 0 ; c < 4 ; c++)
             for (int r = 0 ; r < 4 ; r++){
-                result += Integer.toHexString(matrix[r][c]).length() < 2 ? "0" + Integer.toHexString(matrix[r][c]) : Integer.toHexString(matrix[r][c]);
+                String hexConvert = Integer.toHexString(matrix[r][c]);
+                result += hexConvert.length() < 2 ? "0" + hexConvert : hexConvert;
             }
         return result;
     }// end of String encrypt(String, String)
 
-    public static String decrypt(String encryptedText, String seed) {
+    public static String decrypt(String encryptedText, String seed, String salt) {
         String result = "";
         System.out.println("\t SUBMIT YOUR AES VERSION: \n\t\t [1] AES-128 \n\t\t [2] AES-192 \n\t\t [3] AES-256");
         final char choice = txt.next().trim().charAt(0);
