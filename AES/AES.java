@@ -126,7 +126,7 @@ public class AES {
             for (int r = 0 ; r < 4 ; r++){
                 String hexConvert = Integer.toHexString(matrix[r][c]);
                 result += hexConvert.length() < 2 ? "0" + hexConvert : hexConvert;
-            }
+            }//for loop - i
         return result;
     }// end of String encrypt(String, String)
 
