@@ -10,7 +10,7 @@ public class AES {
     public static void main(String[] args) {
         System.out.println("\nEnter your choice " + "\n\t [1] Encrypt \n\t [2] Decrypt \n\t [X] Exit");
         final char choice = num.next().toUpperCase().charAt(0);
-        String plainText, encryptedText, seed;
+        String plainText, encryptedText, seed, salt;
         switch (choice) {
             // ENCRYPTION
             case '1':
@@ -19,7 +19,7 @@ public class AES {
                 System.out.print("\t SEED (for secret key) : ");
                 seed = txt.nextLine().toUpperCase().trim();
                 System.out.print("\t SALT (MUST BE ONLY 16 CHARACTERS LONG | leave blank if you want a pseudorandom one generated) : ");
-                String salt = txt.nextLine().toUpperCase().trim();
+                salt = txt.nextLine().toUpperCase().trim();
                 encryptedText = encrypt(plainText, seed, salt);
                 System.out.println("\n\t\t   INPUTED PLAIN TEXT\t: " + plainText.substring(4));
                 System.out.println("\t\t\t\t\t\t SEED \t: " + seed);
