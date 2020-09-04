@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class AES {
     private static final Scanner num = new Scanner(System.in), txt = new Scanner(System.in);
     private static int noOfRounds;
-    //private static String salt;
 
     public static void main(String[] args) {
         System.out.println("\nEnter your choice " + "\n\t [1] Encrypt \n\t [2] Decrypt \n\t [X] Exit");
