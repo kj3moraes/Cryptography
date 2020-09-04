@@ -89,7 +89,6 @@ public class AES {
         int index = 3;
         switch (plaintext.charAt(1)){
             case 'X':
-//                plaintext += " ";
                 for (; index < plaintext.length(); index+=2)
                     matrix[((index-3)/2)%4][Math.floorDiv(((index-3)/2),4)] = Integer.parseInt(plaintext.substring(index,index+2),16);
                     break;
@@ -125,8 +124,9 @@ public class AES {
         // STEP 4 : PUT THE RESULTANT MATRIX INTO A HEX STRING
         for (int c = 0 ; c < 4 ; c++)
             for (int r = 0 ; r < 4 ; r++){
-                result += Integer.toHexString(matrix[r][c]).length() < 2 ? "0" + Integer.toHexString(matrix[r][c]) : Integer.toHexString(matrix[r][c]);
-            }
+                String hexConvert = Integer.toHexString(matrix[r][c]);
+                result += hexConvert.length() < 2 ? "0" + hexConvert : hexConvert;
+            }//for loop - i
         return result;
     }// end of String encrypt(String, String)
 
