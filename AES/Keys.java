@@ -13,11 +13,11 @@ public class Keys {
     protected String initialKeyState;
     protected int algorithm, maxColumnNo;
     private final int[] RCON = { 1, 2, 4, 8, 16, 32, 64, 128, 27, 54 };
-    private SBox S = new SBox('e');
+    private SBox S = new SBox();
 
     public String getInitialKeyState() {
         return initialKeyState;
-    }// end of String getInitKeyState()
+    }// end of String getInitKeyState()  
 
     public Keys(String seed, String salt, int algorithm) {
         SecretKey key = null;
@@ -31,7 +31,9 @@ public class Keys {
         } // catch block
         initialKeyState = ByteArrayToHexadecimal(key.getEncoded());
 
-        // STEP 2 : PROPERLY INITIALIZE THE ALGORITHM AND KEY MATRIX
+        System.out.println("Key : " + initialKeyState);
+
+        // STEP 2 : PROPERLY INITIALIZE THE ALGORITHM AND KEY MATRIX        
         switch (algorithm) {
             case 128:
                 currentKeyMatrix = new int[4][4];
@@ -57,7 +59,7 @@ public class Keys {
         int[][] outputMatrix = new int[4][4];
         // STEP 1 : TAKE CARE OF THE KEY0 STATE FOR ALL POSSIBLE KEY LENGTHS
         if (roundNo == 0) {
-            for (int i = 0; i < initialKeyState.length(); i+=2)
+            for (int i = 0 ; i < initialKeyState.length() ; i+=2)
                 currentKeyMatrix[(i/2)%4][Math.floorDiv((i/2),4)] = Integer.parseInt(initialKeyState.substring(i,i+2),16);
             for (int i = 0; i < 4; i++)
                 System.arraycopy(currentKeyMatrix[i], 0, outputMatrix[i], 0, 4);
@@ -172,7 +174,7 @@ public class Keys {
                         // STEP 2.3.1.2 : GENERATE COLUMN 4 USING COLUMN 3.
                         if (roundNo != 1) {
                             for(int r = 0 ; r < 4 ; r++)
-                                currentKeyMatrix[r][4] ^= S.performSubstitution(currentKeyMatrix[r][3]);
+                                currentKeyMatrix[r][4] ^= S.performSubstitution(currentKeyMatrix[r][3], 'e');
 
                             // STEP 2.3.1.3 : USE THE COLUMN 4 TO GENERATE COLUMNS 5,6,7
                             for (int c = 5; c <= 7; c++)
@@ -193,7 +195,17 @@ public class Keys {
         for (int i = 0; i < 4; i++)
             System.arraycopy(currentKeyMatrix[i], 0, outputMatrix[i], 0, 4);
         return outputMatrix;
-    }// end of int[][] getKeyMatrix(int)
+    }// end of int[][] generateKeyMatrix(int)
+
+    protected int[][] generateInvKeyMatrix(int roundNo){
+        int[][] outputMatrix = new int[4][4];
+        
+        for (int i = 0 ; i < roundNo ; i++)//generating the key for the round (roundNo-1)
+                generateKeyMatrix(i);
+
+        outputMatrix = generateKeyMatrix(roundNo);//generating the key for round (roundNo)
+        return outputMatrix;
+    }// end of int[][] generateInvKeyMatrix(int)
 
     private int[] functionF(int[] column, int rconNo) {
         int[] resultantKeyColumn = new int[4];
@@ -204,7 +216,8 @@ public class Keys {
 
         // STEP 2 : SUBBYTES
         for (int i = 0; i < 4; i++)
-            resultantKeyColumn[i] = S.performSubstitution(resultantKeyColumn[i]);
+            resultantKeyColumn[i] = S.performSubstitution(resultantKeyColumn[i], 'e');
+            
         // STEP 3 : RCON
         resultantKeyColumn[0] ^= RCON[rconNo];
         return resultantKeyColumn;
