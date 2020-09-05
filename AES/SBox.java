@@ -1,7 +1,7 @@
 package AES;
 
 public class SBox {
-    protected char mode;
+
     int[][] forwardSBox = { { 99, 124, 119, 123, 242, 107, 111, 197, 48, 1, 103, 43, 254, 215, 171, 118 },
             { 202, 130, 201, 125, 250, 89, 71, 240, 173, 212, 162, 175, 156, 164, 114, 192 },
             { 183, 253, 147, 38, 54, 63, 247, 204, 52, 165, 229, 241, 113, 216, 49, 21 },
@@ -36,11 +36,8 @@ public class SBox {
             { 160, 224, 59, 77, 174, 42, 245, 176, 200, 235, 187, 60, 131, 83, 153, 97 },
             { 23, 43, 4, 126, 186, 119, 214, 38, 225, 105, 20, 99, 85, 33, 12, 125 } };
 
-    public SBox(char mode) {
-        this.mode = mode;
-    }// end of public SBox(int)
-
-    protected int performSubstitution(int number) {
+    
+    protected int performSubstitution(int number, char mode) {
         int row = Integer.parseInt(DecimalTo8BitBinary(number).substring(0, 4), 2);
         int column = Integer.parseInt(DecimalTo8BitBinary(number).substring(4, 8), 2);
         switch (mode) {
