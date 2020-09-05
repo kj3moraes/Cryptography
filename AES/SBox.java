@@ -50,7 +50,7 @@ public class SBox {
             default:
                 return 0;
         }// switch statement
-    }// end of int performSubstitution
+    }// end of int performSubstitution(int, char)
 
     private static String DecimalTo8BitBinary(int intValue) {
         String result = Integer.toBinaryString(intValue);

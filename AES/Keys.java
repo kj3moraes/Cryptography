@@ -20,6 +20,7 @@ public class Keys {
     }// end of String getInitKeyState()  
 
     public Keys(String seed, String salt, int algorithm) {
+        // STEP 1 : GENERATE PSEUDORANDOM KEY BASED ON SEED AND SALT
         SecretKey key = null;
         try {
             KeySpec keyGen = new PBEKeySpec(seed.toCharArray(), salt.getBytes(), 65536, algorithm);
