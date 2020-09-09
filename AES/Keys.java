@@ -13,6 +13,7 @@ public class Keys {
     protected String initialKeyState;
     protected int algorithm, maxColumnNo;
     private final int[] RCON = { 1, 2, 4, 8, 16, 32, 64, 128, 27, 54 };
+    private int[][][] keyMatrix;
     private SBox S = new SBox();
 
     public String getInitialKeyState() {
@@ -20,7 +21,7 @@ public class Keys {
     }// end of String getInitKeyState()  
 
     public Keys(String seed, String salt, int algorithm) {
-        // STEP 1 : GENERATE PSEUDORANDOM KEY BASED ON SEED AND SALT
+        // STEP 1 : GENERATE INITIAL KEY STATE FROM THE SEED AND SALT
         SecretKey key = null;
         try {
             KeySpec keyGen = new PBEKeySpec(seed.toCharArray(), salt.getBytes(), 65536, algorithm);
@@ -32,9 +33,7 @@ public class Keys {
         } // catch block
         initialKeyState = ByteArrayToHexadecimal(key.getEncoded());
 
-        System.out.println("Key : " + initialKeyState);
-
-        // STEP 2 : PROPERLY INITIALIZE THE ALGORITHM AND KEY MATRIX        
+        // STEP 2 : PROPERLY INITIALIZE THE ALGORITHM AND KEY MATRIX
         switch (algorithm) {
             case 128:
                 currentKeyMatrix = new int[4][4];
@@ -198,15 +197,18 @@ public class Keys {
         return outputMatrix;
     }// end of int[][] generateKeyMatrix(int)
 
-    protected int[][] generateInvKeyMatrix(int roundNo){
-        int[][] outputMatrix = new int[4][4];
-        
-        for (int i = 0 ; i < roundNo ; i++)//generating the key for the round (roundNo-1)
-                generateKeyMatrix(i);
+    protected void generateInverseKeyMatrices(int noOfRounds){    
+        // Step 1 : INITIALIZE KEYMATRIX ARRAY
+        keyMatrix = new int[noOfRounds+1][4][4];
 
-        outputMatrix = generateKeyMatrix(roundNo);//generating the key for round (roundNo)
-        return outputMatrix;
-    }// end of int[][] generateInvKeyMatrix(int)
+        // STEP 2 : GENERATE KEY MATRICES AND STORE IN KEYMATRIX[][][]
+        for (int round = 0 ; round <= noOfRounds ; round++)//generating the key for the round (roundNo-1)
+                keyMatrix[round] = generateKeyMatrix(round);
+    }// end of void generateInverseKeyMatrices(int)
+
+    protected int[][] getKeyMatrix(int roundNo){
+        return keyMatrix[roundNo];
+    }// end of int[][] getKeyMatrix(int)
 
     private int[] functionF(int[] column, int rconNo) {
         int[] resultantKeyColumn = new int[4];
