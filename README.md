@@ -108,3 +108,4 @@ This would be an alternate to studying from the previous two books. Although not
 Although **this repository does not cover everything** in cryptography, it is a good starting point from which one can learn about several primitives of this field. 
 
 I sincerely hope that this has been helpful to you and that you enjoyed reading and learning from it as much as I have enjoyed making it.
+
