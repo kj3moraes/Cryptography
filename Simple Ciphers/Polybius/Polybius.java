@@ -37,20 +37,38 @@ public class Polybius {
         main(new String[]{});
     }//end of void main(String[])
 
-    private static String encrypt(String plainText) {
+    private static String encrypt(String plainText, String key) {
         String result = "";
-        for (int i = 0; i < plainText.length(); i++) {
-            int letterNumber;
-            if (plainText.charAt(i) >= 'J')
-                letterNumber = plainText.charAt(i) - 66;
-            else
-                letterNumber = plainText.charAt(i) - 65;
-            int rowNumber = letterNumber / 5 + 1;
-            int columnNumber = letterNumber % 5 + 1;
-            result += (rowNumber + "") + (columnNumber + "") + " ";
+        key = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        plainText += " ";
+        int rowF, columnF, rowL, columnL;
+        for (int i = 0; i < plainText.length() - 1; i += 2) {
+            String extract = plainText.substring(i, i + 2);
+
+            if (key.indexOf(extract.charAt(0)) == -1 || key.indexOf(extract.charAt(1)) == -1) {
+                result += extract;
+                continue;
+            } // if statement - NOT IN KEY MATRIX
+
+            rowF = key.indexOf(extract.charAt(0)) / 5;
+            rowL = key.indexOf(extract.charAt(1)) / 5;
+            columnF = key.indexOf(extract.charAt(0)) % 5;
+            columnL = key.indexOf(extract.charAt(1)) % 5;
+
+            int encRowF, encRowL, encColumnF, encColumnL;
+            if (rowF == rowL) {
+                encColumnF = (columnF + 1) % 5;
+                encColumnL = (columnL + 1) % 5;
+                encRowF = encRowL = rowL;
+            } else if (columnF == columnL) {
+                encRowF = (rowF + 1) % 5;
+                encRowL = (rowL + 1) % 5;
+                encColumnF = encColumnL = columnF;
+            }//else if statement
+
         } // for loop - i
         return result;
-    }//end of String encrypt(String)
+    }//end of String encrypt(String, String)
 
     private static String decrypt(String encryptedText){
         String result = "";
