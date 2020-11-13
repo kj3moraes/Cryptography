@@ -99,9 +99,9 @@ public class OneTimePad {
                 resultInBits += " ";
                 continue;
             }//if statement - spaces
-            int plainTextBit = textIn8BitBin.charAt(k) - 48;
+            int textBit = textIn8BitBin.charAt(k) - 48;
             int keyBit = keyIn8BitBin.charAt(k%keyIn8BitBin.length()) - 48;
-            resultInBits = resultInBits.concat((plainTextBit+keyBit)%2+"");
+            resultInBits = resultInBits.concat((textBit+keyBit)%2+"");
         }//for loop - k
 
         //STEP 3 : CONVERTING INTO THE DESIRED OUTPUT FORMAT
