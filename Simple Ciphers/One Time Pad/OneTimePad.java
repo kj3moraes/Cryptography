@@ -71,12 +71,6 @@ public class OneTimePad {
                     if (character==' ') continue;
                     textIn8BitBin += DecimalTo8BitBinary(character) + " ";
                 }//for loop - i
-                //KEY TO 8 BIT BINARY
-                for (int j = 0; j < key.length(); j++) {
-                    char character = key.charAt(j);
-                    if (character==' ') continue;
-                    keyIn8BitBin += DecimalTo8BitBinary(character) + " ";
-                }//for loop - j
                 break;
 
             //DECRYPTION
@@ -84,14 +78,16 @@ public class OneTimePad {
                 //ENCRYPTED TEXT TO 8 BIT BINARY
                 if(text.charAt(text.length()-1)!=' ') text+=" ";
                 textIn8BitBin = HexTo8BitBinary(text);
-                //KEY TO 8 BIT BINARY
-                for (int j = 0; j < key.length(); j++) {
-                    char character = key.charAt(j);
-                    if (character==' ') continue;
-                    keyIn8BitBin += DecimalTo8BitBinary(character) + " ";
-                }//for loop - j
                 break;
         }//switch statement - mode
+
+         // KEY TO 8 BIT BINARY
+        for (int j = 0; j < key.length(); j++) {
+            char character = key.charAt(j);
+            if (character == ' ')
+                continue;
+            keyIn8BitBin += DecimalTo8BitBinary(character) + " ";
+        } // for loop - j
 
         //STEP 2 : XOR THE TEXT AND THE KEY (WRAPPING THE KEY IF NEED BE)
         for(int k = 0; k<textIn8BitBin.length(); k++) {
