@@ -44,10 +44,7 @@ public class Vigenere {
 
     /**
      * VIGENÈRE - ENCRYPT
-     * This function takes 2 parameters - plain text and the shift value and outputs the encrypted text.
-     *       In the Vigenère cipher, the shift is dependant on the absolute value of the letter
-     *       of the key at that position. We take this as the shift and we add it to the plaintext.
-     *
+     * This function takes 2 parameters - plain text and the shift value and outputs the encrypted text.     *
      * @param plainText - the user input that is to be encrypted
      * @param key - the text to encrypt the plain text.
      * @return - the encrypted text
@@ -81,8 +78,6 @@ public class Vigenere {
     /**
      * VIGENÈRE - DECRYPT
      * This function takes 2 parameters - plain text and the shift value and outputs the encrypted text.
-     *       We take the absolute value of the key at the position and subtract it from the encrypted text.
-     *
      * @param encryptedText - the user input that is to be decrypted
      * @param key - the text to decrypt the plain text
      * @return - the decrypted text

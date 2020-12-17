@@ -36,6 +36,14 @@ class Playfair {
         main(new String[] {});
     }// end of void main(String[])
 
+    /**
+     * POLYBIUS - ENCRYPT 
+     * This function takes 2 parameters - plain text and the
+     * shift value and outputs the encrpytion of the plain text via a Polybius cipher. 
+     * @param plainText - the user input that is to be encrypted
+     * @param key       - the text to encrypt the plain text.
+     * @return - the encrypted text
+     */
     private static String encrypt(String plainText, String key) {
         String result = "";
         key = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -69,6 +77,14 @@ class Playfair {
         return result;
     }//end of String encrypt(String, String)
 
+    /**
+     * POLYBIUS - DECRYPT
+     *  This function takes 2 parameters - plain text and the
+     * shift value and outputs the decryption of the encrypted text     * 
+     * @param encryptedText - the user input that is to be encrypted
+     * @param key       - the text to encrypt the plain text.
+     * @return - the decrypted text
+     */
     private static String decrypt(String encryptedText){
         String result = "";
         encryptedText = encryptedText.trim()+ " ";

@@ -52,21 +52,12 @@ class Trifid {
     }//end of void main(String[])
 
     /**
-     * TRIFID - ENCRYPT
-     *      This function takes 3 - parameters - plain text, size of the groups and key for
-     *      encryption. The encryption scheme occurs in 3 steps. However, Step 1 can be
-     *      omitted if the user enters a key with unique letters.
-     *      Step 1 : Generating a unique key 27 characters long. 'Unique' means no 
-     *              repeated characters. The 27th character is a '+' symbol.
-     *      Step 2 : Converting the plain text into the trifid number equivalent.
-     *               We will call these the 'encodings'.
-     *      Step 3 : By partitioning the encodings into groups whose size is 
-     *               determined by the 'groupingSize' variable. The encodings 
-     *               are then grouped in 3s and converted back into letters.
-     *               
-     * @param plainText - the user input that is to be encrypted
+     * TRIFID - ENCRYPT 
+     * This function takes 3 parameters - plainText, a grouping size and a key
+     * and outputs the encryption of the plain text via the key and a Trifid cipher.
+     * @param plainText    - the user input that is to be encrypted
      * @param groupingSize - the size of the group that will act as blocks for S3
-     * @param key - the key that will encrypt the numbers
+     * @param key          - the key that will encrypt the numbers
      * @return the encrypted text
      */
     private static String encrypt(String plainText, int groupingSize, String key){
