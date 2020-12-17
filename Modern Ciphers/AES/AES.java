@@ -156,8 +156,7 @@ public class AES {
             matrix[(i / 2) % 4][Math.floorDiv((i / 2), 4)] = Integer.parseInt(encryptedText.substring(i, i + 2), 16);
 
         // STEP 3 : USE THE DATA AND THE VARIABLES TO PERFORM THE ENCRYPTION
-        // STEP 3.1 - PERFORM THE LAST KEY XOR (KEY 10, 12 0R 14 DEPENDING ON AES
-        // VERSION)
+        // STEP 3.1 - PERFORM THE LAST KEY XOR (KEY 10, 12 0R 14 DEPENDING ON AES VERSION)
         AESRoundFunction.addRoundKey(D.getKeyMatrix(noOfRounds), matrix);
         AESRoundFunction.invShiftRows(matrix);
         AESRoundFunction.invSubBytes(matrix);

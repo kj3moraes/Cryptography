@@ -79,8 +79,8 @@ class Playfair {
 
     /**
      * POLYBIUS - DECRYPT
-     *  This function takes 2 parameters - plain text and the
-     * shift value and outputs the decryption of the encrypted text     * 
+     * This function takes 2 parameters - encrypted text and the
+     * shift value and outputs the decryption of the encrypted text    
      * @param encryptedText - the user input that is to be encrypted
      * @param key       - the text to encrypt the plain text.
      * @return - the decrypted text
