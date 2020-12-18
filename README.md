@@ -4,37 +4,37 @@
 _(In Progress)_ This repository contains the codes for several known ciphers and a few hashing algorithms. The codes for all the ciphers are in Java. Anyone with intermediate experience working with Java (approx. 1-2 years ) will understand the codes. Another repository of the ciphers in Python will be uploaded soon. Every code has its own documentation to explain its workings to the reader. The documentation also provides some historical context as well as the modern relevance of the cipher it describes. Some ciphers will have documentations within others. The entire list of ciphers is below:
 
 ### Simple Ciphers  
-   * Caesar Cipher
-   * ROT13     
-   * Affine Cipher
-   * Vigenère Cipher  
-   * Gronsfeld Cipher
+   * Caesar Cipher ✅
+   * ROT13 ✅    
+   * Affine Cipher ✅
+   * Vigenère Cipher ✅  
+   * Gronsfeld Cipher ✅
    * Beaufort Cipher  
-   * Trithemius Cipher
+   * Trithemius Cipher ✅
    * Running Key Cipher  
    * Checkerboard Cipher
    * Rail Fence Cipher  
-   * Polybius Cipher
-   * ADFGX Cipher
-   * Bifid Cipher
-   * Nihilist Cipher
-   * Tap Code  
+   * Polybius Cipher ✅
+   * ADFGX Cipher ✅
+   * Bifid Cipher ✅
+   * Nihilist Cipher ✅
+   * Tap Code ✅
    * Trifid Cipher  
    * Wheatstone-Playfair Cipher
    * Bacon Cipher  
-   * One Time Pad
+   * One Time Pad ✅
 
 ### Modern Ciphers
    * Enigma  
    * Lorentz
    * Sigaba
-   * Feistel Network
-   * Lai Maussey Network
+   * Feistel Network ✅
+   * Lai Maussey Network ✅
    * RC5
    * IDEA
    * DES
    * 3DES  
-   * AES
+   * AES ✅
 
 ### Encoding
    * Base32
@@ -46,7 +46,7 @@ _(In Progress)_ This repository contains the codes for several known ciphers and
 
 ### Hashing Algorithms
 
-   * Merkel-Damgård Construction
+   * Merkel-Damgård Construction 
    * MD5
    * SHA-1
    * SHA-256
