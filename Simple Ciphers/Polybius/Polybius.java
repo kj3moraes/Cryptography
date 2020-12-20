@@ -60,7 +60,7 @@ public class Polybius {
                 letterNumber = plainText.charAt(i) - 66;
             else
                 letterNumber = plainText.charAt(i) - 65;
-            int rowNumber = letterNumber / 5 + 1;
+            int rowNumber = (int)(Math.floor(letterNumber / 5) + 1);
             int columnNumber = letterNumber % 5 + 1;
             result += (rowNumber + "") + (columnNumber + "") + " ";
         } // for loop - i
@@ -80,11 +80,12 @@ public class Polybius {
         encryptedText = encryptedText.trim() + " ";
         for (int i = 0; i < encryptedText.length(); i += 3) {
             int letterNumber = Integer.parseInt(encryptedText.substring(i, i + 2));
+            int rowNumber = letterNumber/10, columnNumber = letterNumber%10;
             char letter;
-            if (letterNumber / 10 > 2 || (letterNumber / 10 == 2 && letterNumber % 10 == 5))
-                letter = (char) (65 + (letterNumber / 10 - 1) * 5 + (letterNumber % 10));
+            if (rowNumber > 2 || (rowNumber == 2 && columnNumber == 5))
+                letter = (char) (65 + (rowNumber - 1) * 5 + columnNumber);
             else
-                letter = (char) (65 + (letterNumber / 10 - 1) * 5 + (letterNumber % 10 - 1));
+                letter = (char) (65 + (rowNumber - 1) * 5 + (columnNumber - 1));
             result += letter;
         } // for loop - i
         return result;
