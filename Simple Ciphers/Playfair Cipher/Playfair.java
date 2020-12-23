@@ -20,7 +20,9 @@ class Playfair{
             case '2':
                 System.out.print("\t ENCRYPTED TEXT : ");
                 encryptedText = txt.nextLine();
-                plainText = decrypt(encryptedText);
+                System.out.print("\t KEY (every character of the key must be unique) : ");
+                key = txt.nextLine().toUpperCase();
+                plainText = decrypt(encryptedText, key);
                 System.out.println("\n\t\t INPUTED ENCRYPTED TEXT : " + plainText);
                 System.out.println("\t\t GENERATED DECRYPTION : " +  encryptedText);
                 break;
