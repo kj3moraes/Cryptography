@@ -35,17 +35,8 @@ _(In Progress)_ This repository contains the codes for several known ciphers and
    * DES
    * 3DES  
    * AES ✅
-
-### Encoding
-   * Base32
-   * Base64
-   * ASCII65
-   * Baudot Code
-   * URL Encoding
-   * Bootstring
-
+   
 ### Hashing Algorithms
-
    * Merkel-Damgård Construction 
    * MD5
    * SHA-1
