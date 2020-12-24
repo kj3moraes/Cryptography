@@ -39,12 +39,10 @@ public class Polybius {
 
     /**
      * POLYBIUS - ENCRYPT 
-     * This function takes 2 parameters - plain text and the
-     * shift value and outputs the encryption of the plain text via a Polybius
-     * cipher.
+     * This function takes a single parameter - the plain text and outputs the 
+     * encrypted text encrypted via a standard polybius square.
      * 
      * @param plainText - the user input that is to be encrypted
-     * @param key       - the text to encrypt the plain text.
      * @return - the encrypted text
      */
     private static String encrypt(String plainText) {
@@ -70,11 +68,10 @@ public class Polybius {
 
     /**
      * POLYBIUS - DECRYPT 
-     * This function takes 2 parameters - encrypted text and the
-     * shift value and outputs the decryption of the encrypted text
+     * This function takes a single parameter - encrypted text and outputs the plain 
+     * decrypted text.
      * 
-     * @param encryptedText - the user input that is to be encrypted
-     * @param key           - the text to encrypt the plain text.
+     * @param encryptedText - the user input that is to be decrypted
      * @return - the decrypted text
      */
     private static String decrypt(String encryptedText) {

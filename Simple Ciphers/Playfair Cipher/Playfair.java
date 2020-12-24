@@ -17,12 +17,12 @@ class Playfair {
 
             case '2':
                 System.out.print("\t ENCRYPTED TEXT : ");
-                encryptedText = txt.nextLine();
+                encryptedText = txt.nextLine().toUpperCase().trim();
                 System.out.print("\t KEY (every character of the key must be unique) : ");
                 key = txt.nextLine().toUpperCase();
                 plainText = decrypt(encryptedText, key);
-                System.out.println("\n\t\t INPUTED ENCRYPTED TEXT : " + plainText);
-                System.out.println("\t\t GENERATED DECRYPTION : " + encryptedText);
+                System.out.println("\n\t\t INPUTED ENCRYPTED TEXT : " + encryptedText);
+                System.out.println("\t\t GENERATED DECRYPTION : " + plainText);
                 break;
 
             case 'X':
@@ -35,6 +35,16 @@ class Playfair {
         main(new String[] {});
     }// end of void main(String[])
 
+    /**
+     * PLAYFAIR - ENCRYPT 
+     * This function takes 2 parameters - plain text and the key and outputs the encrpytion
+     * of the plain text via the Polybius square built from the key and the 
+     * Wheatstone-Playfair encryption algorithm
+     *  
+     * @param plainText - the user input that is to be encrypted
+     * @param key       - the text to encrypt the plain text.
+     * @return - the encrypted text
+     */
     private static String encrypt(String plainText, String key) {
         String result = "";
         plainText += " ";
@@ -57,7 +67,7 @@ class Playfair {
             columnL = key.indexOf(extract.charAt(1)) % 5;
 
             // STEP 3 : ENCRYPT BASED ON THE POSITIONS IN THE SQUARE
-            int encRowF = 0, encRowL = 0, encColumnF = 0, encColumnL = 0;
+            int encRowF, encRowL, encColumnF, encColumnL;
             if (rowF == rowL) {
                 encColumnF = (columnF + 1) % 5;
                 encColumnL = (columnL + 1) % 5;
@@ -79,6 +89,14 @@ class Playfair {
         return result;
     }// end of String encrypt(String, String)
 
+    /**
+     * PLAYFAIR - GENERATE CUSTOM KEY
+     * This function takes a single parameter - a seed to build the key from.
+     * It outputs a 25 character key built from the seed such that each character is unique
+
+     * @param seed - the text to build the key from
+     * @return - the unique key.
+     */
     private static String generateCustomKey(String seed) {
         String customAlphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ";
         String generatedKey = "";
@@ -94,8 +112,55 @@ class Playfair {
         return generatedKey;
     }// end of String generateCustomKey(String)
 
+    /**
+     * PLAYFAIR - DECRYPT 
+     * This function takes 2 parameters - the encrypted text and the key
+     * and outputs the decryption of the encrypted text via the Polybius square built
+     * from the key and the Wheatstone-Playfair decryption algorithm
+     * 
+     * @param encryptedText - the user input that is to be decrypted
+     * @param key       - the text to decrypt the cipher text.
+     * @return - the decrypted text
+     */
     private static String decrypt(String encryptedText, String key) {
         String result = "";
+        encryptedText += " ";
+        int rowF, columnF, rowL, columnL;
+        for (int i = 0; i < encryptedText.length() - 1; i += 2) {
+            String extract = encryptedText.substring(i, i + 2);
+
+            // STEP 1 : WEED OUT THE 'EXTRAS'
+            if (key.indexOf(extract.charAt(0)) == -1 || key.indexOf(extract.charAt(1)) == -1) {
+                result += extract;
+                continue;
+            } // if statement - NOT IN KEY MATRIX
+
+            // STEP 2 : EXTRACT THE ROWS AND COLUMNS OF BOTH THE CHARACTERS
+            rowF = key.indexOf(extract.charAt(0)) / 5;
+            rowL = key.indexOf(extract.charAt(1)) / 5;
+            columnF = key.indexOf(extract.charAt(0)) % 5;
+            columnL = key.indexOf(extract.charAt(1)) % 5;
+
+            // STEP 3 : DECRYPT BASED ON THE POSITIONS IN THE SQUARE
+            int decRowF, decRowL, decColumnF, decColumnL;
+            if (rowF == rowL) {
+                decColumnF = ((columnF - 1) % 5 + 5) % 5;
+                decColumnL = ((columnL - 1) % 5 + 5) % 5;
+                decRowF = decRowL = rowL;
+            } // if statement - same ROW
+            else if (columnF == columnL) {
+                decRowF = ((rowF - 1) % 5 + 5) % 5;
+                decRowL = ((rowL - 1) % 5 + 5) % 5;
+                decColumnF = decColumnL = columnF;
+            } // if statement - same COLUMN
+            else {
+                decRowF = rowF;
+                decColumnF = columnL;
+                decRowL = rowL;
+                decColumnL = columnF;
+            } // else - REST OF THE CASES
+            result += key.charAt(decRowF * 5 + decColumnF) + "" + key.charAt(decRowL * 5 + decColumnL);
+        } // for loop - i
         return result;
     }// end of String decrypt(String, String)
 }// end of class
