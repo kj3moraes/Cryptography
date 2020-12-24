@@ -20,6 +20,17 @@ public class Keys {
         return initialKeyState;
     }// end of String getInitKeyState()  
 
+    /**
+     * KEYS - (CONSTRUCTOR)
+     * This constructor takes 3 parameters - a seed for generating the key,
+     * a salt for improving randomness and the algorithm variant which specifies 
+     * the length of the key to be generated. Spits out the pseudorandom key.
+     * 
+     * @param seed - String to generate the key
+     * @param salt - String to improve the randomness of the key
+     * @param algorithm - specifies the length of the key (128, 192 or 256)
+     * @return - the 4x4 resultant matrix.
+     */
     public Keys(String seed, String salt, int algorithm) {
         // STEP 1 : GENERATE INITIAL KEY STATE FROM THE SEED AND SALT
         SecretKey key = null;
@@ -55,6 +66,16 @@ public class Keys {
         }// switch statement
     }// end of public Keys(String, String, int)
 
+    /**
+     * KEYS - GENERATE KEY MATRIX
+     * This function takes a single parameter - the round number.
+     * It uses the global variable - currentKeyMatrix in conjunction with
+     * the round number to generate the corresponding key for the specified
+     * round based on the key generation procdures specified in Rjindael. 
+     * 
+     * @param roundNo - specifies the round no.
+     * @return - the 4x4 resultant matrix.
+     */
     protected int[][] generateKeyMatrix(int roundNo) {
         int[][] outputMatrix = new int[4][4];
         // STEP 1 : TAKE CARE OF THE KEY0 STATE FOR ALL POSSIBLE KEY LENGTHS
@@ -197,6 +218,15 @@ public class Keys {
         return outputMatrix;
     }// end of int[][] generateKeyMatrix(int)
 
+    /**
+     * KEYS - GENERATE INVERSE KEY MATRIX
+     * This function takes a single parameter - the total number of rounds. It
+     * constructs a 3D matrix of dimensions (rounds + 1) x 4 x 4 where the ith 2D matrix
+     * corresponds to the (i+1)th round of the key generation protocol. Stores this
+     * in the keyMatrix global variable. Returns nothing.
+     * 
+     * @param noOfRounds - the total number of rounds.
+     */
     protected void generateInverseKeyMatrices(int noOfRounds){    
         // Step 1 : INITIALIZE KEYMATRIX ARRAY
         keyMatrix = new int[noOfRounds+1][4][4];
@@ -206,10 +236,27 @@ public class Keys {
                 keyMatrix[round] = generateKeyMatrix(round);
     }// end of void generateInverseKeyMatrices(int)
 
+    /**
+     * KEYS - GET KEY MATRIX
+     * This function takes a single parameter - the round number and extracts and returns the 
+     * the corresponding key from the keyMatrix global variable. 
+     *
+     * @param roundNo - the round number
+     * @return - the key matrix for the specified round number.
+     */
     protected int[][] getKeyMatrix(int roundNo){
         return keyMatrix[roundNo];
     }// end of int[][] getKeyMatrix(int)
 
+    /**
+     * KEYS - F FUNCTION
+     * This function takes 2 parameters - a column array and the specific RCON number
+     * It returns the resultant column after passing through the F Function as specified
+     * in the Rjindael specification
+     *
+     * @param roundNo - the round number
+     * @return - the column after passing through the F Function
+     */
     private int[] functionF(int[] column, int rconNo) {
         int[] resultantKeyColumn = new int[4];
 
@@ -226,6 +273,14 @@ public class Keys {
         return resultantKeyColumn;
     }// end of int[] functionF(int[], int)
 
+    /**
+     * KEYS - BYTE ARRAY TO HEX
+     * This function takes a single parameters - a byte array and outputs 
+     * the hex value of each of the elements of the array concatenated together.
+     *
+     * @param input - the byte array
+     * @return - the concatenated hex value
+     */
     private String ByteArrayToHexadecimal(byte[] input) {
         String result = "";
         for (byte b : input)
