@@ -3,12 +3,28 @@ package AES;
 public class AESRoundFunction {
     private static SBox S = new SBox();
 
+    /**
+     * AESRF - SUBSTITUTE BYTES
+     * This function takes a single parameter - a 4x4 integer matrix and replaces
+     * each element with its corresponding forward SBox lookup equivalent
+     * 
+     * @param matrix - the 4x4 int matrix
+     * @return - the 4x4 resultant matrix.
+     */
     protected static void subBytes(int[][] matrix){        
         for (int r = 0; r < matrix.length; r++)
             for (int c = 0; c < matrix[r].length; c++)
                 matrix[r][c] = S.performSubstitution(matrix[r][c], 'e');
     }//end of void subBytes(int[][])
 
+    /**
+     * AESRF - SHIFT ROWS
+     * This function takes a single parameter - a 4x4 integer matrix and shifts 
+     * each row according by its respective index. 
+     * 
+     * @param matrix - the 4x4 int matrix
+     * @return - the 4x4 resultant matrix.
+     */
     protected static void shiftRows(int[][] matrix){
         int[] tempArray;
         for (int r = 0; r < 4; r++) {
@@ -19,6 +35,15 @@ public class AESRoundFunction {
         }//for loop - n
     }// end of void shiftRows(int[][])
 
+    /**
+     * AESRF - MIX COLUMNS
+     * This function takes a single parameter - a 4x4 integer matrix and replaces
+     * each column with its dotProduct equivalent.
+     * equivalent
+     * 
+     * @param matrix - the 4x4 int matrix
+     * @return - the 4x4 resultant matrix.
+     */
     protected static void mixColumns(int[][] matrix){
         int[] tempArray = new int[4];
         for (int c = 0; c < 4; c++) {
@@ -35,6 +60,18 @@ public class AESRoundFunction {
         }//for loop - c
     }// end of void mixColumns(int[][])
 
+    /**
+     * AESRF - ADD ROUND KEY
+     * This function takes 2 single parameters - a 4x4 integer matrix that
+     * represents the key matrix and a 4x4 integer matrix that represents
+     * the state matrix. It XORes each column of the state matrix with 
+     * the corresponding column of the key matrix and stores the value in 
+     * the state matrix.
+     * 
+     * @param keyMatrix - the 4x4 int key matrix
+     * @param matrix - the 4x4 int state matrix
+     * @return - the 4x4 resultant matrix.
+     */
     protected static void addRoundKey(int[][] keyMatrix, int[][] matrix) {
         for (int c = 0; c < 4; c++){
             matrix[0][c] ^= keyMatrix[0][c];
@@ -44,12 +81,29 @@ public class AESRoundFunction {
         }//for loop - columns
     }// end of void addRoundKey(int[][])
 
+    /**
+     * AESRF - INVERSE SUBSTITUTE BYTES 
+     * This function takes a single parameter - a 4x4 integer matrix and 
+     * replaces each element with its corresponding reverse SBox lookup
+     * equivalent 
+     * 
+     * @param matrix - the 4x4 int matrix
+     * @return - the 4x4 resultant matrix.
+     */
     protected static void invSubBytes(int[][] matrix){
         for (int r = 0; r < matrix.length; r++)
             for (int c = 0 ; c < matrix[r].length ; c++)
                 matrix[r][c] = S.performSubstitution(matrix[r][c], 'd');
     }// end of void invSubBytes(int[][])
 
+    /**
+     * AESRF - INVERSE SHIFT ROWS 
+     * This function takes a single parameter - a 4x4 integer matrix
+     * and shifts each row backwards according by its respective index.
+     * 
+     * @param matrix - the 4x4 int matrix
+     * @return - the 4x4 resultant matrix.
+     */
     protected static void invShiftRows(int[][] matrix){
         int[] tempArray;
         for (int r = 0; r < 4; r++) {
@@ -60,6 +114,14 @@ public class AESRoundFunction {
         }//for loop - n
     }// end of void invShiftRows(int[][])
 
+    /**
+     * AESRF - INVERSE MIX COLUMNS 
+     * This function takes a single parameter - a 4x4 integer matrix and replaces
+     * each column with its inverse dotProduct equivalent.
+     * 
+     * @param matrix - the 4x4 int matrix
+     * @return - the 4x4 resultant matrix.
+     */
     protected static void invMixColumns(int[][] matrix){
         int[] tempArray = new int[4];
         for (int c = 0; c < 4; c++) {
@@ -76,6 +138,16 @@ public class AESRoundFunction {
         }//for loop - c
     }// end of void invMixColumns(int[][])
 
+    /**
+     * AESRF - DOT PRODUCT
+     * This function takes 2 parameters - an integer that correspods to the 
+     * operation to take place on the 2nd input parameter - the number. Outputs
+     * the result of the calculation.
+     * 
+     * @param mulValue - integer that indicates which operation
+     * @param number - the number to be operated on
+     * @return - the result of the operation on number
+     */
     private static int dotProduct(int mulValue, int number){
         int result = 0;
         switch (mulValue) {

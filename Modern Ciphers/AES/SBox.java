@@ -36,7 +36,16 @@ public class SBox {
             { 160, 224, 59, 77, 174, 42, 245, 176, 200, 235, 187, 60, 131, 83, 153, 97 },
             { 23, 43, 4, 126, 186, 119, 214, 38, 225, 105, 20, 99, 85, 33, 12, 125 } };
 
-    
+    /**
+     * SBOX - PERFORM SUBSTITUTION
+     *  This function takes 2 parameters - a number and a character specifying the
+     * mode it is running on. It ouputs the result of the substitution based on the
+     * lookup in the respective SBox. 
+     * 
+     * @param number - the number to be substitued
+     * @param mode   - the mode that specifies which SBox to use (either encSBox or decSBox)
+     * @return - the result of the SBox lookup
+     */
     protected int performSubstitution(int number, char mode) {
         int row = Integer.parseInt(DecimalTo8BitBinary(number).substring(0, 4), 2);
         int column = Integer.parseInt(DecimalTo8BitBinary(number).substring(4, 8), 2);
@@ -52,6 +61,14 @@ public class SBox {
         }// switch statement
     }// end of int performSubstitution(int, char)
 
+    /**
+     * SBOX - DECIMAL TO 8-BIT BINARY
+     * This function takes a single parameter - the integer to be converted to 8
+     * bit binary. A constraint on the input is 0 <= intValue < 256.
+     * 
+     * @param intValue - the number to be converted
+     * @return - the 8 bit binary equivalent of the inputed number
+     */
     private static String DecimalTo8BitBinary(int intValue) {
         String result = Integer.toBinaryString(intValue);
         for (int i = result.length(); i < 8; i++)

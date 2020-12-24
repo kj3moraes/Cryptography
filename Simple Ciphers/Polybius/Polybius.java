@@ -38,8 +38,9 @@ public class Polybius {
     }// end of void main(String[])
 
     /**
-     * POLYBIUS - ENCRYPT This function takes 2 parameters - plain text and the
-     * shift value and outputs the encrpytion of the plain text via a Polybius
+     * POLYBIUS - ENCRYPT 
+     * This function takes 2 parameters - plain text and the
+     * shift value and outputs the encryption of the plain text via a Polybius
      * cipher.
      * 
      * @param plainText - the user input that is to be encrypted
@@ -68,7 +69,8 @@ public class Polybius {
     }// end of String encrypt(String)
 
     /**
-     * POLYBIUS - DECRYPT This function takes 2 parameters - encrypted text and the
+     * POLYBIUS - DECRYPT 
+     * This function takes 2 parameters - encrypted text and the
      * shift value and outputs the decryption of the encrypted text
      * 
      * @param encryptedText - the user input that is to be encrypted

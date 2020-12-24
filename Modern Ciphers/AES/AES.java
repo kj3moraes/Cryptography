@@ -60,6 +60,16 @@ public class AES {
         }while(!exit);
     }// end of void main(String[])
 
+    /**
+     * AES - ENCRYPT 
+     * This function takes 2 parameters - plain text and the
+     * seed and outputs the encryption of the plain text via the Rjindael Encryption 
+     * algorithm.
+     * 
+     * @param plainText - the user input that is to be encrypted
+     * @param seed      - the text used to generate a key to encrypt the plain text.
+     * @return - the encrypted text
+     */
     public static String encrypt(String plaintext, String seed) {
         String result = "";
         System.out.println("\t SUBMIT YOUR AES VERSION: \n\t\t [1] AES-128 \n\t\t [2] AES-192 \n\t\t [3] AES-256");
@@ -122,6 +132,15 @@ public class AES {
         return result;
     }// end of String encrypt(String, String)
 
+    /**
+     * AES - DECRYPT 
+     * This function takes 2 parameters - encrypted text and the seed and
+     * outputs the plain text via the Rjindael Decryption  algorithm.
+     * 
+     * @param encryptedText - the user input that is to be encrypted
+     * @param seed          - the text used to generate the key to decrypt the encrypted text.
+     * @return - the decrypted text
+     */
     public static String decrypt(String encryptedText, String seed) {
         String result = "";
         System.out.println("\t SUBMIT YOUR AES VERSION: \n\t\t [1] AES-128 \n\t\t [2] AES-192 \n\t\t [3] AES-256");
@@ -147,7 +166,6 @@ public class AES {
         }// switch statement
 
         D.generateInverseKeyMatrices(noOfRounds);
-
         int[][] matrix = new int[4][4];
 
         // STEP 2 : PUT THE NECESSARY DATA INTO OUR VARIABLES
@@ -156,21 +174,21 @@ public class AES {
             matrix[(i / 2) % 4][Math.floorDiv((i / 2), 4)] = Integer.parseInt(encryptedText.substring(i, i + 2), 16);
 
         // STEP 3 : USE THE DATA AND THE VARIABLES TO PERFORM THE ENCRYPTION
-        // STEP 3.1 - PERFORM THE LAST KEY XOR (KEY 10, 12 0R 14 DEPENDING ON AES VERSION)
-        AESRoundFunction.addRoundKey(D.getKeyMatrix(noOfRounds), matrix);
-        AESRoundFunction.invShiftRows(matrix);
-        AESRoundFunction.invSubBytes(matrix);
-
-        // STEP 3.2 : ITERATE BACKWARD FROM (noOfRounds-1) TO 1
-        for (int round = noOfRounds-1 ; round > 0 ; round--) {
-            AESRoundFunction.addRoundKey(D.getKeyMatrix(round), matrix);
-            AESRoundFunction.invMixColumns(matrix);
+            // STEP 3.1 - PERFORM THE LAST KEY XOR (KEY 10, 12 0R 14 DEPENDING ON AES VERSION)
+            AESRoundFunction.addRoundKey(D.getKeyMatrix(noOfRounds), matrix);
             AESRoundFunction.invShiftRows(matrix);
             AESRoundFunction.invSubBytes(matrix);
-        } // for loop - round
 
-        // STEP 3.3 : PERFORM THE UNIQUE FIRST ROUND FUNCTION
-        AESRoundFunction.addRoundKey(D.getKeyMatrix(0), matrix);
+            // STEP 3.2 : ITERATE BACKWARD FROM (noOfRounds-1) TO 1
+            for (int round = noOfRounds-1 ; round > 0 ; round--) {
+                AESRoundFunction.addRoundKey(D.getKeyMatrix(round), matrix);
+                AESRoundFunction.invMixColumns(matrix);
+                AESRoundFunction.invShiftRows(matrix);
+                AESRoundFunction.invSubBytes(matrix);
+            } // for loop - round
+
+            // STEP 3.3 : PERFORM THE UNIQUE FIRST ROUND FUNCTION
+            AESRoundFunction.addRoundKey(D.getKeyMatrix(0), matrix);
 
         // STEP 4 : PUT THE RESULTANT MATRIX INTO A HEX STRING
         String hex = "";
