@@ -1,14 +1,17 @@
+package Playfair;
+import java.util.Scanner;
+
 class Playfair {
     public static void main(String[] args) {
         final Scanner txt = new Scanner(System.in), num = new Scanner(System.in);
-        System.out.println("Enter your choice \n\t [1] Encrypt \n\t [2] Decrypt \n\t [X] Exit");
+        System.out.println("\nEnter your choice \n\t [1] Encrypt \n\t [2] Decrypt \n\t [X] Exit");
         final char choice = num.next().toUpperCase().charAt(0);
         String plainText, encryptedText, key;
         switch (choice) {
             case '1':
                 System.out.print("\t PLAIN TEXT : ");
                 plainText = txt.nextLine().toUpperCase().trim();
-                System.out.print("\t KEY (every character of the key must be unique) : ");
+                System.out.print("\t KEY/SEED : ");
                 key = txt.nextLine().toUpperCase();
                 encryptedText = encrypt(plainText, key);
                 System.out.println("\n\t\t INPUTED PLAIN TEXT : " + plainText);
@@ -18,7 +21,7 @@ class Playfair {
             case '2':
                 System.out.print("\t ENCRYPTED TEXT : ");
                 encryptedText = txt.nextLine().toUpperCase().trim();
-                System.out.print("\t KEY (every character of the key must be unique) : ");
+                System.out.print("\t KEY / SEED (the same one used for : ");
                 key = txt.nextLine().toUpperCase();
                 plainText = decrypt(encryptedText, key);
                 System.out.println("\n\t\t INPUTED ENCRYPTED TEXT : " + encryptedText);
@@ -36,27 +39,30 @@ class Playfair {
     }// end of void main(String[])
 
     /**
-     * PLAYFAIR - ENCRYPT 
-     * This function takes 2 parameters - plain text and the key and outputs the encrpytion
-     * of the plain text via the Polybius square built from the key and the 
-     * Wheatstone-Playfair encryption algorithm
-     *  
+     * PLAYFAIR - ENCRYPT This function takes 2 parameters - plain text and the key
+     * and outputs the encrypted text via the Wheatstone-Playfair encryption
+     * algorithm.
+     *
      * @param plainText - the user input that is to be encrypted
      * @param key       - the text to encrypt the plain text.
      * @return - the encrypted text
      */
     private static String encrypt(String plainText, String key) {
         String result = "";
-        plainText += " ";
+        plainText = plainText.replaceAll(" ", "");
+        plainText += plainText.length() % 2 != 0 ? "X" : "";
         key = generateCustomKey(key);
-        System.out.println(key);
+
         int rowF, columnF, rowL, columnL;
-        for (int i = 0; i < plainText.length() - 1; i += 2) {
+        for (int i = 0; i < plainText.length(); i += 2) {
             String extract = plainText.substring(i, i + 2);
 
             // STEP 1 : WEED OUT THE 'EXTRAS'
-            if (key.indexOf(extract.charAt(0)) == -1 || key.indexOf(extract.charAt(1)) == -1) {
-                result += extract;
+            if (key.indexOf(extract.charAt(0)) == -1) {
+                result += extract.charAt(0) + "";
+                continue;
+            } else if (key.indexOf(extract.charAt(1)) == -1) {
+                result += extract.charAt(1) + "";
                 continue;
             } // if statement - NOT IN KEY MATRIX
 
@@ -84,25 +90,26 @@ class Playfair {
                 encRowL = rowL;
                 encColumnL = columnF;
             } // else - REST OF THE CASES
-            result += key.charAt(encRowF * 5 + encColumnF) + "" + key.charAt(encRowL * 5 + encColumnL);
+            result += key.charAt(encRowF * 5 + encColumnF) + "" + key.charAt(encRowL * 5 + encColumnL) + " ";
         } // for loop - i
         return result;
     }// end of String encrypt(String, String)
 
     /**
-     * PLAYFAIR - GENERATE CUSTOM KEY
-     * This function takes a single parameter - a seed to build the key from.
-     * It outputs a 25 character key built from the seed such that each character is unique
-
-     * @param seed - the text to build the key from
-     * @return - the unique key.
+     * PLAYFAIR - GENERATE CUSTOM KEY This function takes a single parameter - a
+     * seed to generate a key. It outputs a unique key of 25 characters long
+     * containing all the letters from the English alphabet expect J once and only
+     * one.
+     *
+     * @param seed - the text used to generate a key
+     * @return - the unique key based on the seed
      */
     private static String generateCustomKey(String seed) {
         String customAlphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ";
         String generatedKey = "";
 
         for (int i = 0; i < seed.length(); i++)
-            if (!seed.substring(i + 1).contains(seed.charAt(i) + ""))
+            if (!generatedKey.contains(seed.charAt(i) + ""))
                 generatedKey += seed.charAt(i);
 
         for (int i = 0; i < customAlphabet.length(); i++)
@@ -113,29 +120,34 @@ class Playfair {
     }// end of String generateCustomKey(String)
 
     /**
-     * PLAYFAIR - DECRYPT 
-     * This function takes 2 parameters - the encrypted text and the key
-     * and outputs the decryption of the encrypted text via the Polybius square built
-     * from the key and the Wheatstone-Playfair decryption algorithm
-     * 
-     * @param encryptedText - the user input that is to be decrypted
-     * @param key       - the text to decrypt the cipher text.
+     * PLAYFAIR - DECRYPT This function takes 2 parameters - encrypted text and the
+     * key and outputs the decrypted via the Wheatstone-Playfair dectyption
+     * algorithm.
+     *
+     * @param encryptedText - the user input that is to be encrypted
+     * @param key           - the text to encrypt the plain text.
      * @return - the decrypted text
      */
     private static String decrypt(String encryptedText, String key) {
         String result = "";
-        encryptedText += " ";
+        encryptedText = encryptedText.replaceAll(" ", "");
+        encryptedText += encryptedText.length() % 2 != 0 ? "X" : "";
+        key = generateCustomKey(key);
+
         int rowF, columnF, rowL, columnL;
-        for (int i = 0; i < encryptedText.length() - 1; i += 2) {
+        for (int i = 0; i < encryptedText.length(); i += 2) {
             String extract = encryptedText.substring(i, i + 2);
 
             // STEP 1 : WEED OUT THE 'EXTRAS'
-            if (key.indexOf(extract.charAt(0)) == -1 || key.indexOf(extract.charAt(1)) == -1) {
-                result += extract;
+            if (key.indexOf(extract.charAt(0)) == -1) {
+                result += extract.charAt(0) + "";
+                continue;
+            } else if (key.indexOf(extract.charAt(1)) == -1) {
+                result += extract.charAt(1) + "";
                 continue;
             } // if statement - NOT IN KEY MATRIX
 
-            // STEP 2 : EXTRACT THE ROWS AND COLUMNS OF BOTH THE CHARACTERS
+            /* STEP 2 : EXTRACT THE ROWS AND COLUMNS OF BOTH THE CHARACTERS */
             rowF = key.indexOf(extract.charAt(0)) / 5;
             rowL = key.indexOf(extract.charAt(1)) / 5;
             columnF = key.indexOf(extract.charAt(0)) % 5;
