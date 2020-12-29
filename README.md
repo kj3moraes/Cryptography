@@ -34,7 +34,7 @@ _(In Progress)_ This repository contains the codes for several known ciphers and
    * IDEA
    * DES
    * 3DES  
-   * AES ✅
+   * AES ❗
    
 ### Hashing Algorithms
    * Merkel-Damgård Construction 
