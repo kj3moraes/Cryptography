@@ -20,7 +20,7 @@ _(In Progress)_ This repository contains the codes for several known ciphers and
    * Nihilist Cipher ✅
    * Tap Code ✅
    * Trifid Cipher  
-   * Wheatstone-Playfair Cipher 
+   * Wheatstone-Playfair Cipher ✅
    * Bacon Cipher  
    * One Time Pad ✅
 
