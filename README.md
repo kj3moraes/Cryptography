@@ -1,7 +1,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://raw.githubusercontent.com/LordVader31/Cryptography/master/LICENSE?token=AGECP4T5NJ7KPGV427OZ5FK7K4N2K)
 
 # Cryptography
-_(In Progress)_ This repository contains the codes for several known ciphers and a few hashing algorithms. The codes for all the ciphers are in Java. Anyone with intermediate experience working with Java (approx. 1-2 years ) will understand the codes. Another repository of the ciphers in Python will be uploaded soon. Every code has its own documentation to explain its workings to the reader. The documentation also provides some historical context as well as the modern relevance of the cipher it describes. Some ciphers will have documentations within others. The entire list of ciphers is below:
+_(In Progress)_ This repository contains the codes and documentations for several known ciphers and a few hashing algorithms. The codes for all the ciphers are in Java. Anyone with intermediate experience working with Java (approx. 1-2 years ) will understand the codes. Alternate versions written in Python will be upladed soon. Every code has its own documentation to explain its workings to the reader. Some documentations have expositions on the generalization of the cipher and others have the mathematical definitions of security. The documentation also provides some historical context as well as the modern relevance of the cipher it describes. Some ciphers will have documentations within others. The entire list of ciphers is below:
 
 ### Simple Ciphers  
    * Caesar Cipher ✅
@@ -36,11 +36,11 @@ _(In Progress)_ This repository contains the codes for several known ciphers and
    * 3DES  
    * AES ❗
    
-### One-way compression functions
-   * Merkle-Damgård Construction
+### One-way compression functions & Hash functions
    * Davies-Meyer
    * Miyaguchi-Prenel
    * Matyas-Meyer Oseas
+   * Merkle-Damgård Construction 
    * MD5
    * SHA-1
    * SHA-256
