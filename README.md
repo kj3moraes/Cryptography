@@ -36,8 +36,11 @@ _(In Progress)_ This repository contains the codes for several known ciphers and
    * 3DES  
    * AES ❗
    
-### Hashing Algorithms
-   * Merkel-Damgård Construction 
+### One-way compression functions
+   * Merkle-Damgård Construction
+   * Davies-Meyer
+   * Miyaguchi-Prenel
+   * Matyas-Meyer Oseas
    * MD5
    * SHA-1
    * SHA-256
