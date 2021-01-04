@@ -64,6 +64,10 @@ This course by Brit Cruise is a fun and easy to understand first peek into crypt
 **Cryptography I (Coursera)**  
 This is a rigorous course by Dan Boneh of Stanford University that is a very strong starting point for an introduction into the world of cryptography. The course material is significantly technical and although there are no distinct prerequisties, a background in discrete mathematics and number theory (especially modular arithmetic and probability) would benefit the viewer. Regardless, the course material is very well explained. This course is recommended to those who want to explore the mathematics and fundamental workings of several crpytographic primtives. The course is aimed at undergraduates in applied mathematics, computer science and related fields.
 
+
+**Cryptography Stack Exchange**  
+[Cryptograhy Stack Exchange](https://crypto.stackexchange.com/) is an excellent forum to learn about cryptography. One can search for previously answered questions or post one's own to clarify a doubt. There are multiple great answers from the community and it should be the first step for anybody wanting to learn more about cryptography.
+
 **Practical Cryptography**  
 [Practical Cryptography](http://practicalcryptography.com/) is a website that elaborates on the working of the ciphers and encryption schemes mentioned above. Recommendeded if one prefers a visual approach to learning about the algorithms.
 
