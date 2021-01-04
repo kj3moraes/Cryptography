@@ -1,7 +1,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://raw.githubusercontent.com/LordVader31/Cryptography/master/LICENSE?token=AGECP4T5NJ7KPGV427OZ5FK7K4N2K)
 
 # Cryptography
-_(In Progress)_ This repository contains the codes and documentations for several known ciphers and a few hashing algorithms. The codes for all the ciphers are in Java. Anyone with intermediate experience working with Java (approx. 1-2 years ) will understand the codes. Alternate versions written in Python will be upladed soon. Every code has its own documentation to explain its workings to the reader. Some documentations have expositions on the generalization of the cipher and others have the mathematical definitions of security. The documentation also provides some historical context as well as the modern relevance of the cipher it describes. Some ciphers will have documentations within others. The entire list of ciphers is below:
+This repository contains the codes and documentations for several known ciphers and a few hashing algorithms. The codes for all the ciphers are in Java. Anyone with intermediate experience working with Java (approx. 1-2 years ) will understand the codes. Alternate versions written in Python will be upladed soon. Every code has its own documentation to explain its workings to the reader. Some documentations have expositions on the generalization of the cipher and others have the mathematical definitions of security. The documentation also provides some historical context as well as the modern relevance of the cipher it describes. Some ciphers will have documentations within others. The entire list of ciphers is below:
 
 ### Simple Ciphers  
    * Caesar Cipher ✅
@@ -50,7 +50,9 @@ The classification of 'Simple Ciphers' and 'Modern Ciphers' is rather arbitrary 
 **Note that you MUST DOWNLOAD the PDFs and then study them. The Web version is badly formatted**
  
 The following image below shows the flowchart of documentation for all the listed ciphers.:
-
+![Simple Ciphers](https://raw.githubusercontent.com/LordVader31/Cryptography/master/Flowcharts/Simple%20Ciphers%20Flowchart.png)
+![Complex Ciphers](https://raw.githubusercontent.com/LordVader31/Cryptography/master/Flowcharts/Complex%20Ciphers%20Flowchart.png)
+![Hashing Algorithms](https://github.com/LordVader31/Cryptography/blob/master/Flowcharts/Hashing%20Algorithms%20Flowchart.png)
 
 It is highly recommended that the reader follows the order specified above. Although most documentations are relatively self-contained, there are several concepts that carry forth from previous ciphers.
 
