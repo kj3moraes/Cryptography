@@ -57,8 +57,10 @@ public class Polybius {
         for (int i = 0; i < plainText.length(); i++) {
             int letterNumber;
             char character = plainText.charAt(i);
-            if (character < 65 || character > 90 || character == 'J')
+            if (character < 65 || character > 90)
                 continue;
+            if (character == 'J')
+                character = 'I';
 
             letterNumber = key.indexOf(character);
             int rowNumber = (int) (Math.floor((float) letterNumber / 5) + 1);
