@@ -71,8 +71,8 @@ This is a rigorous course by Dan Boneh of Stanford University that is a very str
 **Practical Cryptography**  
 [Practical Cryptography](http://practicalcryptography.com/) is a website that elaborates on the working of the ciphers and encryption schemes mentioned above. Recommendeded if one prefers a visual approach to learning about the algorithms.
 
-**Boxentriq**  
-[Boxentriq](https://www.boxentriq.com/) is similar to Practical Cryptography and provides an in-built encryption-decryption tool that allows the user to play around and experiment. Download the app to get puzzles and ciphers to crack.
+**Boxentriq | Cryptii**  
+[Boxentriq](https://www.boxentriq.com/) is similar to Practical Cryptography and provides an in-built encryption-decryption tool that allows the user to play around and experiment. Download the app to get puzzles and ciphers to crack. [Cryptii](https://cryptii.com/) is nearly the same Boxentriq except that it offers more than just ciphers. You can play around with Encoding and convert to and from different numeral bases. There are several  other fun operations to play around with.
 
 **Reddit**  
 [r/codes](https://www.reddit.com/r/codes/) and [r/cryptography](https://www.reddit.com/r/cryptography/) are two subreddits where one can learn a whole lot from other enthusiasts and professionals in the field of cryptography. r/codes is mainly for cracking ciphers and puzzles. r/cryptogrpahy is for learning about the encryption and decryption schemes.
