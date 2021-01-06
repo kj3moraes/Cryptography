@@ -33,8 +33,10 @@ This repository contains the codes and documentations for several known ciphers 
    * RC5
    * IDEA
    * DES
-   * 3DES  
+   * 3DES
+   * DESX
    * AES ❗
+   * Blowfish
    
 ### One-way compression functions & Hash functions
    * Davies-Meyer
