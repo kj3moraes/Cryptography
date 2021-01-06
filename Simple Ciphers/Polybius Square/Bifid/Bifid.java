@@ -1,27 +1,35 @@
+package Bifid;
+
 import java.util.Scanner;
-public class Bifid {
+
+import Polybius.Polybius;
+public class Bifid extends Polybius {
     public static void main(String[] args) {
         final Scanner txt = new Scanner(System.in), num = new Scanner(System.in);
         System.out.println("\nEnter your choice \n\t [1] Encrypt \n\t [2] Decrypt \n\t [X] Exit");
         final char choice = num.next().toUpperCase().charAt(0);
-        String plainText, encryptedText;
+        String plainText, encryptedText, key;
         switch (choice){
             //ENCRYPTION
             case '1':
                 System.out.print("\t PLAIN TEXT : ");
-                plainText = txt.nextLine();
-                encryptedText = encrypt(plainText);
+                plainText = txt.nextLine().toUpperCase().trim();
+                System.out.print("\t KEY/SEED (leave blank for default) : ");
+                key = txt.nextLine().toUpperCase().trim();
+                encryptedText = encrypt(plainText, key);
                 System.out.println("\n\t\t INPUTED PLAIN TEXT : " + plainText);
                 System.out.println("\t\t GENERATED ENCRYPTION : " +  encryptedText);
                 break;
 
-            //DECRYPTION
+            // DECRYPTION
             case '2':
                 System.out.print("\t ENCRYPTED TEXT : ");
-                encryptedText = txt.nextLine();
-                plainText = decrypt(encryptedText);
+                encryptedText = txt.nextLine().trim();
+                System.out.print("\t KEY/SEED (same one used for encryption : if default, leave blank) : ");
+                key = txt.nextLine().toUpperCase();
+                plainText = decrypt(encryptedText, key);
                 System.out.println("\n\t\t INPUTED ENCRYPTED TEXT : " + encryptedText);
-                System.out.println("\t\t GENERATED DECRYPTION : " +  plainText);
+                System.out.println("\t\t GENERATED DECRYPTION : " + plainText);
                 break;
 
             //EXIT
@@ -37,28 +45,21 @@ public class Bifid {
 
     /**
      * BIFID - ENCRYPT
-     * This function takes a single parameter - plain text. It ouputs the encryption 
+     * This function takes a single parameter - plain text. It ouputs the encryption
      * of the plaintext using the Bifid encryption algorithm.
-     * 
+     *
      * @param plainText - the user input that is to be encrypted
+     * @param key - the custom key to fill the Polybius Square
      * @return - the encrypted text
      */
-    private static String encrypt(String plainText){
+    protected static String encrypt(String plainText, String key){
         String result = "", rowNumbers = "", columnNumbers = "";
-        plainText = (plainText+" ").toUpperCase();
-
+        plainText = plainText;
+        key = generateCustomKey(key, "ABCDEFGHIKLMNOPQRSTUVWXYZ");
+        
         // S1 : ENCODING LETTERS INTO POLYBIUS SQUARE COORDINATES
         for (int i = 0; i < plainText.length(); i++) {
-           
-            int letterNumber;
-            if (Character.isUpperCase(plainText.charAt(i))) {
-                if (plainText.charAt(i) >= 'J')
-                    letterNumber = plainText.charAt(i) - 66;
-                else
-                    letterNumber = plainText.charAt(i) - 65;
-            }//if statement - uppercase correction
-            else
-                continue;
+            int letterNumber = key.indexOf(plainText.charAt(i));
             rowNumbers += (letterNumber/5 + 1) + "";
             columnNumbers += (letterNumber%5 + 1) + "";
         }//for loop - i
@@ -67,16 +68,7 @@ public class Bifid {
         rowNumbers += columnNumbers;
 
         //S3 : CONVERTING COORDINATES BACK INTO LETTERS
-        int j = 0;
-        do {    
-            int letterNumber = Integer.parseInt(rowNumbers.substring(j,j+2));
-            char letter;
-            if (letterNumber/10 > 2 || (letterNumber/10 == 2 && letterNumber%10 >= 4))
-                letter = (char)(65 + (letterNumber/10-1)*5 + (letterNumber%10));
-            else letter = (char)(65 + (letterNumber/10-1)*5 + (letterNumber%10-1));
-            result+=letter;
-            j+=2;
-        }while (j < rowNumbers.length());
+        result = Polybius.decrypt(rowNumbers, key);
         return result;
     }//end of String encrypt(String)
 
@@ -84,31 +76,25 @@ public class Bifid {
      * BIFID - DECRYPT
      * This function takes a single parameter - the encrypted text. It ouputs the decryption
      * of the encrypted text via the Bifid decryption algorithm.
+     * 
      * @param encryptedText - the user input that is to be decrypted
+     * @param key - the custom key to fill the Polybius square
      * @return - the decrypted text
      */
-    private static String decrypt(String encryptedText){
+    protected static String decrypt(String encryptedText, String key) {
+        
         // S1 : CONVERSION OF ENCRYPTED TEXT INTO COORDINATES
         String result = "", intermediateLetterNumbers = "";
-        for (int i = 0; i < encryptedText.length(); i++) {
-            int letterNumber;
-                if (encryptedText.charAt(i) >= 'J')
-                    letterNumber = encryptedText.charAt(i) - 66;
-                else
-                    letterNumber = encryptedText.charAt(i) - 65;
-            intermediateLetterNumbers += (letterNumber/5+1)+""+(letterNumber%5+1);
-        }//for loop - i
+        intermediateLetterNumbers = Polybius.encrypt(encryptedText, key);
+        key = generateCustomKey(key, "ABCDEFGHIKLMNOPQRSTUVWXYZ");
 
         // S2 : USING ROW AND COLUMN COORDINATES TO CONVERT TO LETTER
         int midPoint = intermediateLetterNumbers.length()/2;
         for(int i = 0; i<midPoint; i++){
             int letterNumber =  Integer.parseInt(intermediateLetterNumbers.charAt(i)+""+
                     intermediateLetterNumbers.charAt(midPoint+i));
-            char letter;
-            if (letterNumber/10 > 2 || (letterNumber/10 == 2 && letterNumber%10 >= 5))
-                letter = (char)(65 + (letterNumber/10-1)*5 + (letterNumber%10));
-            else letter = (char)(65 + (letterNumber/10-1)*5 + (letterNumber%10-1));
-            result+=letter;
+            int rowNumber = letterNumber / 10, columnNumber = letterNumber % 10;
+            result += key.charAt(--rowNumber * 5 + --columnNumber);
         }//for loop - i
         return result;
     }//end of String decrypt(String)
