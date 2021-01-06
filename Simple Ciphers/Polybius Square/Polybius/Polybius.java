@@ -55,14 +55,13 @@ public class Polybius {
         key = generateCustomKey(key.replaceAll(" ", ""), "ABCDEFGHIKLMNOPQRSTUVWXYZ");
 
         for (int i = 0; i < plainText.length(); i++) {
-            int letterNumber;
             char character = plainText.charAt(i);
             if (character < 65 || character > 90)
                 continue;
             if (character == 'J')
                 character = 'I';
 
-            letterNumber = key.indexOf(character);
+            int letterNumber = key.indexOf(character);
             int rowNumber = (int) (Math.floor((float) letterNumber / 5) + 1);
             int columnNumber = letterNumber % 5 + 1;
             result += rowNumber + "" + columnNumber;
@@ -71,27 +70,30 @@ public class Polybius {
     }// end of String encrypt(String)
 
     /**
-     * POLYBIUS - GENERATE CUSTOM KEY This function takes a single parameter - a
-     * seed to generate a key. It outputs a unique key of 25 characters long
-     * containing all the letters from the English alphabet expect J once and only
-     * one.
+     * POLYBIUS - GENERATE CUSTOM KEY 
+     * This function takes 2 parameters - a seed and  an alphabet. 
+     * It outputs a unique key generated from the seed with letters
+     * from the custom alphabet appended after.
      *
-     * @param seed - the text used to generate a key
-     * @return - the unique key based on the seed
+     * @param seed           - the text used to generate a key
+     * @param customAlphabet - the custom alphabet to build key from
+     * @return - the unique key based on the seed and custom alphabet
      */
     protected static String generateCustomKey(String seed, String customAlphabet) {
         String generatedKey = "";
 
+        // S1 : ENSURE THAT ONLY UNIQUE CHARACTERS GET ADDED TO generatedKey
         for (int i = 0; i < seed.length(); i++)
             if (!generatedKey.contains(seed.charAt(i) + ""))
                 generatedKey += seed.charAt(i);
 
+        // S2 : ATTACH THE REST OF THE LETTERS IN customAlphabet
         for (int i = 0; i < customAlphabet.length(); i++)
             if (generatedKey.indexOf(customAlphabet.charAt(i)) == -1)
                 generatedKey = generatedKey.concat(customAlphabet.charAt(i) + "");
 
         return generatedKey;
-    }// end of String generateCustomKey(String)
+    }// end of String generateCustomKey(String, String)
 
     /**
      * POLYBIUS - DECRYPT This function takes a single parameter - encrypted text.

@@ -70,7 +70,7 @@ public class Bifid extends Polybius {
 
         // S2 : CONCATENATING THE ROW AND COLUMN COORDINATES
         rowNumbers += columnNumbers;
-        System.out.println(rowNumbers);
+
         // S3 : CONVERTING COORDINATES BACK INTO LETTERS
         result = Polybius.decrypt(rowNumbers, key);
         return result;
