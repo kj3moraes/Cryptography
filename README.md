@@ -8,18 +8,19 @@ This repository contains the codes and documentations for several known ciphers 
    * ROT13 ✅    
    * Affine Cipher ✅
    * Vigenère Cipher ✅  
+   * Autokey Cipher ✅
    * Gronsfeld Cipher ✅
-   * Beaufort Cipher  
+   * Beaufort Cipher ✅
    * Trithemius Cipher ✅
    * Running Key Cipher  
    * Checkerboard Cipher
    * Rail Fence Cipher  
    * Polybius Cipher ✅
    * ADFGX Cipher ✅
-   * Bifid Cipher ✅
    * Nihilist Cipher ✅
    * Tap Code ✅
-   * Trifid Cipher  
+   * Bifid Cipher ✅
+   * Trifid Cipher ✅
    * Wheatstone-Playfair Cipher ✅
    * Bacon Cipher  
    * One Time Pad ✅
@@ -39,13 +40,19 @@ This repository contains the codes and documentations for several known ciphers 
    * Blowfish
    
 ### One-way compression functions & Hash functions
-   * Davies-Meyer
-   * Miyaguchi-Prenel
-   * Matyas-Meyer Oseas
-   * Merkle-Damgård Construction 
-   * MD5
+   * Davies-Meyer ⏺
+   * Miyaguchi-Prenel ⏺
+   * Matyas-Meyer Oseas ⏺
+   * Merkle-Damgård Construction ⏺
+   * MD5 ⏺
    * SHA-1
    * SHA-256
+
+
+  
+ ✅ - Completed \\
+ ❗ - Commited but incomplete \\
+ ⏺ - In the Works
 
 The classification of 'Simple Ciphers' and 'Modern Ciphers' is rather arbitrary (since ROT13 is a modern variant of the Caesar cipher yet is listed under Simple Ciphers) but is in place to segregate ciphers based on difficulty to comprehend. The ciphers which do not have separate documentations are specified in others which are similar to it and have existed before. Furthermore, the documentation for each cipher provides background knowledge and mathematical representation of the cipher's encryption and decryption algorithms. The documentation is simply to assist the reader in understanding the working of the code. However, one must **read the documentations before going through the code.**
 
