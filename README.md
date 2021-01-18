@@ -24,11 +24,10 @@ This repository contains the codes and documentations for several known ciphers 
    * Wheatstone-Playfair Cipher ❗
    * Bacon Cipher  
    * One Time Pad ✅
-
-### Modern Ciphers
    * Enigma  
    * Lorentz
    * Sigaba
+### Modern Ciphers
    * Feistel Network ✅
    * Lai Maussey Network ✅
    * RC5
