@@ -19,7 +19,7 @@ This repository contains the codes and documentations for several known ciphers 
    * ADFGX Cipher ✅
    * Nihilist Cipher ✅
    * Tap Code ✅
-   * Bifid Cipher ❗
+   * Bifid Cipher ✅ 
    * Trifid Cipher ❗
    * Wheatstone-Playfair Cipher ❗
    * Bacon Cipher  
