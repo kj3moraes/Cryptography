@@ -15,13 +15,13 @@ This repository contains the codes and documentations for several known ciphers 
    * Running Key Cipher  
    * Checkerboard Cipher
    * Rail Fence Cipher  
-   * Polybius Cipher ❗
+   * Polybius Cipher ⏺
    * ADFGX Cipher ✅
    * Nihilist Cipher ✅
    * Tap Code ✅
    * Bifid Cipher ✅ 
-   * Trifid Cipher ❗
-   * Wheatstone-Playfair Cipher ❗
+   * Trifid Cipher ⏺
+   * Wheatstone-Playfair Cipher ⏺
    * Bacon Cipher  
    * One Time Pad ✅
    * Enigma  
