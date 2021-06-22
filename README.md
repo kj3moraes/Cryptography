@@ -110,8 +110,4 @@ This book is arguably the gold standard for studying and understanding number th
 **A Compuational Introduction to Number Theory and Algebra (Shoup)**  
 This would be an alternate to studying from the previous two books. Although not as rigorous as the previous two combined, it is a fitting alternative to them. The prerequisite is high school mathematics. It is sufficient for any high school student learning about cryptography but may not be the right book to study from if you are an undergraduate or graduate student in computer science and related fields.
 
----
-Although **this repository does not cover everything** in cryptography, it is a good starting point from which one can learn about several primitives of this field. 
-
-I sincerely hope that this has been helpful to you and that you enjoyed reading and learning from it as much as I have enjoyed making it.
 
