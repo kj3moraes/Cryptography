@@ -1,6 +1,6 @@
 package AES.Versions;
 
-public class KeyLength256 implements KeyOperations{
+public class KeyLength256 extends KeyOperations{
 
     @Override
     public int[][] generateKeyMatrix() {

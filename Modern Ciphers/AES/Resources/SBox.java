@@ -43,7 +43,7 @@ public final class SBox {
      * mode it is running on. It ouputs the result of the substitution based on the
      * lookup in the respective SBox.
      *
-     * @param number - the number to be substitued
+     * @param number - the number to be substituted
      * @param mode   - the mode that specifies which SBox to use (either encSBox or decSBox)
      * @return - the result of the SBox lookup
      */
