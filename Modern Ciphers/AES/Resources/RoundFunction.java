@@ -1,5 +1,5 @@
 package AES.Resources;
 
-public class RoundFunction {
+public final class RoundFunction {
 
 }//end of class
