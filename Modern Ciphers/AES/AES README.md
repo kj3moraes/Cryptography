@@ -17,3 +17,7 @@ The class that
     * `KeyLength128` - 128 bit variant of AES
     * `KeyLength192` - 192 bit variant of AES
     * `KeyLength256` - 256 bit variant of AES
+
+
+## DISCLAIMER
+This program is not meant for any real-world usage. This is only written to be studied in an educational environment. DO NOT USE THIS TO ENCRPYT ANY DATA COMMUNICATIONS. 
