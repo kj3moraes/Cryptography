@@ -111,3 +111,5 @@ This book is arguably the gold standard for studying and understanding number th
 This would be an alternate to studying from the previous two books. Although not as rigorous as the previous two combined, it is a fitting alternative to them. The prerequisite is high school mathematics. It is sufficient for any high school student learning about cryptography but may not be the right book to study from if you are an undergraduate or graduate student in computer science and related fields.
 
 
+## LICENSING
+All code except Modern Ciphers is licenses under the MIT License. The modern ciphers code is licensed under the Apache 2.0 License and all documentation in PDF from is licensed under the GNU Free Documentation License v1.3
