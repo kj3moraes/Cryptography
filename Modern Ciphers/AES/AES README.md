@@ -1,23 +1,33 @@
 # AES README
 This file gives a brief overview of the implementation of AES in the repository. The in-depth analysis of the algorithm,
-the differences between the variants and some mathematical security parameters are discusses in the PDF file. 
-
-The class that 
+the differences between the variants and some mathematical security parameters are discusses in the PDF file.
 
 
-
-
-
-**Class Descriptions**
-* `Main.java`
-* `KeyGeneration.java`
-* `Round Function.java`
-* `SBox.java` - implements the AES Substitution Box as described by [Rjindael S-Box](https://en.wikipedia.org/wiki/Rijndael_S-box)
-* `KeyOperations.java` - performs the major cryptographic operations.
-    * `KeyLength128` - 128 bit variant of AES
-    * `KeyLength192` - 192 bit variant of AES
-    * `KeyLength256` - 256 bit variant of AES
+    -----------
+    |  MAIN   | is the main interface the user operates with 
+    -----------
+         |
+         |
+         --------------------  
+                            | calls for encryption, decryption
+                            | operations.
+                    -----------------
+          --------- | CRYPTOGRAPHIC | ---------------------------
+          |         |   OPERATIONS  |                           | calls for generating initial
+          |         -----------------                           | keys and round keys. Uses the 
+          |                                                     |  (...)
+          | calls for round functions                     --------------
+     --------------                                       |    KEY     | ---------------
+     |   ROUND    |                                       | GENERATION |               |
+     |  FUNCTIONS |                                       --------------               | uses the generateKeyMatrix()
+     --------------                                                                    | to generate all the round keys.
+           |                                                                           | Calls the respective class
+           | calls for Substituion operations                                          | based on the key length
+       ---------                                                                -------------------
+       |  SBOX |                                                                |  KEY LENGTH (.) |
+       ---------                                                                -------------------  
 
 
 ## DISCLAIMER
-This program is not meant for any real-world usage. This is only written to be studied in an educational environment. DO NOT USE THIS TO ENCRPYT ANY DATA COMMUNICATIONS. 
+This program is not meant for any real-world usage. This is only written to be studied in an educational environment.
+DO NOT USE THIS TO ENCRYPT ANY DATA COMMUNICATIONS. 
