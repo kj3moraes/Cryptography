@@ -112,4 +112,6 @@ This would be an alternate to studying from the previous two books. Although not
 
 
 ## LICENSING
-All code except Modern Ciphers is licenses under the MIT License. The code under the Modern Ciphers folder is licensed under the Apache 2.0 License. All documentation in this repository in PDF form is licensed under the GNU Free Documentation License v1.3
+All code except under the Modern Ciphers folder is licenses under the MIT License. The code under the Modern Ciphers
+folder is licensed under the Apache 2.0 License. All documentation in this repository in PDF form is licensed under the
+GNU Free Documentation License v1.3. 

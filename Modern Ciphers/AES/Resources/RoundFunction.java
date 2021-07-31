@@ -2,7 +2,7 @@ package AES.Resources;
 
 public final class RoundFunction {
     /**
-     * subBytes() -----------------------------------------------------------------------
+     * subBytes(int[][]) ----------------------------------------------------------------
      * This function takes a single parameter - a 4x4 integer matrix and replaces
      * each element with its corresponding forward SBox lookup equivalent
      *
@@ -15,7 +15,7 @@ public final class RoundFunction {
     }//end of void subBytes(int[][])
 
     /**
-     * AESRF - SHIFT ROWS
+     * shiftRows(int[][]) ---------------------------------------------------------------
      * This function takes a single parameter - a 4x4 integer matrix and shifts 
      * each row according by its respective index. 
      *
@@ -33,7 +33,7 @@ public final class RoundFunction {
     }// end of void shiftRows(int[][])
 
     /**
-     * AESRF - MIX COLUMNS
+     * mixColumns(int[][]) --------------------------------------------------------------
      * This function takes a single parameter - a 4x4 integer matrix and replaces
      * each column with its dotProduct equivalent.
      * equivalent
@@ -58,7 +58,7 @@ public final class RoundFunction {
     }// end of void mixColumns(int[][])
 
     /**
-     * AESRF - ADD ROUND KEY
+     * addRoundKey(int[][], int[][]) ----------------------------------------------------
      * This function takes 2 single parameters - a 4x4 integer matrix that
      * represents the key matrix and a 4x4 integer matrix that represents
      * the state matrix. It XORes each column of the state matrix with 

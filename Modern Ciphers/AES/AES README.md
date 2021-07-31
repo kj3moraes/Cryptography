@@ -28,6 +28,8 @@ the differences between the variants and some mathematical security parameters a
        ---------                                                                -------------------  
 
 
+The Version Inheritance Hierarchy specifies the inheritance hierarchy of the 
+
 ## DISCLAIMER
 This program is not meant for any real-world usage. This is only written to be studied in an educational environment.
 DO NOT USE THIS TO ENCRYPT ANY DATA COMMUNICATIONS. 
