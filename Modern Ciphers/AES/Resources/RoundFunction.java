@@ -1,8 +1,24 @@
-package AES.Resources;
+/*
+ * Copyright (c) 2021 Keane Jonathan Moraes
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
+package AES.Resources;;
 
 public final class RoundFunction {
     /**
-     * subBytes(int[][]) ----------------------------------------------------------------
+     * subBytes() -----------------------------------------------------------------------
      * This function takes a single parameter - a 4x4 integer matrix and replaces
      * each element with its corresponding forward SBox lookup equivalent
      *
@@ -15,7 +31,7 @@ public final class RoundFunction {
     }//end of void subBytes(int[][])
 
     /**
-     * shiftRows(int[][]) ---------------------------------------------------------------
+     * AESRF - SHIFT ROWS
      * This function takes a single parameter - a 4x4 integer matrix and shifts 
      * each row according by its respective index. 
      *
@@ -33,7 +49,7 @@ public final class RoundFunction {
     }// end of void shiftRows(int[][])
 
     /**
-     * mixColumns(int[][]) --------------------------------------------------------------
+     * AESRF - MIX COLUMNS
      * This function takes a single parameter - a 4x4 integer matrix and replaces
      * each column with its dotProduct equivalent.
      * equivalent
@@ -58,7 +74,7 @@ public final class RoundFunction {
     }// end of void mixColumns(int[][])
 
     /**
-     * addRoundKey(int[][], int[][]) ----------------------------------------------------
+     * AESRF - ADD ROUND KEY
      * This function takes 2 single parameters - a 4x4 integer matrix that
      * represents the key matrix and a 4x4 integer matrix that represents
      * the state matrix. It XORes each column of the state matrix with 
