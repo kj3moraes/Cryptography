@@ -14,3 +14,5 @@ This tree depicts the '_flow_' of inheritance of for the different key operation
       |    KEY      |             |    KEY      |             |    KEY      |
       | LENGTH 128  |             | LENGTH  192 |             | LENGTH  256 |
       ---------------             ---------------             ---------------
+
+Classes with (...) are **abstract classes**
